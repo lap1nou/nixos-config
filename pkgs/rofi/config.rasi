@@ -1,0 +1,14 @@
+configuration{
+    modi: "drun";
+    combi-modi: "drun";
+    icon-theme: "Papirus";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    disable-history: false;
+    hide-scrollbar: false;
+    display-drun: "    Run  ";
+    sidebar-mode: false;
+}
+
+@theme "tokyonight"

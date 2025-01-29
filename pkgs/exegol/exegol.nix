@@ -1,0 +1,35 @@
+{ lib, pkgs, ... }:
+pkgs.python3Packages.buildPythonPackage rec {
+  name = "exegol";
+  version = "4.3.9";
+
+  src = pkgs.fetchgit {
+    url = "https://github.com/ThePorgs/Exegol.git";
+    fetchSubmodules = true;
+    deepClone = true;
+    leaveDotGit = true;
+    rev = "040a17080471cb7b7176817e481fd7d581cfaed0";
+    sha256 = "sha256-AbqMpMnC/FR4RyHmO+FgdJwLv+7dGw32gc2D7cl1fRY=";
+  };
+
+  doCheck = false;
+
+  propagatedBuildInputs = [
+    pkgs.python3Packages.docker
+    pkgs.python3Packages.requests
+    pkgs.python3Packages.rich
+    pkgs.python3Packages.pyyaml
+    pkgs.python3Packages.gitpython
+    pkgs.python3Packages.argcomplete
+  ];
+
+  nativeBuildInputs = [ pkgs.installShellFiles pkgs.python312Packages.argcomplete ];
+
+  postInstall = ''
+    installShellCompletion --cmd exegol \
+      --bash <(register-python-argcomplete exegol --shell bash) \
+      --zsh <(register-python-argcomplete exegol --shell zsh) \
+      --fish <(register-python-argcomplete exegol --shell fish)
+  '';
+
+}

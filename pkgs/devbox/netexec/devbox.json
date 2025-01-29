@@ -1,0 +1,19 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
+    "packages": [
+      "poetry@latest",
+      "python@3.12",
+      "openssl",
+      "ruff@latest"
+    ],
+    "shell": {
+      "init_hook": [
+        "poetry install"
+      ],
+      "scripts": {
+        "nxc": "poetry run python nxc/netexec.py",
+        "test_e2e": "poetry run python tests/e2e_tests.py -t 10.2.10.40 -u sccm-account-da -p 'SCCM_D@-ftw_'",
+        "test": "poetry run pytest"
+      }
+    }
+}
