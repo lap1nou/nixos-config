@@ -9,7 +9,7 @@ pkgs.python3Packages.buildPythonPackage rec {
     deepClone = true;
     leaveDotGit = true;
     rev = "040a17080471cb7b7176817e481fd7d581cfaed0";
-    sha256 = "sha256-6+5JBRgCP+ZiReX92U4gGWTRL53iocFuOhhjyU7bb+c=";
+    sha256 = "sha256-I8XsvJis+bcbdiwo15rGvg9TnKDqImwZBnX+kAkc0Gk=";
   };
 
   doCheck = false;
