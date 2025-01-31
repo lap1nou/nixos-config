@@ -7,7 +7,7 @@ nix --experimental-features "nix-command flakes" run github:nix-community/disko/
 
 # Copy and install NixOS config
 nixos-generate-config --no-filesystems --root /mnt
-cp -R ./nixos-config/. /mnt/etc/nixos
+cp -R ../nixos-config/. /mnt/etc/nixos
 touch /mnt/etc/nixos/.htb_env
 cd /mnt/etc/nixos/ && git add -f .htb_env
 
