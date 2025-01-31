@@ -3,7 +3,7 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 
 # Apply Disko partitioning
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./nixos-config/disko-config.nix
+nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko /mnt/etc/nixos/disko-config.nix
 
 # Copy and install NixOS config
 nixos-generate-config --no-filesystems --root /mnt
