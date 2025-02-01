@@ -5,11 +5,11 @@ pkgs.python3Packages.buildPythonPackage rec {
 
   src = pkgs.fetchgit {
     url = "https://github.com/ThePorgs/Exegol.git";
-    fetchSubmodules = true;
-    deepClone = true;
+    #fetchSubmodules = true;
+    #deepClone = true;
     leaveDotGit = true;
     rev = "040a17080471cb7b7176817e481fd7d581cfaed0";
-    sha256 = "sha256-I8XsvJis+bcbdiwo15rGvg9TnKDqImwZBnX+kAkc0Gk=";
+    sha256 = "sha256-8jtz1/OfoFvFSufddUmxDjUrB+0zrpW8LGrtMRPjaS8=";
   };
 
   doCheck = false;
