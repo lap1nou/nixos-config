@@ -24,7 +24,7 @@ in
     loader.grub = {
       enable = true;
       device = "nodev";
-      # https://discourse.nixos.org/t/configure-grub-on-efi-system/2926/9
+      # https://discourse.nixos.org/t/configure-grub-on-efi-system/2926/9, only for VM
       efiSupport = true;
       efiInstallAsRemovable = true;
     };
