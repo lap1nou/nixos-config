@@ -9,7 +9,7 @@ echo -n "$password" > /tmp/secret.key
 nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix
 
 # Copy and install NixOS config
-nixos-generate-config --no-filesystems --root /mnt
+nixos-generate-config --root /mnt
 cp -R ../nixos-config/. /mnt/etc/nixos
 touch /mnt/etc/nixos/.htb_env
 cd /mnt/etc/nixos/ && git add -f .htb_env
