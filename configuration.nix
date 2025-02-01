@@ -24,7 +24,11 @@ in
     loader.grub = {
       enable = true;
       device = "nodev";
+      efiSupport = true;
+      efiInstallAsRemovable = true;
     };
+
+    efi.canTouchEfiVariables = false;
 
     # Store "/tmp" folder in RAM
     tmp.useTmpfs = true;
