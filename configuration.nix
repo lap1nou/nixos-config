@@ -24,6 +24,7 @@ in
     loader.grub = {
       enable = true;
       device = "nodev";
+      # https://discourse.nixos.org/t/configure-grub-on-efi-system/2926/9
       efiSupport = true;
       efiInstallAsRemovable = true;
     };
