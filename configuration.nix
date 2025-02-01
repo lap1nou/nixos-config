@@ -29,7 +29,7 @@ in
       efiInstallAsRemovable = true;
     };
 
-    efi.canTouchEfiVariables = false;
+    loader.efi.canTouchEfiVariables = false;
 
     # Store "/tmp" folder in RAM
     tmp.useTmpfs = true;
