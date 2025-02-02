@@ -17,6 +17,11 @@ let
       patchShebangs tests/examples/_postprocess.lua
     '';
   });
+
+  picomConfigFile = pkgs.writeTextFile {
+    name = "picom.conf";
+    text = builtins.readFile ./pkgs/picom/picom.conf;
+  };
 in
 {
 
@@ -146,55 +151,23 @@ in
     };
   };
 
+  # Reference: https://www.reddit.com/r/NixOS/comments/15qdgw9/how_to_produce_type_libconfig_configuration_from/
+  systemd.user.services.picom = {
+    description = "Picom composite manager";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      ExecStart = "${lib.getExe pkgs.picom} --config ${picomConfigFile}";
+      RestartSec = 3;
+      Restart = "always";
+    };
+  };
+
   services = {
     physlock = {
       enable = true;
       allowAnyUser = true;
-    };
-
-    picom = {
-      enable = true;
-      backend = "glx";
-
-      fade = true;
-      inactiveOpacity = 0.9;
-      fadeDelta = 4;
-
-      # Source: https://github.com/lactua/dotfiles/blob/master/dots/picom/.config/picom/picom.conf
-      settings = {
-        shadow = true;
-        shadow-radius = 10;
-        shadow-opacity = .6;
-        shadow-offset-x = -8;
-        shadow-offset-y = -8;
-        shadow-color = "#111111";
-        shadow-exclude = [
-          "name *= 'rofi'"
-        ];
-
-        fade-in-step = 0.028;
-        fade-out-step = 0.028;
-
-        inactive-opacity-override = true;
-        active-opacity = 0.95;
-        inactive-dim = 0;
-
-        blur-method = "dual_kawase";
-        blur-strength = 5;
-        blur-background = true;
-        blur-background-frame = false;
-        blur-background-fixed = false;
-        blur-kern = "3x3box";
-
-        detect-rounded-corners = true;
-        corner-radius = 15;
-        rounded-corners-exclude = [ "class_g *= 'awesome'" ];
-
-        wintypes = {
-          dock = {animation = "slide-down";};
-          toolbar = {animation = "slide-down";};
-        };
-      };
     };
 
     displayManager.sddm = {
