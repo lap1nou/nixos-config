@@ -107,6 +107,7 @@ in
   virtualisation = {
     vmware.guest.enable = true;
     docker.enable = true;
+    vmware.host.enable = true;
 
     # Not enabled because there is no way to check progress
     #oci-containers = {
