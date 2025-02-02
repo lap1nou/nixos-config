@@ -51,6 +51,7 @@
     packer
     pavucontrol # GUI manage sound
     peazip
+    picom
     # rofi: installed in home.nix
     semgrep
     spotify
