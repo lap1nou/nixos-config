@@ -111,6 +111,9 @@
     # Wezterm
     #"${config.home.homeDirectory}/.wezterm.lua".source = ./pkgs/wezterm/.wezterm.lua;
 
+    # Htop
+    "${config.home.homeDirectory}/.config/htop".source = ./pkgs/htop;
+
     # Devbox
     "${config.home.homeDirectory}/.devbox".source = ./pkgs/devbox;
 
