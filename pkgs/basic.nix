@@ -48,7 +48,6 @@
     obsidian
     openssl
     openvpn
-    packer
     pavucontrol # GUI manage sound
     peazip
     picom
@@ -59,7 +58,6 @@
     tlrc # Man page for program, use 'tldr $COMMAND'
     traceroute
     unzip
-    vagrant
     vlc
     wget
     wireshark
