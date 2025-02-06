@@ -286,6 +286,7 @@ in
 
   # Custom pkgs for all users
   environment.systemPackages = with pkgs; [
+    sbctl
     wireguard-tools
   ];
 
