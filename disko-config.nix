@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "$DISK_NAME";
+        device = "DISK_NAME";
         content = {
           type = "gpt";
           partitions = {
