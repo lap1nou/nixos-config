@@ -1,6 +1,5 @@
 DISKS=($(lsblk -nd -o NAME,TYPE | awk '{if ($2 == "disk") print $1}'))
 
-i=0
 for i in "${!DISKS[@]}"
 do
     echo "$((i+1))) /dev/${DISKS[$i]}"
