@@ -1,3 +1,24 @@
+DISKS=($(lsblk -nd -o NAME,TYPE | awk '{if ($2 == "disk") print $1}'))
+
+i=0
+for i in "${!DISKS[@]}"
+do
+    echo "$((i+1))) /dev/${DISKS[$i]}"
+done
+
+while true; do
+    read -p "Enter the disk you want to install NixOS on: " CHOICE
+    if [[ "$CHOICE" =~ ^[0-9]+$ ]] && (( CHOICE >= 1 && CHOICE <= ${#DISKS[@]} )); then
+        SELECTED_DISK="/dev/${DISKS[$((CHOICE-1))]}"
+        break
+    else
+        echo "Invalid choice. Please enter a number between 1 and ${#DISKS[@]}"
+    fi
+done
+
+echo "NixOS will be installed on $SELECTED_DISK"
+sed -i "s|DISK_NAME|$SELECTED_DISK|g" disko-config.nix
+
 read -s -p "Enter the LUKS password:" password
 echo -n "$password" > /tmp/secret.key
 
