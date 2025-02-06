@@ -29,6 +29,7 @@
     devbox
     dig
     discord
+    efitools
     exegol
     eza
     feh # Image viewer
