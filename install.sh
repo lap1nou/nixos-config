@@ -1,3 +1,8 @@
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run it as root!"
+    exit 1
+fi
+
 DISKS=($(lsblk -nd -o NAME,TYPE | awk '{if ($2 == "disk") print $1}'))
 
 for i in "${!DISKS[@]}"
