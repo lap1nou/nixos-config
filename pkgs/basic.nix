@@ -19,6 +19,7 @@
     ansible
     # bat: installed in home.nix
     libsForQt5.breeze-grub
+    brightnessctl
     (catppuccin-sddm.override {
       flavor = "mocha";
       font  = "Noto Sans";
