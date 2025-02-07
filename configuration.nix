@@ -26,14 +26,14 @@ in
 {
 
   boot = {
-    loader.grub = {
-      enable = true;
-      device = "nodev";
+    #loader.grub = {
+      #enable = true;
+      #device = "nodev";
       # https://discourse.nixos.org/t/configure-grub-on-efi-system/2926/9, only for VM
-      efiSupport = true;
-      efiInstallAsRemovable = true;
-    };
-
+      #efiSupport = true;
+      #efiInstallAsRemovable = true;
+    #};
+    loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
 
     # Store "/tmp" folder in RAM
