@@ -8,7 +8,7 @@
 
   boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "ahci" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "iwlwifi" ];
   boot.extraModulePackages = [ ];
 
   swapDevices = [ ];
