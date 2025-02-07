@@ -39,7 +39,7 @@ local dpi = beautiful.xresources.apply_dpi
     local brightness_slider = create_slider()
     brightness_slider:connect_signal("property::value", function()
         local brightness = brightness_slider.value
-        -- run_shell("")
+        run_shell("brightnessctl s " .. brightness .. "%")
     end)
     local brightness_container = create_slider_container("brightness.svg", "firefox", brightness_slider, "Brightness")
 
