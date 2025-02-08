@@ -248,8 +248,10 @@ in
         ll = "eza --icons=always -algh";
         ls = "eza --icons=always -algh";
         xclip = "xclip -i -sel p -f | xclip -i -sel c";
-        update = "sudo cp -rf /home/lapinou/programming/nixos/ /etc/; sudo rm -rf /etc/nixos/.git/; sudo nixos-rebuild switch";
-        edit-config = "code /home/lapinou/programming/nixos/";
+        #update = "sudo cp -rf /home/lapinou/programming/nixos/ /etc/; sudo rm -rf /etc/nixos/.git/; sudo nixos-rebuild switch";
+	update = "sudo nixos-rebuild switch";
+	edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
+        #edit-config = "code /home/lapinou/programming/nixos/";
         nix-shell = "nix-shell --extra-experimental-features flakes";
       };
   };
