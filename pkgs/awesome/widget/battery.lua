@@ -8,6 +8,16 @@ local battery_path = "/sys/class/power_supply/BAT0/"
 local battery_status_file = "status"
 local battery_capacity_file = "capacity"
 
+function file_exists(file)
+    local file_handler = io.open(file)
+    if file_handler then file_handler:close() end
+    return file_handler and true or false
+end
+
+if file_exists(battery_path .. battery_status_file) == false then
+    return wibox.widget { }
+end
+
 local battery_widget = wibox.widget {
     {
         id = "icon",
