@@ -7,6 +7,10 @@
     #(import ./pkgs/exegol/exegol.nix { inherit pkgs lib; })
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
   ];
+  home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    run ${pkgs.git}/bin/git clone https://github.com/lap1nou/nixos-config $HOME/programming/nixos/
+    run ${pkgs.git}/bin/git clone https://github.com/lap1nou/postex-rs $HOME/programming/postex-rs/
+  '';
 
   stylix.enable = true;
   stylix.polarity = "dark";
