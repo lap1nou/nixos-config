@@ -8,8 +8,13 @@
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
   ];
   home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    run ${pkgs.git}/bin/git clone https://github.com/lap1nou/nixos-config $HOME/programming/nixos/
-    run ${pkgs.git}/bin/git clone https://github.com/lap1nou/postex-rs $HOME/programming/postex-rs/
+    if [[ ! -d "$HOME/programming/nixos/" ]]; then
+      run ${pkgs.git}/bin/git clone https://github.com/lap1nou/nixos-config $HOME/programming/nixos/
+    fi
+
+    if [[ ! -d "$HOME/programming/postex-rs/" ]]; then
+      run ${pkgs.git}/bin/git clone https://github.com/lap1nou/postex-rs $HOME/programming/postex-rs/
+    fi
   '';
 
   stylix.enable = true;
