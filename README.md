@@ -7,5 +7,6 @@
 - https://github.com/deficient/battery-widget/tree/master
 
 # License
-- Icons from https://fonts.google.com/icons: Apache license
+- Some icons from https://fonts.google.com/icons: Apache license
+- Some icons from https://github.com/PapirusDevelopmentTeam/papirus-icon-theme: GNU General Public License v3.0
 - FontAwesome: SIL OFL 1.1 License
