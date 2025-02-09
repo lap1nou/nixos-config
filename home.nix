@@ -9,11 +9,11 @@
   ];
   home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [[ ! -d "$HOME/programming/nixos/" ]]; then
-      run ${pkgs.git}/bin/git clone https://github.com/lap1nou/nixos-config $HOME/programming/nixos/
+      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/nixos-config.git $HOME/programming/nixos/
     fi
 
     if [[ ! -d "$HOME/programming/postex-rs/" ]]; then
-      run ${pkgs.git}/bin/git clone https://github.com/lap1nou/postex-rs $HOME/programming/postex-rs/
+      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/postex-rs.git $HOME/programming/postex-rs/
     fi
   '';
 
