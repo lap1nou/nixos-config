@@ -109,7 +109,7 @@ theme.icon_terminal = theme.dir .. "/icons/applications/utilities-terminal.svg"
 theme.icon_nautilus = theme.dir .. "/icons/applications/files.svg"
 theme.icon_exegol = theme.dir .. "/icons/applications/exegol.png"
 theme.icon_lock = theme.dir .. "/icons/applications/lock.svg"
-theme.icon_power = theme.dir .. "/icons/applications/power.svg"
+theme.icon_power = theme.dir .. "/icons/applications/power_off.svg"
 
 function theme.at_screen_connect(s)
     -- If wallpaper is a function, call it with the screen
