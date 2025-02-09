@@ -70,37 +70,6 @@ theme.awesome_icon = theme.dir .. "/icons/awesome.svg"
 theme.layout_tile                               = theme.dir .. "/icons/wibar/tile.svg"
 theme.layout_floating                           = theme.dir .. "/icons/wibar/floating.svg"
 
-theme.titlebar_close_button_focus_hover         = theme.dir .. "/icons/titlebar/close_focus_hover.png"
-theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
-theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/button_normal.png"
-
-theme.titlebar_sticky_button_focus_active       = theme.dir .. "/icons/titlebar/sticky_focus_active.svg"
-theme.titlebar_sticky_button_normal_active      = theme.dir .. "/icons/titlebar/sticky_normal_active.svg"
-theme.titlebar_sticky_button_focus_inactive     = theme.dir .. "/icons/titlebar/sticky_focus_inactive.svg"
-theme.titlebar_sticky_button_normal_inactive    = theme.dir .. "/icons/titlebar/sticky_normal_inactive.svg"
-
--- Floating button
-theme.titlebar_floating_button_normal_active   = theme.dir .. "/icons/titlebar/button_normal.png"
-theme.titlebar_floating_button_focus_active    = theme.dir .. "/icons/titlebar/floating_focus_hover.png"
-theme.titlebar_floating_button_normal_active_hover    = theme.dir .. "/icons/titlebar/floating_focus_hover.png"
-theme.titlebar_floating_button_focus_active_hover    = theme.dir .. "/icons/titlebar/floating_focus_hover.png"
-
-theme.titlebar_floating_button_normal_inactive = theme.dir .. "/icons/titlebar/button_normal.png"
-theme.titlebar_floating_button_focus_inactive  = theme.dir .. "/icons/titlebar/floating_focus.png"
-theme.titlebar_floating_button_normal_inactive_hover = theme.dir .. "/icons/titlebar/floating_focus_hover.png"
-theme.titlebar_floating_button_focus_inactive_hover = theme.dir .. "/icons/titlebar/floating_focus_hover.png"
-
--- Maximized button
-theme.titlebar_maximized_button_normal_active   = theme.dir .. "/icons/titlebar/button_normal.png"
-theme.titlebar_maximized_button_focus_active    = theme.dir .. "/icons/titlebar/maximize_focus_hover.png"
-theme.titlebar_maximized_button_normal_active_hover    = theme.dir .. "/icons/titlebar/minimize_focus_hover.png"
-theme.titlebar_maximized_button_focus_active_hover    = theme.dir .. "/icons/titlebar/minimize_focus_hover.png"
-
-theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/button_normal.png"
-theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/maximize_focus.png"
-theme.titlebar_maximized_button_normal_inactive_hover = theme.dir .. "/icons/titlebar/maximize_focus_hover.png"
-theme.titlebar_maximized_button_focus_inactive_hover = theme.dir .. "/icons/titlebar/maximize_focus_hover.png"
-
 theme.icon_peazip = theme.dir .. "/icons/applications/peazip.svg"
 theme.icon_firefox = theme.dir .. "/icons/applications/firefox.svg"
 theme.icon_vscode = theme.dir .. "/icons/applications/vscode.svg"
