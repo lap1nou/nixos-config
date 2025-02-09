@@ -5,3 +5,6 @@
 - https://github.com/lactua/dotfiles
 - https://github.com/streetturtle/awesome-wm-widgets
 - https://github.com/deficient/battery-widget/tree/master
+
+# License
+- Icons from https://fonts.google.com/icons: Apache license
