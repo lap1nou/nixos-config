@@ -8,3 +8,4 @@
 
 # License
 - Icons from https://fonts.google.com/icons: Apache license
+- FontAwesome: SIL OFL 1.1 License
