@@ -26,13 +26,6 @@ in
 {
 
   boot = {
-    #loader.grub = {
-      #enable = true;
-      #device = "nodev";
-      # https://discourse.nixos.org/t/configure-grub-on-efi-system/2926/9, only for VM
-      #efiSupport = true;
-      #efiInstallAsRemovable = true;
-    #};
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
 
@@ -43,7 +36,7 @@ in
   networking = {
     hostName = "pentest";
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall.enable = true;
     # Wireguard interface for Ludus lab
     wireguard.enable = true;
     # Reference: https://alberand.com/nixos-wireguard-vpn.html
