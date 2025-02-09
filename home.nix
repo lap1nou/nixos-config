@@ -197,6 +197,22 @@
       Type=Application
       Categories=GNOME;GTK;Settings;X-GNOME-NetworkSettings;X-GNOME-Utilities;
     '';
+
+    # Reference: https://www.reddit.com/r/NixOS/comments/1aszsj6/vmware_doesnt_follow_gtk_theme_in_hyprland/
+    ".local/share/applications/vmware-workstation.desktop".text =
+    ''
+      [Desktop Entry]
+      Encoding=UTF-8
+      Name=VMware Workstation
+      Comment=Run and manage virtual machines
+      Exec=env GTK_THEME=Adwaita-dark ${pkgs.vmware-workstation}/bin/vmware %U
+      Terminal=false
+      Type=Application
+      Icon=vmware-workstation
+      StartupNotify=true
+      Categories=System;
+      MimeType=application/x-vmware-vm;application/x-vmware-team;application/x-vmware-enc-vm;x-scheme-handler/vmrc;
+    '';
   };
 
   xdg.portal = {
