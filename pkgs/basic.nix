@@ -16,7 +16,7 @@
     # alacritty: installed in home.nix
     ascii
     alsa-utils # CLI to manage sound
-    ansible
+    # ansible
     # bat: installed in home.nix
     libsForQt5.breeze-grub
     brightnessctl
@@ -57,7 +57,7 @@
     # rofi: installed in home.nix
     semgrep
     spotify
-    tailspin # Log reader
+    # tailspin # Log reader
     tlrc # Man page for program, use 'tldr $COMMAND'
     traceroute
     unzip
