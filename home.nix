@@ -6,10 +6,11 @@
   home.packages = [ 
     #(import ./pkgs/exegol/exegol.nix { inherit pkgs lib; })
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
+    (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
   ];
   home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
     if [[ ! -d "$HOME/programming/nixos/" ]]; then
-      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/nixos-config.git $HOME/programming/nixos/
+      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/nixos-config.git $HOME/programming/nixos-config/
     fi
 
     if [[ ! -d "$HOME/programming/postex-rs/" ]]; then

@@ -1,0 +1,88 @@
+diff --git a/go_src/vagrant-vmware-utility/settings/settings.go b/go_src/vagrant-vmware-utility/settings/settings.go
+index 829e9b0..34aa7d4 100644
+--- a/go_src/vagrant-vmware-utility/settings/settings.go
++++ b/go_src/vagrant-vmware-utility/settings/settings.go
+@@ -19,13 +19,13 @@ func BuildSettings(logger hclog.Logger) (*Settings, error) {
+ 	logger = logger.Named("settings")
+ 	npath := path.Join(utility.DirectoryFor("settings"), "nat.json")
+ 	logger.Trace("building nat settings", "path", npath)
+-	nat, err := LoadNATSettings(npath, logger)
++	nat, err := LoadNATSettings("/opt/vagrant-vmware-utility/settings/nat.json", logger)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 	ppath := path.Join(utility.DirectoryFor("settings"), "portforwarding.json")
+ 	logger.Trace("building port forwarding settings", "path", ppath)
+-	pfwds, err := LoadPortForwardingSettings(ppath, logger)
++	pfwds, err := LoadPortForwardingSettings("/opt/vagrant-vmware-utility/settings/portforwarding.json", logger)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+diff --git a/go_src/vagrant-vmware-utility/utility/certificate.go b/go_src/vagrant-vmware-utility/utility/certificate.go
+index 1e632f8..8f92fc1 100644
+--- a/go_src/vagrant-vmware-utility/utility/certificate.go
++++ b/go_src/vagrant-vmware-utility/utility/certificate.go
+@@ -168,7 +168,8 @@ func GenerateCertificate() error {
+ // then we just use the executable's directory as the base and create
+ // a certificate directory within.
+ func GetCertificatePaths() (*CertificatePaths, error) {
+-	basePath := DirectoryFor("certificates")
++	//basePath := DirectoryFor("certificates")
++	basePath := "/opt/vagrant-vmware-utility/certificates/"
+ 	if err := os.MkdirAll(basePath, 0755); err != nil {
+ 		return nil, err
+ 	}
+diff --git a/go_src/vagrant-vmware-utility/utility/command_posix.go b/go_src/vagrant-vmware-utility/utility/command_posix.go
+index 113f909..6242eda 100644
+--- a/go_src/vagrant-vmware-utility/utility/command_posix.go
++++ b/go_src/vagrant-vmware-utility/utility/command_posix.go
+@@ -15,24 +15,24 @@ import (
+ func RootOwned(checkPath string, andOperated bool) bool {
+ 	pathInfo, err := os.Stat(checkPath)
+ 	if err != nil {
+-		return false
++		return true
+ 	}
+ 	pathStat, ok := pathInfo.Sys().(*syscall.Stat_t)
+ 	if !ok {
+-		return false
++		return true
+ 	}
+ 	if pathStat.Uid != 0 {
+-		return false
++		return true
+ 	}
+ 	filePerm := pathInfo.Mode().Perm()
+ 	// Check for allowed write access
+ 	if (filePerm & os.FileMode(0022)) != 0 {
+-		return false
++		return true
+ 	}
+ 
+ 	// Check for execute permission if requested
+ 	if andOperated && ((filePerm & os.FileMode(0100)) == 0) {
+-		return false
++		return true
+ 	}
+ 	return true
+ }
+diff --git a/go_src/vagrant-vmware-utility/utility/vmware_paths_linux.go b/go_src/vagrant-vmware-utility/utility/vmware_paths_linux.go
+index 6480432..7f4b55f 100644
+--- a/go_src/vagrant-vmware-utility/utility/vmware_paths_linux.go
++++ b/go_src/vagrant-vmware-utility/utility/vmware_paths_linux.go
+@@ -18,11 +18,11 @@ func (v *VmwarePaths) Load() (err error) {
+ 	v.DhcpLease = "/etc/vmware/{{device}}/dhcpd/dhcpd.leases"
+ 	v.Networking = "/etc/vmware/networking"
+ 	v.NatConf = "/etc/vmware/{{device}}/nat/nat.conf"
+-	v.VmnetCli = "/usr/bin/vmware-networks"
++	v.VmnetCli = "vmware-networks"
+ 	v.Services = "/etc/init.d/vmware"
+-	v.Vmx = "/usr/lib/vmware/bin/vmware-vmx"
+-	v.Vmrun = "/usr/bin/vmrun"
+-	v.Vdiskmanager = "/usr/bin/vmware-vdiskmanager"
++	v.Vmx = "vmware-vmx"
++	v.Vmrun = "vmrun"
++	v.Vdiskmanager = "vmware-vdiskmanager"
+ 
+ 	if _, err = os.Stat("/bin/vmrest"); err == nil {
+ 		v.Vmrest = "/bin/vmrest"

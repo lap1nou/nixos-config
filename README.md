@@ -10,3 +10,4 @@
 - Some icons from https://fonts.google.com/icons: Apache license
 - Some icons from https://github.com/PapirusDevelopmentTeam/papirus-icon-theme: GNU General Public License v3.0
 - FontAwesome: SIL OFL 1.1 License
+- License is preserved for the 'vagrant-vmware-desktop' patch: Mozilla Public License 2.0
