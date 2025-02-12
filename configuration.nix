@@ -74,6 +74,7 @@ in
 
   # Clean folders older than 30D in the ".cache" folder of users
   systemd.user.tmpfiles.rules = ["e %C - - - ABCM:30d -"]; # Type Path Mode User Group Age Argument…
+  systemd.packages = [ (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; }) ];
 
   users = { 
     mutableUsers = false;
