@@ -37,7 +37,28 @@ in
 
   networking = {
     hostName = "pentest";
-    networkmanager.enable = true;
+    networkmanager = {
+	enable = true;
+	ensureProfiles.profiles = {
+		phone-wifi = {
+			connection = {
+				id = "Phone WiFi";
+				type = "wifi";
+			};
+
+			wifi = {
+				mode = "infrastructure";
+				ssid = "WE-C423";
+			};
+
+			wifi-security = {
+				auth-alg = "open";
+				key-mgmt = "wpa-psk";
+				psk = builtins.readFile ./.phone-wifi;
+			};
+		};
+	};
+    };
     firewall.enable = true;
     # Wireguard interface for Ludus lab
     wireguard.enable = true;
