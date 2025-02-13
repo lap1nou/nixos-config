@@ -11,3 +11,4 @@
 - Some icons from https://github.com/PapirusDevelopmentTeam/papirus-icon-theme: GNU General Public License v3.0
 - FontAwesome: SIL OFL 1.1 License
 - License is preserved for the 'vagrant-vmware-desktop' patch: Mozilla Public License 2.0
+- Wallpapers from https://www.reddit.com/r/unixporn/
