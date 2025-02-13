@@ -11,6 +11,7 @@
     (writeShellScriptBin "pentest-new" (builtins.readFile ../alias/pentest-new.sh))
     (writeShellScriptBin "exegol-start" (builtins.readFile ../alias/exegol-start.sh))
     (writeShellScriptBin "rofi-exegol-start" (builtins.readFile ../alias/rofi-exegol-start.sh))
+    (writeShellScriptBin "change-wallpaper" (builtins.readFile ../alias/change-wallpaper.sh))
     adwaita-qt # Dark theme for < QT6 application
     adwaita-qt6 # Dark theme for QT6 application
     # alacritty: installed in home.nix
