@@ -9,7 +9,7 @@
     (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
   ];
   home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [[ ! -d "$HOME/programming/nixos/" ]]; then
+    if [[ ! -d "$HOME/programming/nixos-config/" ]]; then
       run ${pkgs.git}/bin/git clone git@github.com:lap1nou/nixos-config.git $HOME/programming/nixos-config/
     fi
 
