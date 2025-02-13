@@ -24,6 +24,8 @@ let
   };
 in
 {
+  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   boot = {
     loader.systemd-boot.enable = true;
