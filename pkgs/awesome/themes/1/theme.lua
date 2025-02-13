@@ -55,7 +55,7 @@ theme.border_normal = theme.transparent
 theme.border_focus = "#597bab"
 
 theme.titlebar_bg_focus = "#292929"
-theme.taglist_fg_focus = "#597bab"
+theme.taglist_fg_focus = theme.base01
 theme.taglist_bg_focus = theme.transparent
 
 theme.menu_height = dpi(16)
