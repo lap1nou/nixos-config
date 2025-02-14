@@ -21,6 +21,7 @@
     # bat: installed in home.nix
     libsForQt5.breeze-grub
     brightnessctl
+    chafa
     (catppuccin-sddm.override {
       flavor = "mocha";
       font  = "Noto Sans";
