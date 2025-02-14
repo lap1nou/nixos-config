@@ -2,3 +2,4 @@
 updog --ssl --port 443 --password "exegol4thewin" --directory /workspace/web
 mssqlclient.py $DOMAIN/$USER:$PASSWORD@$IP -windows-auth
 gowitness scan file -f /workspace/loot/urls.txt --write-screenshots --screenshot-path /workspace/loot/gowitness-screens/
+ysoserialnet -f Json.Net -g ObjectDataProvider -o raw -c "calc" -t

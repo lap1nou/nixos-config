@@ -26,6 +26,8 @@ alias tun0='grep_tun0 | tr -d "\n" | xclip'
 alias add-host="echo $1 $2 >> /etc/hosts"
 alias cat="bat -p -P"
 alias pcat="bat"
+alias install_ysoserialnet="/opt/my-resources/setup/ysoserialnet/install.sh"
+alias ysoserialnet='wine /opt/tools/ysoserialnet/ysoserial.exe'
 alias nmap-classic='(){
     mkdir -p /workspace/loot/$1/nmap/
     nmap -v -sV -p- -oA /workspace/loot/$1/nmap/tcp_default_$1 $1;
