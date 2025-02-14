@@ -27,6 +27,7 @@
     enable = true;
     settings = {
       confirm_os_window_close = 0;
+      scrollback_lines = 100000;
     };
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
