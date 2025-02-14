@@ -23,6 +23,16 @@
 
   # Some program should be installed this way in order for stylix to apply theme
   programs.bat.enable = true;
+  programs.kitty = {
+    enable = true;
+    settings = {
+      confirm_os_window_close = 0;
+    };
+    keybindings = {
+      "ctrl+c" = "copy_or_interrupt";
+      "ctrl+v" = "paste_from_clipboard";
+    };
+  };
   programs.alacritty = {
     enable = true;
     settings = {
@@ -47,7 +57,7 @@
         icon-theme = "Papirus";
         modi = "drun";
         combi-modi = "drun";
-        terminal = "alacritty";
+        terminal = "kitty";
         display-drun = "    Run  ";
         drun-display-format = "{icon} {name}";
       }
@@ -245,7 +255,7 @@
     };
 
     "org/gnome/desktop/default-applications/terminal" = {
-      exec = "alacritty";
+      exec = "kitty";
     };
 
     "org/nemo/preferences/menu-config" = {

@@ -17,7 +17,6 @@
     # alacritty: installed in home.nix
     ascii
     alsa-utils # CLI to manage sound
-    # ansible
     # bat: installed in home.nix
     libsForQt5.breeze-grub
     brightnessctl

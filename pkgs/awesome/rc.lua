@@ -35,7 +35,7 @@ end
 beautiful.init("~/.config/awesome/themes/1/theme.lua")
 
 -- terminal = "wezterm" -> https://github.com/wez/wezterm/issues/5990
-terminal = "alacritty"
+terminal = "kitty"
 editor = "code"
 editor_cmd = terminal .. " -e " .. editor
 
