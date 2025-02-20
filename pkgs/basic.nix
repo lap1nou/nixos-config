@@ -43,7 +43,6 @@
     nemo # File manager
     networkmanagerapplet # GUI manage network connections
     # ncdu
-    # micro
     moreutils
     obsidian
     openssl
