@@ -233,7 +233,6 @@ in
       HTB_TOKEN = (builtins.readFile ./.htb_env);
       NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
       GTK_CSD = "0"; # Disable GTK CSD (Client-side decoration) such as the mini close button on Firefox (that d'oesn't go well with Awesomewm for example) 
-      QT_STYLE_OVERRIDE = "adwaita-dark"; # Source: https://discourse.nixos.org/t/guide-to-installing-qt-theme/35523
     };
     pathsToLink = [ "/share/nautilus-python/extensions" ];
   };
