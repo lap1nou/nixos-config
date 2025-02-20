@@ -12,13 +12,9 @@
     (writeShellScriptBin "exegol-start" (builtins.readFile ../alias/exegol-start.sh))
     (writeShellScriptBin "rofi-exegol-start" (builtins.readFile ../alias/rofi-exegol-start.sh))
     (writeShellScriptBin "change-wallpaper" (builtins.readFile ../alias/change-wallpaper.sh))
-    adwaita-qt # Dark theme for < QT6 application
-    adwaita-qt6 # Dark theme for QT6 application
-    # alacritty: installed in home.nix
     ascii
     alsa-utils # CLI to manage sound
     # bat: installed in home.nix
-    libsForQt5.breeze-grub
     brightnessctl
     chafa
     (catppuccin-sddm.override {
@@ -58,14 +54,12 @@
     # rofi: installed in home.nix
     semgrep
     spotify
-    # tailspin # Log reader
     tlrc # Man page for program, use 'tldr $COMMAND'
     traceroute
     unzip
     vlc
     wget
     wireshark
-    # wezterm -> bugged for now
     xorg.xhost # For Exegol GUI application
     xclip
     yq-go
