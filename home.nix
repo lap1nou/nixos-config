@@ -157,9 +157,6 @@
     # Starship
     "${config.home.homeDirectory}/.config/starship.toml".source = ./pkgs/starship/starship.toml;
 
-    # Micro
-    #"${config.home.homeDirectory}/.config/micro".source = ./pkgs/micro;
-
     ".local/share/applications/org.flameshot.Flameshot.desktop".text =
     ''
       [Desktop Entry]
