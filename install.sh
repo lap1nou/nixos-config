@@ -1,46 +1,62 @@
+function spin_task() {
+    # The expression "${@:2}" take the argument starting from the second 
+    gum spin --spinner dot --title "$1" --show-error -- "${@:2}"
+
+    if [[ "$?" -eq 0 ]]; then
+        echo '{{ Color "#62b851" "0" "" }} {{ "'$1'\n" }}' | gum format -t template
+    else
+        echo '{{ Color "#d63209" "0" "" }} {{ "'$1'\n" }}' | gum format -t template
+        exit 1
+    fi
+}
+
 # Check that the script is ran as root
 if [[ $EUID -ne 0 ]]; then
-    echo "Please run it as root!"
+    echo '{{ Color "#d63209" "0" "" }} {{ "This script need to be run as" }} {{ Color "#d63209" "0" "root\n" }}' | gum format -t template
+    sudo "$0"
+    exit 0
+fi
+
+# Check if there is enough RAM
+RAM=$(free -g | awk '{print $2}' | head -n 2 | tail -n 1)
+
+if [[ "$RAM" -le 10 ]]; then
+    echo '{{ Color "#d63209" "0" "" }} {{ "Not enough RAM," }} {{ Color "#d63209" "0" "10 GB" }} {{ "are required minimum\n" }} ' | gum format -t template
     exit 1
 fi
 
-# Gather all available disks
-DISKS=($(lsblk -nd -o NAME,TYPE | awk '{if ($2 == "disk") print $1}'))
-
-for i in "${!DISKS[@]}"
-do
-    echo "$((i+1))) /dev/${DISKS[$i]}"
-done
-
 # Ask the user to choose one of the disk
+SELECTED_DISK=$(lsblk -nd -o PATH,TYPE | awk '{if ($2 == "disk") print $1}' | gum choose --header="Select the disk you want to install NixOS on:" --cursor=" " --no-show-help)
+
+if [[ -z "$SELECTED_DISK" ]]; then
+    echo '{{ Color "#d63209" "0" "" }} {{ "Please select a disk\n" }}' | gum format -t template
+    exit 1
+fi
+
+# Replace the selected disk in the "disko" config
+echo '{{ Color "#62b851" "0" "" }} {{ "NixOS will be installed on" }} {{ Color "#62b851" "0" "'$SELECTED_DISK'\n" }}' | gum format -t template
+sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" disko-config.nix
+
 while true; do
-    read -p "Enter the disk you want to install NixOS on: " CHOICE
-    if [[ "$CHOICE" =~ ^[0-9]+$ ]] && (( CHOICE >= 1 && CHOICE <= ${#DISKS[@]} )); then
-        SELECTED_DISK="/dev/${DISKS[$((CHOICE-1))]}"
-        break
+    LUKS_PASSWORD=$(gum input --no-show-help --placeholder="Enter the LUKS password..." --password)
+    LUKS_PASSWORD_REPEAT=$(gum input --no-show-help --placeholder="Enter the LUKS password again..." --password)
+
+    if [[ "$LUKS_PASSWORD" != "$LUKS_PASSWORD_REPEAT" ]]; then
+        echo '{{ Color "#d63209" "0" "" }} {{ "Password are not the same, please try again.\n" }}' | gum format -t template
     else
-        echo "Invalid choice. Please enter a number between 1 and ${#DISKS[@]}"
+        echo $LUKS_PASSWORD > /tmp/secret.key
+        echo '{{ Color "#62b851" "0" "" }} {{ "Password matches !\n" }}' | gum format -t template
+        break
     fi
 done
 
-# Replace the selected disk in the "disko" config
-echo "NixOS will be installed on $SELECTED_DISK"
-sed -i "s|DISK_NAME|$SELECTED_DISK|g" disko-config.nix
+spin_task "Installing home-manager..." nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+spin_task "Updating nix-channel..." nix-channel --update
+spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix
 
-read -s -p "Enter the LUKS password:" password
-echo -n "$password" > /tmp/secret.key
-
-# Install home manager
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-
-# Apply Disko partitioning
-nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix
-
-# Copy and install NixOS config
-nixos-generate-config --no-filesystems --root /mnt
+spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
 cp -R ../nixos-config/. /mnt/etc/nixos
-touch /mnt/etc/nixos/.htb_env
-cd /mnt/etc/nixos/ && git add -f .htb_env
+touch /mnt/etc/nixos/.htb_env /mnt/etc/nixos/.phone-wifi
+cd /mnt/etc/nixos/ && git add -f .htb_env .phone-wifi
 
-nixos-install --flake /mnt/etc/nixos/.#pentest
+spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake /mnt/etc/nixos/.#pentest
