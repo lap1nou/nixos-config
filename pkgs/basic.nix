@@ -35,6 +35,7 @@
     flameshot
     fzf
     # git: installed in home.nix
+    gum
     home-manager 
     htop
     imhex
