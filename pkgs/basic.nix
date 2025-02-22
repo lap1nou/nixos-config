@@ -45,6 +45,7 @@
     networkmanagerapplet # GUI manage network connections
     # ncdu
     moreutils
+    nixos-generators
     obsidian
     openssl
     openvpn
