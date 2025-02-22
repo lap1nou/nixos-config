@@ -66,29 +66,6 @@
     xclip
     yq-go
     zip
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        ms-python.python
-        ms-azuretools.vscode-docker
-        pkief.material-icon-theme
-        rust-lang.rust-analyzer
-        charliermarsh.ruff
-        #enkia.tokyo-night
-      ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          name = "sarif-viewer";
-          publisher = "MS-SarifVSCode";
-          version = "3.4.2";
-          sha256 = "sha256-HDuDelX9kCK58Re8aTlKP+EJi4fSm5lejXsvxlMXRxM=";
-        }
-        {
-          name = "devbox";
-          publisher = "jetpack-io";
-          version = "0.1.6";
-          sha256 = "sha256-cPlMZzF3UNVJCz16TNPoiGknukEWXNNXnjZVMyp/Dz8=";
-        }
-      ];
-    })
   ];
 
 }
