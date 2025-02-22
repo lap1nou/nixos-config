@@ -27,6 +27,7 @@
     devbox
     dig
     discord
+    drawio
     efitools
     exegol
     eza
