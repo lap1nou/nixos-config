@@ -29,6 +29,7 @@ in
 
   boot = {
     loader.systemd-boot.enable = true;
+    loader.systemd-boot.editor = false; # "Whether to allow editing the kernel command-line before boot. It is recommended to set this to false, as it allows gaining root access by passing init=/bin/sh as a kernel parameter."
     loader.efi.canTouchEfiVariables = false;
 
     # Store "/tmp" folder in RAM
