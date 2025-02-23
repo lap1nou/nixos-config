@@ -251,6 +251,10 @@ in
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
 
+      promptInit = ''
+        eval "$(starship init zsh)"
+      '';
+
       ohMyZsh = {
         enable = true;
         plugins = [ "git" ];
@@ -264,14 +268,13 @@ in
         ll = "eza --icons=always -algh";
         ls = "eza --icons=always -algh";
         xclip = "xclip -i -sel p -f | xclip -i -sel c";
-	      update = "sudo nixos-rebuild switch";
-	      edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
-        nix-shell = "nix-shell --extra-experimental-features flakes";
+	update = "sudo nixos-rebuild switch";
+	edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
+        nix-shell = "nix-shell --run zsh --extra-experimental-features flakes";
         change-theme = "change-wallpaper; update; echo 'awesome.restart()' | awesome-client";
       };
   };
   programs.dconf.enable = true; # https://discourse.nixos.org/t/error-gdbus-error-org-freedesktop-dbus-error-serviceunknown-the-name-ca-desrt-dconf-was-not-provided-by-any-service-files/29111
-  programs.starship.enable = true;
   programs.wireshark.enable = true;
   programs.ssh = {
     startAgent = true;
