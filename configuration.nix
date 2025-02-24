@@ -36,6 +36,14 @@ in
     tmp.useTmpfs = true;
   };
 
+  security.sudo.execWheelOnly = true;
+
+  documentation.enable = true;
+  documentation.man.enable = true;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.dev.enable = false;
+
   networking = {
     hostName = "pentest";
     networkmanager = {
