@@ -39,7 +39,7 @@
         $git_branch\
         $git_status\
         $git_metrics\
-        [](fg:#${config.stylix.generated.palette.base09} bg:none)
+        [](fg:#${config.stylix.generated.palette.base09} bg:none)
         [ └>](bold green) 
         """
 
