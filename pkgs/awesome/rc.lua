@@ -9,9 +9,55 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
-local hotkeys_popup = require("awful.hotkeys_popup")
+local hotkeys_popup = require("awful.hotkeys_popup.widget")
 
-require("awful.hotkeys_popup.keys")
+for group_name, group_data in pairs({
+    ["Kitty"] = { color = "#009F00" }
+}) do
+    hotkeys_popup.add_group_rules(group_name, group_data)
+end
+
+-- Terminal hotkey
+local terminal_keys = {
+    ["Kitty: general"] = {
+        {
+            modifiers = { "Ctrl" },
+            keys = {
+                c = "copy the selected text",
+                v = "paste the selected text"
+            }
+        },
+        {
+            modifiers = { "Ctrl", "Shift" },
+            keys = {
+              page_up = "scroll up",
+              page_down = "scroll down",
+              home = "scroll to start",
+              ["end"] = "scroll to end"
+            }
+        }
+    },
+    ["Kitty: tabs"] = {
+        {
+            modifiers = { "Ctrl", "Shift" },
+            keys = {
+              t = "new tab",
+              q = "close tab"
+            }
+        }
+    },
+    ["Kitty: muliplexing"] = {
+        {
+            modifiers = { "Ctrl", "Shift" },
+            keys = {
+              enter = "new window",
+              w = "close window"
+            }
+        }
+    }
+}
+
+hotkeys_popup.add_hotkeys(terminal_keys)
 
 if awesome.startup_errors then
     naughty.notify({ preset = naughty.config.presets.critical,
