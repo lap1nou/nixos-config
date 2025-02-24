@@ -37,6 +37,11 @@ in
   };
 
   security.sudo.execWheelOnly = true;
+  security.auditd.enable = true;
+  security.audit.enable = true;
+  security.audit.rules = [
+	"-w /etc/passwd -p wa -k password_change"
+  ];
 
   documentation.enable = true;
   documentation.man.enable = true;
