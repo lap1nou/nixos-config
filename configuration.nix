@@ -1,4 +1,4 @@
-{ config, lib, pkgs, home-manager, pythonOlder, ... }:
+{ config, lib, pkgs, home-manager, pythonOlder, testBool,... }:
 
 # Get AwesomeWM from Git directly as the NixOS version is really old
 let
