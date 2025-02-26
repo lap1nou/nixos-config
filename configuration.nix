@@ -22,6 +22,11 @@ let
     name = "picom.conf";
     text = builtins.readFile ./pkgs/picom/picom.conf;
   };
+
+  testCondi = {
+    "enabled" = [ (import ./disko-config.nix) ];
+    "disabled" = [ ];
+  };
 in
 {
   hardware.enableAllFirmware = true;
@@ -37,11 +42,11 @@ in
   };
 
   security.sudo.execWheelOnly = true;
-  security.auditd.enable = true;
-  security.audit.enable = true;
-  security.audit.rules = [
-	"-w /etc/passwd -p wa -k password_change"
-  ];
+  #security.auditd.enable = true;
+  #security.audit.enable = true;
+  #security.audit.rules = [
+	#"-w /etc/passwd -p wa -k password_change"
+  #];
 
   documentation.enable = true;
   documentation.man.enable = true;
@@ -316,8 +321,8 @@ in
   imports = [
       ./hardware-configuration.nix
       ./pkgs/basic.nix
-      ./disko-config.nix
-  ];
+      #./disko-config.nix
+  ] ++ (testCondi.${testBool} or [ ]);
 
   # Custom pkgs for all users
   environment.systemPackages = with pkgs; [
