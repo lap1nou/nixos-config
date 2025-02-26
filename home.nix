@@ -188,6 +188,13 @@
     enable = true;
     userEmail = "lapinousexy@gmail.com";
     userName = "lap1nou";
+
+    signing.signByDefault = true;
+
+    extraConfig = {
+      gpg.format = "ssh";
+      user.signingkey = "~/.ssh/id_rsa_github.pub";
+    };
   };
 
   # This value determines the Home Manager release that your configuration is
