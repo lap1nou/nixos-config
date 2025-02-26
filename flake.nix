@@ -16,7 +16,7 @@
     nixosConfigurations.pentest = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
-        testBool = "true";
+        testBool = "enabled";
       };
       modules = [
         stylix.nixosModules.stylix
@@ -51,7 +51,7 @@
           }
         ];
         format = "iso";
-        specialArgs = { testBool = "false"; };
+        specialArgs = { testBool = "disabled"; };
     };
     };
   };
