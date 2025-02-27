@@ -13,6 +13,7 @@
     (writeShellScriptBin "rofi-exegol-start" (builtins.readFile ../alias/rofi-exegol-start.sh))
     (writeShellScriptBin "change-wallpaper" (builtins.readFile ../alias/change-wallpaper.sh))
     (writeShellScriptBin "nix-install" (builtins.readFile ../alias/nix-install.sh))
+    (writeShellScriptBin "nix-iso" (builtins.readFile ../alias/nix-iso.sh))
     ascii
     alsa-utils # CLI to manage sound
     # bat: installed in home.nix
