@@ -292,7 +292,7 @@ in
 	edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
         nix-shell = "nix-shell --run zsh --extra-experimental-features flakes";
         change-theme = "change-wallpaper; update; echo 'awesome.restart()' | awesome-client";
-	nix-iso = "sudo nixos-generate -f iso --flake ~/programming/nixos-config/ -o out.iso";
+	nix-iso = "git clone https://github.com/lap1nou/nixos-config.git /tmp/nixos-config; sudo nixos-generate -f iso --flake /tmp/nixos-config/ -o out.iso; rm -rf /tmp/nixos-config";
       };
   };
   programs.dconf.enable = true; # https://discourse.nixos.org/t/error-gdbus-error-org-freedesktop-dbus-error-serviceunknown-the-name-ca-desrt-dconf-was-not-provided-by-any-service-files/29111
