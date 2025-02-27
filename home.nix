@@ -8,15 +8,6 @@
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
     (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
   ];
-  home.activation.cloneRepo = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    if [[ ! -d "$HOME/programming/nixos-config/" ]]; then
-      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/nixos-config.git $HOME/programming/nixos-config/
-    fi
-
-    if [[ ! -d "$HOME/programming/postex-rs/" ]]; then
-      run ${pkgs.git}/bin/git clone git@github.com:lap1nou/postex-rs.git $HOME/programming/postex-rs/
-    fi
-  '';
 
   stylix.enable = true;
   stylix.polarity = "dark";
