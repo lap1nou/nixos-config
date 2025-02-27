@@ -38,7 +38,7 @@ fi
 
 # Replace the selected disk in the "disko" config
 echo '{{ Color "#62b851" "0" "" }} {{ "NixOS will be installed on" }} {{ Color "#62b851" "0" "'$SELECTED_DISK'\n" }}' | gum format -t template
-sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" disko-config.nix
+sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" "$NIXOS_CONFIG_DOWNLOAD_PATH/disko-config.nix"
 
 while true; do
     LUKS_PASSWORD=$(gum input --no-show-help --placeholder="Enter the LUKS password..." --password)
