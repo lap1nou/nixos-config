@@ -10,6 +10,9 @@ function spin_task() {
     fi
 }
 
+NIXOS_CONFIG_DOWNLOAD_PATH="/tmp/nixos-config"
+NIXOS_CONFIG_PATH="/mnt/etc/nixos"
+
 # Check that the script is ran as root
 if [[ $EUID -ne 0 ]]; then
     echo '{{ Color "#d63209" "0" "" }} {{ "This script need to be run as" }} {{ Color "#d63209" "0" "root\n" }}' | gum format -t template
@@ -52,11 +55,13 @@ done
 
 spin_task "Installing home-manager..." nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 spin_task "Updating nix-channel..." nix-channel --update
-spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko ./disko-config.nix
+git clone https://github.com/lap1nou/nixos-config.git "$NIXOS_CONFIG_DOWNLOAD_PATH/"
+spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/disko-config.nix"
 
 spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
-cp -R ../nixos-config/. /mnt/etc/nixos
-touch /mnt/etc/nixos/.htb_env /mnt/etc/nixos/.phone-wifi
-cd /mnt/etc/nixos/ && git add -f .htb_env .phone-wifi
 
-spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake /mnt/etc/nixos/.#pentest
+cp -R "$NIXOS_CONFIG_DOWNLOAD_PATH/." "$NIXOS_CONFIG_PATH"
+touch "$NIXOS_CONFIG_PATH/.htb_env" "$NIXOS_CONFIG_PATH/.phone-wifi"
+cd "$NIXOS_CONFIG_PATH/" && git add -f .htb_env .phone-wifi
+
+spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#pentest"
