@@ -108,6 +108,7 @@
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
       "ctrl+v" = "paste_from_clipboard";
+      "ctrl+u" = ''remote_control send-text "dbcreds\\n"'';
     };
   };
   programs.alacritty = {
