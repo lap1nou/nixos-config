@@ -28,6 +28,8 @@ if [[ "$RAM" -le 10 ]]; then
     exit 1
 fi
 
+git clone https://github.com/lap1nou/nixos-config.git "$NIXOS_CONFIG_DOWNLOAD_PATH/"
+
 # Ask the user to choose one of the disk
 SELECTED_DISK=$(lsblk -nd -o PATH,TYPE | awk '{if ($2 == "disk") print $1}' | gum choose --header="Select the disk you want to install NixOS on:" --cursor=" " --no-show-help)
 
@@ -55,7 +57,6 @@ done
 
 spin_task "Installing home-manager..." nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 spin_task "Updating nix-channel..." nix-channel --update
-git clone https://github.com/lap1nou/nixos-config.git "$NIXOS_CONFIG_DOWNLOAD_PATH/"
 spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/disko-config.nix"
 
 spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
