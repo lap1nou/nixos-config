@@ -25,11 +25,28 @@
                 settings.allowDiscards = true;
                 passwordFile = "/tmp/secret.key";
                 content = {
-                  type = "filesystem";
-                  format = "ext4";
-                  mountpoint = "/";
+                  type = "lvm_pv";
+                  vg = "pool";
                 };
               };
+            };
+          };
+        };
+      };
+    };
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          root = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
+              mountOptions = [
+                "defaults"
+              ];
             };
           };
         };
