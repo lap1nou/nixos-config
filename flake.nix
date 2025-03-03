@@ -13,6 +13,7 @@
   };
 
   outputs = inputs@{ nixpkgs, disko, stylix, home-manager, nixos-generators,... }: {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
     nixosConfigurations.pentest = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
