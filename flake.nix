@@ -10,10 +10,25 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = inputs@{ nixpkgs, disko, stylix, home-manager, nixos-generators,... }: {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+  outputs = inputs@{ self, nixpkgs, disko, stylix, home-manager, nixos-generators, systems, treefmt-nix,... }: 
+let
+      # Small tool to iterate over each systems
+      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
+
+      # Eval the treefmt modules from ./treefmt.nix
+      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+    in
+{
+# for `nix fmt`
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      # for `nix flake check`
+      checks = eachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+      });
+
     nixosConfigurations.pentest = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
