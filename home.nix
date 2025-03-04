@@ -1,9 +1,15 @@
-{ config, pkgs, fetchFromGitHub, lib, ... }:
+{
+  config,
+  pkgs,
+  fetchFromGitHub,
+  lib,
+  ...
+}:
 
 {
   home.username = lib.mkForce "lapinou";
   home.homeDirectory = lib.mkForce "/home/lapinou";
-  home.packages = [ 
+  home.packages = [
     #(import ./pkgs/exegol/exegol.nix { inherit pkgs lib; })
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
     (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
@@ -15,75 +21,76 @@
   # Some program should be installed this way in order for stylix to apply theme
   programs.starship = {
     enable = true;
-    settings = builtins.fromTOML (
-      ''
-        # Source: https://github.com/theRubberDuckiee/dev-environment-files/blob/main/starship.toml
-        format = """\
-        [](#${config.stylix.generated.palette.base02})\
-        $status\
-        $os\
-        $env_var\
-        $directory\
-        [](fg:#${config.stylix.generated.palette.base01} bg:#${config.stylix.generated.palette.base03})\
-        $nix_shell\
-        [](fg:#${config.stylix.generated.palette.base03} bg:#${config.stylix.generated.palette.base09})\
-        $git_branch\
-        $git_status\
-        $git_metrics\
-        [](fg:#${config.stylix.generated.palette.base09} bg:none)
-        [ └>](bold green) 
-        """
+    settings = builtins.fromTOML (''
+      # Source: https://github.com/theRubberDuckiee/dev-environment-files/blob/main/starship.toml
+      format = """\
+      [](#${config.stylix.generated.palette.base02})\
+      $status\
+      $os\
+      $env_var\
+      $directory\
+      [](fg:#${config.stylix.generated.palette.base01} bg:#${config.stylix.generated.palette.base03})\
+      $nix_shell\
+      [](fg:#${config.stylix.generated.palette.base03} bg:#${config.stylix.generated.palette.base09})\
+      $git_branch\
+      $git_status\
+      $git_metrics\
+      [](fg:#${config.stylix.generated.palette.base09} bg:none)
+      [ └>](bold green) 
+      """
 
-        [status]
-        disabled = false
-        style = "fg:bold red bg:#${config.stylix.generated.palette.base02}"
-        format = '[✗ ]($style)'
+      [status]
+      disabled = false
+      style = "fg:bold red bg:#${config.stylix.generated.palette.base02}"
+      format = '[✗ ]($style)'
 
-        [os]
-        style = "bg:#${config.stylix.generated.palette.base02}"
-        disabled = false
+      [os]
+      style = "bg:#${config.stylix.generated.palette.base02}"
+      disabled = false
 
-        [directory]
-        format = "[  $path ]($style)"
-        style = "fg:#${config.stylix.generated.palette.base05} bg:#${config.stylix.generated.palette.base01}"
-        truncation_length = 0
+      [directory]
+      format = "[  $path ]($style)"
+      style = "fg:#${config.stylix.generated.palette.base05} bg:#${config.stylix.generated.palette.base01}"
+      truncation_length = 0
 
-        [nix_shell]
-        style = "bg:#${config.stylix.generated.palette.base03}"
-        symbol = '❄️'
-        format = '[[ $symbol nix-shell ](bg:#${config.stylix.generated.palette.base03} fg:#${config.stylix.generated.palette.base00})]($style)'
+      [nix_shell]
+      style = "bg:#${config.stylix.generated.palette.base03}"
+      symbol = '❄️'
+      format = '[[ $symbol nix-shell ](bg:#${config.stylix.generated.palette.base03} fg:#${config.stylix.generated.palette.base00})]($style)'
 
-        [git_branch]
-        format = '[ $symbol$branch(:$remote_branch) ]($style)'
-        symbol = "  "
-        style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
+      [git_branch]
+      format = '[ $symbol$branch(:$remote_branch) ]($style)'
+      symbol = "  "
+      style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
 
-        [git_status]
-        format = '[$all_status]($style)'
-        style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
+      [git_status]
+      format = '[$all_status]($style)'
+      style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
 
-        [git_metrics]
-        format = "([+$added]($added_style))[]($added_style)"
-        added_style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
-        deleted_style = "fg:bright-red bg:235"
-        disabled = false
+      [git_metrics]
+      format = "([+$added]($added_style))[]($added_style)"
+      added_style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
+      deleted_style = "fg:bright-red bg:235"
+      disabled = false
 
-        [character]
-        style = "bg:#${config.stylix.generated.palette.base05}"
-        success_symbol = ""
-        error_symbol = "[✗](#${config.stylix.generated.palette.base05})"
-      ''
-    );
+      [character]
+      style = "bg:#${config.stylix.generated.palette.base05}"
+      success_symbol = ""
+      error_symbol = "[✗](#${config.stylix.generated.palette.base05})"
+    '');
   };
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [ 
-      ms-python.python
-      ms-azuretools.vscode-docker
-      pkief.material-icon-theme
-      #rust-lang.rust-analyzer
-      charliermarsh.ruff
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    extensions =
+      with pkgs.vscode-extensions;
+      [
+        ms-python.python
+        ms-azuretools.vscode-docker
+        pkief.material-icon-theme
+        #rust-lang.rust-analyzer
+        charliermarsh.ruff
+      ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "sarif-viewer";
           publisher = "MS-SarifVSCode";
@@ -141,40 +148,40 @@
       }
     ];
 
-      theme = {
-          window = {
-            width = config.lib.formats.rasi.mkLiteral "280px";
-            x-offset = config.lib.formats.rasi.mkLiteral "4px";
-            y-offset = config.lib.formats.rasi.mkLiteral "26px";
-            border = config.lib.formats.rasi.mkLiteral "2px";
-            border-radius = config.lib.formats.rasi.mkLiteral "15px";
-          };
-
-          element = {
-            padding = config.lib.formats.rasi.mkLiteral "4px 8px";
-            spacing = config.lib.formats.rasi.mkLiteral "8px";
-          };
-
-          "element selectedactive" = {
-            text-color = lib.mkForce (config.lib.formats.rasi.mkLiteral "#f7768e");
-            background-color = lib.mkForce (config.lib.formats.rasi.mkLiteral "#f7768e");
-          };
-
-          "element normal.urgent" = {
-            background-color = lib.mkForce "#f7768e";
-            text-color = lib.mkForce "#f7768e";
-          };
-
-          "*" = {
-            margin  = 0;
-            padding = 0;
-            spacing = 0;
-            border = "2px";
-            border-radius = "15px";
-          };
-
-          element.text-color = "#f7768e";
+    theme = {
+      window = {
+        width = config.lib.formats.rasi.mkLiteral "280px";
+        x-offset = config.lib.formats.rasi.mkLiteral "4px";
+        y-offset = config.lib.formats.rasi.mkLiteral "26px";
+        border = config.lib.formats.rasi.mkLiteral "2px";
+        border-radius = config.lib.formats.rasi.mkLiteral "15px";
       };
+
+      element = {
+        padding = config.lib.formats.rasi.mkLiteral "4px 8px";
+        spacing = config.lib.formats.rasi.mkLiteral "8px";
+      };
+
+      "element selectedactive" = {
+        text-color = lib.mkForce (config.lib.formats.rasi.mkLiteral "#f7768e");
+        background-color = lib.mkForce (config.lib.formats.rasi.mkLiteral "#f7768e");
+      };
+
+      "element normal.urgent" = {
+        background-color = lib.mkForce "#f7768e";
+        text-color = lib.mkForce "#f7768e";
+      };
+
+      "*" = {
+        margin = 0;
+        padding = 0;
+        spacing = 0;
+        border = "2px";
+        border-radius = "15px";
+      };
+
+      element.text-color = "#f7768e";
+    };
   };
   programs.git = {
     enable = true;
@@ -238,8 +245,7 @@
       '';
     };
 
-    ".local/share/applications/org.flameshot.Flameshot.desktop".text =
-    ''
+    ".local/share/applications/org.flameshot.Flameshot.desktop".text = ''
       [Desktop Entry]
       Name=Flameshot
       GenericName=Screenshot tool2
@@ -258,8 +264,7 @@
       X-KDE-DBUS-Restricted-Interfaces=org.kde.kwin.Screenshot,org.kde.KWin.ScreenShot2
     '';
 
-    ".local/share/applications/nemo.desktop".text =
-    ''
+    ".local/share/applications/nemo.desktop".text = ''
       [Desktop Entry]
       Name=Files
       Comment=Access and organize files
@@ -275,8 +280,7 @@
       Actions=open-home;open-computer;open-trash;
     '';
 
-    ".local/share/applications/nm-connection-editor.desktop".text =
-    ''
+    ".local/share/applications/nm-connection-editor.desktop".text = ''
       [Desktop Entry]
       Name=Advanced Network Configuration
       Comment=Manage and change your network connection settings
@@ -289,8 +293,7 @@
     '';
 
     # Reference: https://www.reddit.com/r/NixOS/comments/1aszsj6/vmware_doesnt_follow_gtk_theme_in_hyprland/
-    ".local/share/applications/vmware-workstation.desktop".text =
-    ''
+    ".local/share/applications/vmware-workstation.desktop".text = ''
       [Desktop Entry]
       Encoding=UTF-8
       Name=VMware Workstation
@@ -306,9 +309,9 @@
   };
 
   xdg.portal = {
-      enable = true;
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-      configPackages = with pkgs; [ xdg-desktop-portal-gtk ];
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    configPackages = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
   dconf.settings = {

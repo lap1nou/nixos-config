@@ -1,4 +1,5 @@
 # Source: https://github.com/theRubberDuckiee/dev-environment-files/blob/main/starship.toml
+
 format = """\
 [](#E4E4E4)\
 $os\
@@ -15,32 +16,23 @@ $git_metrics\
 [ └>](bold green) 
 """
 
-[os]
+[character]
 style = "bg:#E4E4E4"
-disabled = false
+success_symbol = ''
+error_symbol = '[✗](#E84D44)'
 
-[status]
-disabled = false
-style = "fg:bold red bg:#E4E4E4"
-format = '[✗ ]($style)'
+[cmd_duration]
+format = "[  $duration ]($style)"
+style = "fg:bright-white bg:18"
 
 [directory]
 format = "[  $path ]($style)"
 style = "fg:#E4E4E4 bg:#3B76F0"
 truncation_length = 0
 
-[nix_shell]
-style = "bg:#1d2230"
-symbol = '❄️'
-format = '[[ $symbol nix-shell ](bg:#1C3A5E fg:#8DFBD2)]($style)'
-
 [git_branch]
 format = '[ $symbol$branch(:$remote_branch) ]($style)'
 symbol = "  "
-style = "fg:#1C3A5E bg:#FCF392"
-
-[git_status]
-format = '[$all_status]($style)'
 style = "fg:#1C3A5E bg:#FCF392"
 
 [git_metrics]
@@ -49,18 +41,27 @@ added_style = "fg:#1C3A5E bg:#FCF392"
 deleted_style = "fg:bright-red bg:235"
 disabled = false
 
+[git_status]
+format = '[$all_status]($style)'
+style = "fg:#1C3A5E bg:#FCF392"
+
 [hg_branch]
 format = "[ $symbol$branch ]($style)"
 symbol = " "
 
-[cmd_duration]
-format = "[  $duration ]($style)"
-style = "fg:bright-white bg:18"
+[nix_shell]
+style = "bg:#1d2230"
+symbol = '❄️'
+format = '[[ $symbol nix-shell ](bg:#1C3A5E fg:#8DFBD2)]($style)'
 
-[character]
+[os]
 style = "bg:#E4E4E4"
-success_symbol = ''
-error_symbol = '[✗](#E84D44)'
+disabled = false
+
+[status]
+disabled = false
+style = "fg:bold red bg:#E4E4E4"
+format = '[✗ ]($style)'
 
 [time]
 disabled = false

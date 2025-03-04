@@ -1,4 +1,12 @@
-{ config, lib, pkgs, home-manager, pythonOlder, testBool,... }:
+{
+  config,
+  lib,
+  pkgs,
+  home-manager,
+  pythonOlder,
+  testBool,
+  ...
+}:
 
 # Get AwesomeWM from Git directly as the NixOS version is really old
 let
@@ -45,7 +53,7 @@ in
   #security.auditd.enable = true;
   #security.audit.enable = true;
   #security.audit.rules = [
-	#"-w /etc/passwd -p wa -k password_change"
+  #"-w /etc/passwd -p wa -k password_change"
   #];
 
   documentation.enable = true;
@@ -57,26 +65,26 @@ in
   networking = {
     hostName = "pentest";
     networkmanager = {
-	enable = true;
-	ensureProfiles.profiles = {
-		phone-wifi = {
-			connection = {
-				id = "Phone WiFi";
-				type = "wifi";
-			};
+      enable = true;
+      ensureProfiles.profiles = {
+        phone-wifi = {
+          connection = {
+            id = "Phone WiFi";
+            type = "wifi";
+          };
 
-			wifi = {
-				mode = "infrastructure";
-				ssid = "WE-C423";
-			};
+          wifi = {
+            mode = "infrastructure";
+            ssid = "WE-C423";
+          };
 
-			wifi-security = {
-				auth-alg = "open";
-				key-mgmt = "wpa-psk";
-				psk = builtins.readFile ./secrets/.phone-wifi;
-			};
-		};
-	};
+          wifi-security = {
+            auth-alg = "open";
+            key-mgmt = "wpa-psk";
+            psk = builtins.readFile ./secrets/.phone-wifi;
+          };
+        };
+      };
     };
     firewall.enable = true;
     # Wireguard interface for Ludus lab
@@ -99,7 +107,10 @@ in
             publicKey = "Bd1iTeoQsdDUUFUmf0IVvEr7tQOkzuqMwxWfZMSy7B0=";
 
             # Forward all the traffic via VPN.
-            allowedIPs = [ "10.2.0.0/16" "198.51.100.1/32" ];
+            allowedIPs = [
+              "10.2.0.0/16"
+              "198.51.100.1/32"
+            ];
 
             # Set this to the server IP and port.
             endpoint = "192.168.100.76:51820";
@@ -116,10 +127,12 @@ in
   zramSwap.enable = true;
 
   # Clean folders older than 30D in the ".cache" folder of users
-  systemd.user.tmpfiles.rules = ["e %C - - - ABCM:30d -"]; # Type Path Mode User Group Age Argument…
-  systemd.packages = [ (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; }) ];
+  systemd.user.tmpfiles.rules = [ "e %C - - - ABCM:30d -" ]; # Type Path Mode User Group Age Argument…
+  systemd.packages = [
+    (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
+  ];
 
-  users = { 
+  users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
 
@@ -175,13 +188,15 @@ in
     wantedBy = [ "multi-user.target" ];
     path = [ config.virtualisation.docker.package ];
     script = ''
-      docker load -i ${pkgs.dockerTools.pullImage {
-        imageName = "tenable/nessus";
-        imageDigest = "sha256:1aaf1a0a7ef760412386cdec56273bdc3ec73c48cf32aacb75d5fb8d6676c30a";
-        sha256 = "8FF/Mfov3MWV1OG8ZXlALTa9R7UrEEFplKztrkp7nQk=";
-        finalImageName = "nessus";
-        finalImageTag = "10.8.3-ubuntu";
-      }}
+      docker load -i ${
+        pkgs.dockerTools.pullImage {
+          imageName = "tenable/nessus";
+          imageDigest = "sha256:1aaf1a0a7ef760412386cdec56273bdc3ec73c48cf32aacb75d5fb8d6676c30a";
+          sha256 = "8FF/Mfov3MWV1OG8ZXlALTa9R7UrEEFplKztrkp7nQk=";
+          finalImageName = "nessus";
+          finalImageTag = "10.8.3-ubuntu";
+        }
+      }
     '';
     serviceConfig = {
       RemainAfterExit = true;
@@ -209,9 +224,9 @@ in
     };
 
     displayManager.sddm = {
-        enable = true;
-        theme = "catppuccin-mocha";
-        package = pkgs.kdePackages.sddm;
+      enable = true;
+      theme = "catppuccin-mocha";
+      package = pkgs.kdePackages.sddm;
     };
 
     xserver = {
@@ -237,10 +252,10 @@ in
 
   # https://nixos.wiki/wiki/Storage_optimization
   nix.gc = {
-		automatic = true;
-		dates = "weekly";
-		options = "--delete-older-than 30d";
-	};
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
   nix.optimise.automatic = true;
 
   fonts.packages = [
@@ -253,7 +268,7 @@ in
       ADW_DISABLE_PORTAL = 1;
       HTB_TOKEN = (builtins.readFile ./secrets/.htb_env);
       NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
-      GTK_CSD = "0"; # Disable GTK CSD (Client-side decoration) such as the mini close button on Firefox (that d'oesn't go well with Awesomewm for example) 
+      GTK_CSD = "0"; # Disable GTK CSD (Client-side decoration) such as the mini close button on Firefox (that d'oesn't go well with Awesomewm for example)
     };
     pathsToLink = [ "/share/nautilus-python/extensions" ];
   };
@@ -266,34 +281,35 @@ in
   stylix.targets.grub.useImage = true;
 
   # Pkgs
-  programs.zsh = { # https://nixos.wiki/wiki/Zsh
+  programs.zsh = {
+    # https://nixos.wiki/wiki/Zsh
+    enable = true;
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    promptInit = ''
+      eval "$(starship init zsh)"
+    '';
+
+    ohMyZsh = {
       enable = true;
-      enableCompletion = true;
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
+      plugins = [ "git" ];
+      theme = "agnoster";
+    };
 
-      promptInit = ''
-        eval "$(starship init zsh)"
-      '';
-
-      ohMyZsh = {
-        enable = true;
-        plugins = [ "git" ];
-        theme = "agnoster";
-      };
-
-      shellAliases = {
-        cat = "bat -p -P";
-        pcat = "bat";
-        l = "eza --icons=always -algh";
-        ll = "eza --icons=always -algh";
-        ls = "eza --icons=always -algh";
-        xclip = "xclip -i -sel p -f | xclip -i -sel c";
-	update = "sudo nixos-rebuild switch";
-	edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
-        nix-shell = "nix-shell --run zsh --extra-experimental-features flakes";
-        change-theme = "change-wallpaper; update; echo 'awesome.restart()' | awesome-client";
-      };
+    shellAliases = {
+      cat = "bat -p -P";
+      pcat = "bat";
+      l = "eza --icons=always -algh";
+      ll = "eza --icons=always -algh";
+      ls = "eza --icons=always -algh";
+      xclip = "xclip -i -sel p -f | xclip -i -sel c";
+      update = "sudo nixos-rebuild switch";
+      edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
+      nix-shell = "nix-shell --run zsh --extra-experimental-features flakes";
+      change-theme = "change-wallpaper; update; echo 'awesome.restart()' | awesome-client";
+    };
   };
   programs.dconf.enable = true; # https://discourse.nixos.org/t/error-gdbus-error-org-freedesktop-dbus-error-serviceunknown-the-name-ca-desrt-dconf-was-not-provided-by-any-service-files/29111
   programs.wireshark.enable = true;
@@ -320,9 +336,9 @@ in
   #};
 
   imports = [
-      ./hardware-configuration.nix
-      ./pkgs/basic.nix
-      #./disko-config.nix
+    ./hardware-configuration.nix
+    ./pkgs/basic.nix
+    #./disko-config.nix
   ] ++ (testCondi.${testBool} or [ ]);
 
   # Custom pkgs for all users

@@ -6,7 +6,7 @@
   imports = [
     ./firefox.nix
   ];
-  environment.systemPackages = with pkgs; [ 
+  environment.systemPackages = with pkgs; [
     (writeShellScriptBin "htb-new" (builtins.readFile ../alias/htb-new.sh))
     (writeShellScriptBin "pentest-new" (builtins.readFile ../alias/pentest-new.sh))
     (writeShellScriptBin "exegol-start" (builtins.readFile ../alias/exegol-start.sh))
@@ -21,7 +21,7 @@
     chafa
     (catppuccin-sddm.override {
       flavor = "mocha";
-      font  = "Noto Sans";
+      font = "Noto Sans";
       fontSize = "9";
       background = "${./awesome/themes/1/wallpaper.jpg}";
       loginBackground = true;
@@ -39,7 +39,7 @@
     fzf
     # git: installed in home.nix
     gum
-    home-manager 
+    home-manager
     htop
     imhex
     jq

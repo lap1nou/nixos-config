@@ -17,7 +17,7 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            luks = {  
+            luks = {
               size = "100%";
               content = {
                 type = "luks";

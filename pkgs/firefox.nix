@@ -103,7 +103,7 @@
         ];
       }
     ];
-    
+
     UserMessaging = {
       WhatsNew = false;
       ExtensionRecommendations = false;

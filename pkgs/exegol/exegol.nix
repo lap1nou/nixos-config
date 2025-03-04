@@ -20,7 +20,10 @@ pkgs.python3Packages.buildPythonPackage rec {
     pkgs.python3Packages.argcomplete
   ];
 
-  nativeBuildInputs = [ pkgs.installShellFiles pkgs.python312Packages.argcomplete ];
+  nativeBuildInputs = [
+    pkgs.installShellFiles
+    pkgs.python312Packages.argcomplete
+  ];
 
   postInstall = ''
     installShellCompletion --cmd exegol \
