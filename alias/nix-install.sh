@@ -63,6 +63,5 @@ spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesyst
 
 cp -R "$NIXOS_CONFIG_DOWNLOAD_PATH/." "$NIXOS_CONFIG_PATH"
 touch "$NIXOS_CONFIG_PATH/.htb_env" "$NIXOS_CONFIG_PATH/.phone-wifi"
-cd "$NIXOS_CONFIG_PATH/" && git add -f .htb_env .phone-wifi
 
 spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#pentest"
