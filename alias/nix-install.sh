@@ -28,7 +28,7 @@ if [[ "$RAM" -le 10 ]]; then
     exit 1
 fi
 
-git clone https://github.com/lap1nou/nixos-config.git "$NIXOS_CONFIG_DOWNLOAD_PATH/"
+spin_task "Cloning the NixOS config..." git clone https://github.com/lap1nou/nixos-config.git "$NIXOS_CONFIG_DOWNLOAD_PATH/"
 
 # Ask the user to choose one of the disk
 SELECTED_DISK=$(lsblk -nd -o PATH,TYPE | awk '{if ($2 == "disk") print $1}' | gum choose --header="Select the disk you want to install NixOS on:" --cursor=" " --no-show-help)
@@ -62,6 +62,5 @@ spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command
 spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
 
 cp -R "$NIXOS_CONFIG_DOWNLOAD_PATH/." "$NIXOS_CONFIG_PATH"
-touch "$NIXOS_CONFIG_PATH/.htb_env" "$NIXOS_CONFIG_PATH/.phone-wifi"
 
 spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#pentest"
