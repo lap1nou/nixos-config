@@ -73,7 +73,7 @@ in
 			wifi-security = {
 				auth-alg = "open";
 				key-mgmt = "wpa-psk";
-				psk = builtins.readFile ./.phone-wifi;
+				psk = builtins.readFile ./secrets/.phone-wifi;
 			};
 		};
 	};
@@ -88,7 +88,8 @@ in
         ips = [ "198.51.100.2/32" ];
         listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
-        privateKeyFile = "/etc/wg_ludus.key";
+        #privateKeyFile = "/etc/wg_ludus.key";
+        privateKey = builtins.readFile ./secrets/.wg_ludus.key;
 
         peers = [
           # For a client configuration, one peer entry for the server will suffice.
@@ -250,7 +251,7 @@ in
   environment = {
     sessionVariables = rec {
       ADW_DISABLE_PORTAL = 1;
-      HTB_TOKEN = (builtins.readFile ./.htb_env);
+      HTB_TOKEN = (builtins.readFile ./secrets/.htb_env);
       NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
       GTK_CSD = "0"; # Disable GTK CSD (Client-side decoration) such as the mini close button on Firefox (that d'oesn't go well with Awesomewm for example) 
     };
