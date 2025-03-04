@@ -38,6 +38,7 @@
     flameshot
     fzf
     # git: installed in home.nix
+    git-crypt
     gum
     home-manager
     htop
