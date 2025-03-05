@@ -11,9 +11,6 @@ local dpi = beautiful.xresources.apply_dpi
 
 local function run_shell(cmd)
 	awful.spawn.easy_async(cmd, function(stdout, stderr, reason, exit_code)
-		if exit_code ~= 0 then
-			naughty.notify({ preset = naughty.config.presets.critical, title = "Command error !", text = stderr })
-		end
 	end)
 end
 
