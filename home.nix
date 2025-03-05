@@ -110,28 +110,14 @@
     enable = true;
     settings = {
       confirm_os_window_close = 0;
-      scrollback_lines = 100000;
+      scrollback_lines = -1;
+      tab_bar_edge = "top";
+      enable_audio_bell = false;
     };
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
       "ctrl+v" = "paste_from_clipboard";
       "ctrl+u" = ''remote_control send-text "dbcreds\\n"'';
-    };
-  };
-  programs.alacritty = {
-    enable = true;
-    settings = {
-      font.normal = lib.mkForce {
-        family = "monospace";
-      };
-
-      scrolling = {
-        history = 100000;
-      };
-
-      selection = {
-        save_to_clipboard = true;
-      };
     };
   };
   programs.rofi = {
