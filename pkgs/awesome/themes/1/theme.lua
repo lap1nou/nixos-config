@@ -1,7 +1,7 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-
+local gears = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
@@ -79,6 +79,11 @@ theme.icon_nautilus = theme.dir .. "/icons/applications/files.svg"
 theme.icon_exegol = theme.dir .. "/icons/applications/exegol.png"
 theme.icon_lock = theme.dir .. "/icons/applications/lock.svg"
 theme.icon_power = theme.dir .. "/icons/applications/power_off.svg"
+
+theme.notification_bg = theme.transparent
+theme.notification_shape = function (cr, height, width)
+    gears.shape.rounded_rect(cr, height, width, 6)
+end
 
 function theme.at_screen_connect(s)
 	-- If wallpaper is a function, call it with the screen
