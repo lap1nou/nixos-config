@@ -14,6 +14,7 @@
     (writeShellScriptBin "change-wallpaper" (builtins.readFile ../alias/change-wallpaper.sh))
     (writeShellScriptBin "nix-install" (builtins.readFile ../alias/nix-install.sh))
     (writeShellScriptBin "nix-iso" (builtins.readFile ../alias/nix-iso.sh))
+    (writeShellScriptBin "nix-clean" (builtins.readFile ../alias/nix-clean.sh))
     ascii
     alsa-utils # CLI to manage sound
     # bat: installed in home.nix
