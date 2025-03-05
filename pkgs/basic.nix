@@ -57,6 +57,7 @@
     pavucontrol # GUI manage sound
     peazip
     picom
+    planify
     # rofi: installed in home.nix
     semgrep
     spotify
