@@ -18,9 +18,6 @@ local screenshot_button = wibox.widget({
 screenshot_button:connect_signal("button::press", function(_, _, _, button)
 	if button == 1 then
 		awful.spawn.easy_async("flameshot gui", function(stdout, stderr, reason, exit_code)
-			if exit_code ~= 0 then
-				naughty.notify({ preset = naughty.config.presets.critical, title = "Command error !", text = stderr })
-			end
 		end)
 	end
 end)
