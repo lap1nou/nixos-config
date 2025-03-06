@@ -81,8 +81,8 @@ theme.icon_lock = theme.dir .. "/icons/applications/lock.svg"
 theme.icon_power = theme.dir .. "/icons/applications/power_off.svg"
 
 theme.notification_bg = theme.transparent
-theme.notification_shape = function (cr, height, width)
-    gears.shape.rounded_rect(cr, height, width, 6)
+theme.notification_shape = function(cr, height, width)
+	gears.shape.rounded_rect(cr, height, width, 6)
 end
 
 function theme.at_screen_connect(s)

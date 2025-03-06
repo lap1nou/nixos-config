@@ -67,6 +67,7 @@
             stylix.nixosModules.stylix
             disko.nixosModules.disko
             ./configuration.nix
+            ./ssh.nix
             home-manager.nixosModules.home-manager
             {
               #home-manager.useGlobalPkgs = true;

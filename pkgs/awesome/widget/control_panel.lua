@@ -10,8 +10,7 @@ local slider_container = require("widget.slider_container")
 local dpi = beautiful.xresources.apply_dpi
 
 local function run_shell(cmd)
-	awful.spawn.easy_async(cmd, function(stdout, stderr, reason, exit_code)
-	end)
+	awful.spawn.easy_async(cmd, function(stdout, stderr, reason, exit_code) end)
 end
 
 local control_panel_button = wibox.widget({

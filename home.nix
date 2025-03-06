@@ -11,6 +11,7 @@
   home.homeDirectory = lib.mkForce "/home/lapinou";
   home.packages = [
     #(import ./pkgs/exegol/exegol.nix { inherit pkgs lib; })
+    (import ./pkgs/rdm/rdm.nix { inherit pkgs lib; })
     (import ./pkgs/htb-cli.nix { inherit pkgs lib; })
     (import ./pkgs/vagrant-vmware-utility/vagrant-vmware-utility.nix { inherit pkgs lib; })
   ];

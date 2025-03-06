@@ -17,8 +17,7 @@ local screenshot_button = wibox.widget({
 
 screenshot_button:connect_signal("button::press", function(_, _, _, button)
 	if button == 1 then
-		awful.spawn.easy_async("flameshot gui", function(stdout, stderr, reason, exit_code)
-		end)
+		awful.spawn.easy_async("flameshot gui", function(stdout, stderr, reason, exit_code) end)
 	end
 end)
 
