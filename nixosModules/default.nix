@@ -1,0 +1,38 @@
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./shared_folder/shared_folder.nix
+    ./awesomewm/awesomewm.nix
+    ./htb-cli/htb-cli.nix
+    ./exegol/exegol.nix
+    ./htop/htop.nix
+    ./firefox/firefox.nix
+    ./rdm/rdm.nix
+    ./pkgs/utils.nix
+    ./pkgs/nixosConfig.nix
+    ./pkgs/system.nix
+    ./pkgs/desktop.nix
+    ./pkgs/office.nix
+    ./pkgs/programming.nix
+    ./pkgs/social.nix
+    ./pkgs/pentesting.nix
+    ./wireguard/wireguard.nix
+    ./hardening/hardening.nix
+    ./optimization/optimization.nix
+    ./localization/localization.nix
+    ./nessus/nessus.nix
+    ./nixSettings/nixSettings.nix
+    ./stylixConfig/stylixConfig.nix
+    ./virtualisation/virtualisation.nix
+    ./ssh/ssh.nix
+    ./sshd/sshd.nix
+    ./fontsPkgs/fontsPkgs.nix
+    ./alias/alias.nix
+    ./nemo/nemo.nix
+  ];
+}

@@ -40,48 +40,59 @@
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
 
-      nixosConfigurations.pentest = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          testBool = "enabled";
+          inherit self;
         };
         modules = [
           stylix.nixosModules.stylix
           disko.nixosModules.disko
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            #home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.lapinou = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-          }
+          ./hosts/vm/configuration.nix
+          ./nixosModules
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit self;
+        };
+        modules = [
+          stylix.nixosModules.stylix
+          disko.nixosModules.disko
+          ./hosts/laptop/configuration.nix
+          ./nixosModules
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+      nixosConfigurations.work = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit self;
+        };
+        modules = [
+          stylix.nixosModules.stylix
+          disko.nixosModules.disko
+          ./hosts/work/configuration.nix
+          ./nixosModules
+          inputs.home-manager.nixosModules.default
         ];
       };
       packages.x86_64-linux = {
         iso = nixos-generators.nixosGenerate {
           system = "x86_64-linux";
+          specialArgs = {
+            inherit self;
+          };
           modules = [
             stylix.nixosModules.stylix
             disko.nixosModules.disko
-            ./configuration.nix
-            ./ssh.nix
-            home-manager.nixosModules.home-manager
-            {
-              #home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users.lapinou = import ./home.nix;
-
-              # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-            }
+            ./hosts/iso/configuration.nix
+            ./nixosModules
+            inputs.home-manager.nixosModules.default
           ];
           format = "iso";
-          specialArgs = {
-            testBool = "disabled";
-          };
         };
       };
     };

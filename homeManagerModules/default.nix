@@ -1,0 +1,19 @@
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+{
+  imports = [
+    ./homeManager.nix
+    ./starship/starship.nix
+    ./zsh/zsh.nix
+    ./vscode/vscode.nix
+    ./kitty/kitty.nix
+    ./bat/bat.nix
+    ./stylix/stylix.nix
+    ./git/git.nix
+    ./rofi/rofi.nix
+  ];
+}

@@ -1,5 +1,0 @@
-{
-    "Alt-/": "lua:comment.comment",
-    "CtrlUnderscore": "lua:comment.comment",
-    "Alt-f": "filemanager:toggle_tree"
-}
