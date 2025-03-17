@@ -34,5 +34,6 @@
     ./fontsPkgs/fontsPkgs.nix
     ./alias/alias.nix
     ./nemo/nemo.nix
+    ./phone_wifi/phone_wifi.nix
   ];
 }

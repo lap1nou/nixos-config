@@ -24,6 +24,7 @@
   stylixConfig.enable = true;
   virtualisation.enable = true;
   alias.enable = true;
+  phone_wifi.enable = true;
 
   # Pkgs
   utils.enable = true;
@@ -53,32 +54,6 @@
     loader.efi.canTouchEfiVariables = false;
   };
 
-  networking = {
-    hostName = "pentest";
-    networkmanager = {
-      enable = true;
-      ensureProfiles.profiles = {
-        phone-wifi = {
-          connection = {
-            id = "Phone WiFi";
-            type = "wifi";
-          };
-
-          wifi = {
-            mode = "infrastructure";
-            ssid = "WE-C423";
-          };
-
-          wifi-security = {
-            auth-alg = "open";
-            key-mgmt = "wpa-psk";
-            psk = builtins.readFile (self.outPath + "/secrets/.phone_wifi");
-          };
-        };
-      };
-    };
-  };
-
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
@@ -98,10 +73,6 @@
         "realtime"
         "audio"
         "jackaudio"
-        "docker"
-        "qemu"
-        "libvirtd"
-        "wireshark"
       ];
     };
   };
@@ -118,9 +89,6 @@
       excludePackages = [ pkgs.xterm ];
     };
   };
-
-  programs.dconf.enable = true; # https://discourse.nixos.org/t/error-gdbus-error-org-freedesktop-dbus-error-serviceunknown-the-name-ca-desrt-dconf-was-not-provided-by-any-service-files/29111
-  programs.wireshark.enable = true;
 
   imports = [
     ./hardware-configuration.nix

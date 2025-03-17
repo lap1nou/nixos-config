@@ -88,5 +88,11 @@ in
       };
     };
 
+    users.users.lapinou = {
+      extraGroups = [
+        "docker"
+      ];
+    };
+
   };
 }
