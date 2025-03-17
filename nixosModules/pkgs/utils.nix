@@ -28,13 +28,5 @@
       yq-go
       zip
     ];
-
-    programs.wireshark.enable = true;
-
-    users.users.lapinou = {
-      extraGroups = [
-        "wireshark"
-      ];
-    };
   };
 }

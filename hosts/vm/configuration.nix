@@ -36,6 +36,7 @@
   social.enable = true;
   pentesting.enable = true;
   nemo.enable = true;
+  wireshark.enable = true;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;

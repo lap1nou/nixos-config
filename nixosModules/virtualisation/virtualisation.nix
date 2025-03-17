@@ -88,11 +88,6 @@ in
       };
     };
 
-    users.users.lapinou = {
-      extraGroups = [
-        "docker"
-      ];
-    };
-
+    users.groups.docker.members = [ "lapinou" ];
   };
 }
