@@ -12,7 +12,7 @@
     };
   };
 
-  config.variables =  {
+  config.variables = {
     host = "work";
   };
 }
