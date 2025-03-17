@@ -1,4 +1,5 @@
 {
+  self,
   pkgs,
   lib,
   config,
@@ -21,7 +22,7 @@
           ips = [ "198.51.100.2/32" ];
           listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
 
-          privateKey = builtins.readFile (self.outPath + "./secrets/.wg_ludus.key");
+          privateKey = builtins.readFile (self.outPath + "/secrets/.wg_ludus.key");
 
           peers = [
             # For a client configuration, one peer entry for the server will suffice.

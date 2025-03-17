@@ -1,4 +1,5 @@
 {
+  osConfig,
   pkgs,
   lib,
   config,
@@ -30,12 +31,10 @@
         ll = "eza --icons=always -algh";
         ls = "eza --icons=always -algh";
         xclip = "xclip -i -sel p -f | xclip -i -sel c";
-        #update = "sudo cp -rf /home/lapinou/programming/nixos/ /etc/; sudo rm -rf /etc/nixos/.git/; sudo nixos-rebuild switch";
-        update = "sudo nixos-rebuild switch";
+        update = "sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'";
         edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
-        #edit-config = "code /home/lapinou/programming/nixos/";
         nix-shell = "nix-shell --extra-experimental-features flakes --run zsh";
-        change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#vm'; echo 'awesome.restart()' | awesome-client";
+        change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
       };
     };
   };

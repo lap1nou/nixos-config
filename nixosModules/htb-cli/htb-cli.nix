@@ -42,7 +42,7 @@ in
 
     environment = {
       sessionVariables = rec {
-        HTB_TOKEN = (builtins.readFile (self.outPath + "./secrets/.htb_env"));
+        HTB_TOKEN = (builtins.readFile (self.outPath + "/secrets/.htb_env"));
       };
     };
   };

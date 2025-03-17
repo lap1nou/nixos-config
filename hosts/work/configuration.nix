@@ -76,7 +76,7 @@
           wifi-security = {
             auth-alg = "open";
             key-mgmt = "wpa-psk";
-            psk = builtins.readFile (self.outPath + "./secrets/.phone_wifi");
+            psk = builtins.readFile (self.outPath + "/secrets/.phone_wifi");
           };
         };
       };

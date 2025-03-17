@@ -72,7 +72,7 @@
           wifi-security = {
             auth-alg = "open";
             key-mgmt = "wpa-psk";
-            psk = builtins.readFile (self.outPath + "./secrets/.phone_wifi");
+            psk = builtins.readFile (self.outPath + "/secrets/.phone_wifi");
           };
         };
       };
@@ -125,6 +125,7 @@
   imports = [
     ./hardware-configuration.nix
     ./disko-config.nix
+    ./variables.nix
   ];
 
   system.stateVersion = "24.11";

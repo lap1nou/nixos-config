@@ -67,4 +67,5 @@ spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesyst
 rm -f /tmp/git-crypt.key
 cp -R "$NIXOS_CONFIG_DOWNLOAD_PATH/." "$NIXOS_CONFIG_PATH"
 
-spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#pentest"
+HOST=$(gum choose --header="Select the host you want to install:" --cursor=" " --no-show-help "vm" "laptop" "work")
+spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#$HOST"
