@@ -7,7 +7,7 @@
   ...
 }:
 {
-  shared_folder.enable = true;
+  shared_folder.enable = false;
   awesomewm.enable = true;
   htb-cli.enable = false;
   htop.enable = true;
