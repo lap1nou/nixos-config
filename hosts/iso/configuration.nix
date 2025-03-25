@@ -21,6 +21,7 @@
   nessus.enable = true;
   nixSettings.enable = true;
   ssh.enable = true;
+  sshd.enable = true;
   stylixConfig.enable = true;
   virtualisation.enable = true;
   alias.enable = true;
