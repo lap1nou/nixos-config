@@ -96,5 +96,9 @@
     ./variables.nix
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+                "archiver-3.5.1"
+              ];
+
   system.stateVersion = "24.11";
 }
