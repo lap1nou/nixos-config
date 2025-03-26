@@ -45,7 +45,7 @@ fi
 
 # Replace the selected disk in the "disko" config
 echo '{{ Color "#62b851" "0" "" }} {{ "NixOS will be installed on" }} {{ Color "#62b851" "0" "'$SELECTED_DISK'\n" }}' | gum format -t template
-sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" "$NIXOS_CONFIG_DOWNLOAD_PATH/$HOST/disko-config.nix"
+sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" "$NIXOS_CONFIG_DOWNLOAD_PATH/hosts/$HOST/disko-config.nix"
 
 while true; do
     LUKS_PASSWORD=$(gum input --no-show-help --placeholder="Enter the LUKS password..." --password)
@@ -62,7 +62,7 @@ done
 
 spin_task "Installing home-manager..." nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 spin_task "Updating nix-channel..." nix-channel --update
-spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/$HOST/disko-config.nix"
+spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/hosts/$HOST/disko-config.nix"
 
 spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
 
