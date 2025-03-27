@@ -32,10 +32,10 @@
                       mountpoint = "/";
                     };
 
-                    "/persist" = {
-                      mountpoint = "/persist";
+                    "/persistent" = {
+                      mountpoint = "/persistent";
                       mountOptions = [
-                        "subvol=persist"
+                        "subvol=persistent"
                         "compress=zstd"
                         "noatime"
                       ];
