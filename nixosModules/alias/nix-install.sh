@@ -33,6 +33,8 @@ GIT_CRYPT_B64=$(gum write --no-show-help --placeholder="Enter the git-crypt Base
 echo "$GIT_CRYPT_B64" | base64 -d > /tmp/git-crypt.key
 cd "$NIXOS_CONFIG_DOWNLOAD_PATH/" && git-crypt unlock /tmp/git-crypt.key
 
+HOST=$(gum choose --header="Select the host you want to install:" --cursor=" " --no-show-help "vm" "laptop" "work")
+
 # Ask the user to choose one of the disk
 SELECTED_DISK=$(lsblk -nd -o PATH,TYPE | awk '{if ($2 == "disk") print $1}' | gum choose --header="Select the disk you want to install NixOS on:" --cursor=" " --no-show-help)
 
@@ -43,7 +45,7 @@ fi
 
 # Replace the selected disk in the "disko" config
 echo '{{ Color "#62b851" "0" "" }} {{ "NixOS will be installed on" }} {{ Color "#62b851" "0" "'$SELECTED_DISK'\n" }}' | gum format -t template
-sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" "$NIXOS_CONFIG_DOWNLOAD_PATH/disko-config.nix"
+sed -i "s|device = \".*\";|device = \"$SELECTED_DISK\";|g" "$NIXOS_CONFIG_DOWNLOAD_PATH/hosts/$HOST/disko-config.nix"
 
 while true; do
     LUKS_PASSWORD=$(gum input --no-show-help --placeholder="Enter the LUKS password..." --password)
@@ -60,12 +62,12 @@ done
 
 spin_task "Installing home-manager..." nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 spin_task "Updating nix-channel..." nix-channel --update
-spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/disko-config.nix"
+spin_task "Apply Disko partitioning..." nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko "$NIXOS_CONFIG_DOWNLOAD_PATH/hosts/$HOST/disko-config.nix"
 
 spin_task "Generating NixOS basic config..." nixos-generate-config --no-filesystems --root /mnt
 
 rm -f /tmp/git-crypt.key
 cp -R "$NIXOS_CONFIG_DOWNLOAD_PATH/." "$NIXOS_CONFIG_PATH"
 
-HOST=$(gum choose --header="Select the host you want to install:" --cursor=" " --no-show-help "vm" "laptop" "work")
+
 spin_task "Installing NixOS..." nixos-install --no-root-passwd --flake "$NIXOS_CONFIG_PATH/.#$HOST"
