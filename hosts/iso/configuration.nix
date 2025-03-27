@@ -38,6 +38,7 @@
   pentesting.enable = true;
   nemo.enable = true;
   wireshark.enable = true;
+  keepassxc.enable = false;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;

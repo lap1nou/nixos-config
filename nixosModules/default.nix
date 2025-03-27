@@ -36,5 +36,6 @@
     ./nemo/nemo.nix
     ./phone_wifi/phone_wifi.nix
     ./wireshark/wireshark.nix
+    ./keepassxc/keepassxc.nix
   ];
 }

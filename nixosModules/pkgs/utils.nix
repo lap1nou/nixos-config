@@ -17,7 +17,6 @@
       fzf
       imhex
       jq
-      keepassxc
       openvpn
       peazip
       tlrc
