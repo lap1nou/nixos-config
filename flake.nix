@@ -54,7 +54,6 @@
           ./nixosModules
           inputs.home-manager.nixosModules.default
           impermanence.nixosModules.impermanence
-          impermanence.homeManagerModules.impermanence
         ];
       };
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
