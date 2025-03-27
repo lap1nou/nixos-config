@@ -49,7 +49,7 @@
       {
         imports = [ 
           ./home.nix
-          impermanence.homeManagerModules.impermanence
+          inputs.impermanence.homeManagerModules.impermanence
         ];
       };
   };
