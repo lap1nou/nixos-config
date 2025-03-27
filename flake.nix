@@ -11,6 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs =
@@ -51,6 +52,8 @@
           ./hosts/vm/configuration.nix
           ./nixosModules
           inputs.home-manager.nixosModules.default
+          impermanence.nixosModules.impermanence
+          impermanence.homeManagerModules.impermanence
         ];
       };
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
