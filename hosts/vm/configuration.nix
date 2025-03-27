@@ -4,6 +4,7 @@
   lib,
   pkgs,
   pythonOlder,
+  impermanence,
   ...
 }:
 {
@@ -46,7 +47,10 @@
     users.lapinou =
       { ... }:
       {
-        imports = [ ./home.nix ];
+        imports = [ 
+          ./home.nix
+          impermanence.homeManagerModules.impermanence
+        ];
       };
   };
 
