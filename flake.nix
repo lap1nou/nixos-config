@@ -24,6 +24,7 @@
       nixos-generators,
       systems,
       treefmt-nix,
+      impermanence,
       ...
     }:
     let
