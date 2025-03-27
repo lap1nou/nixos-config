@@ -4,7 +4,7 @@
   lib,
   pkgs,
   pythonOlder,
-  impermanence,
+  inputs,
   ...
 }:
 {
