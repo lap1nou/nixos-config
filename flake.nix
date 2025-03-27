@@ -46,6 +46,7 @@
         system = "x86_64-linux";
         specialArgs = {
           inherit self;
+          inherit inputs;
         };
         modules = [
           stylix.nixosModules.stylix
