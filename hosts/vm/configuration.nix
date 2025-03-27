@@ -66,7 +66,7 @@
 
     users.lapinou = {
       isNormalUser = true;
-      home = "/home/lapinou";
+      #home = "/home/lapinou";
       description = "lapinou";
       hashedPassword = "$y$j9T$luaplVK4AN84DU/RvA52T1$HSLIXpC.Cjy9NMOqunUE0DgtIm0pSgFV.oT3Q8BTAzA"; # root
       extraGroups = [
