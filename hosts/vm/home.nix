@@ -57,4 +57,30 @@
       Categories=GNOME;GTK;Settings;X-GNOME-NetworkSettings;X-GNOME-Utilities;
     '';
   };
+
+home.persistence."/persistent/home/lapinou" = {
+    directories = [
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Documents"
+      "Videos"
+      "Desktop"
+      ".ssh"
+      ".exegol"
+      ".mozilla"
+      ".config"
+      #".themes"
+      ".vscode"
+      ".vmware"
+      ".zsh_history"
+      ".zshenv"
+      ".zshrc"
+      "programming"
+    ];
+    files = [
+      #".screenrc"
+    ];
+    allowOther = true;
+  };
 }
