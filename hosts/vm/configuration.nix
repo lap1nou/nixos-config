@@ -102,6 +102,7 @@
     ./variables.nix
   ];
 
+  boot.initrd.systemd.enable = true;
   boot.initrd.systemd.services.clean-btrfs = {
     wantedBy = [ "initrd.target" ];
     after = [ "systemd-cryptsetup@cryptroot.service" ];
