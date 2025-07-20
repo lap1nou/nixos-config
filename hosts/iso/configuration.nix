@@ -14,11 +14,11 @@
   firefox.enable = true;
   wireguard.enable = false;
   optimization.enable = true;
-  exegol.enable = true;
+  exegol.enable = false;
   fontsPkgs.enable = true;
   hardening.enable = true;
   localization.enable = true;
-  nessus.enable = true;
+  nessus.enable = false;
   nixSettings.enable = true;
   ssh.enable = true;
   sshd.enable = true;
@@ -35,7 +35,7 @@
   office.enable = true;
   programming.enable = true;
   social.enable = true;
-  pentesting.enable = true;
+  pentesting.enable = false;
   nemo.enable = true;
   wireshark.enable = true;
   keepassxc.enable = false;
