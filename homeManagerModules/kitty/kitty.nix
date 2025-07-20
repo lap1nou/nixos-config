@@ -22,7 +22,7 @@
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+v" = "paste_from_clipboard";
-        "ctrl+u" = ''remote_control send-text "exh apply creds\\n"'';
+        "ctrl+u" = ''remote_control send-text "exh set creds\\n"'';
       };
     };
   };
