@@ -8,14 +8,14 @@
   ...
 }:
 {
-  shared_folder.enable = true;
+  shared_folder.enable = false;
   awesomewm.enable = true;
-  htb-cli.enable = true;
+  htb-cli.enable = false;
   htop.enable = true;
   firefox.enable = true;
   wireguard.enable = true;
   optimization.enable = true;
-  exegol.enable = true;
+  exegol.enable = false;
   fontsPkgs.enable = true;
   hardening.enable = true;
   localization.enable = true;
@@ -102,78 +102,78 @@
     ./variables.nix
   ];
 
-  boot.initrd.systemd.enable = true;
-  boot.initrd.systemd.services.clean-btrfs = {
-    wantedBy = [ "initrd.target" ];
-    after = [ "systemd-cryptsetup@cryptroot.service" ];
-    before = [ "sysroot.mount" ];
-    unitConfig.DefaultDependencies = "no";
-    serviceConfig.Type = "oneshot";
-    script = ''
-      mkdir /btrfs_tmp
-      mount /dev/mapper/cryptroot /btrfs_tmp
-      if [[ -e /btrfs_tmp/root ]]; then
-          mkdir -p /btrfs_tmp/old_roots
-          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-      fi
+  #boot.initrd.systemd.enable = true;
+  #boot.initrd.systemd.services.clean-btrfs = {
+  #  wantedBy = [ "initrd.target" ];
+  #  after = [ "systemd-cryptsetup@cryptroot.service" ];
+  #  before = [ "sysroot.mount" ];
+  #  unitConfig.DefaultDependencies = "no";
+  #  serviceConfig.Type = "oneshot";
+  #  script = ''
+  #    mkdir /btrfs_tmp
+  #    mount /dev/mapper/cryptroot /btrfs_tmp
+  #    if [[ -e /btrfs_tmp/root ]]; then
+  #        mkdir -p /btrfs_tmp/old_roots
+  #        timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+  #        mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+  #    fi
+#
+  #    delete_subvolume_recursively() {
+  #        IFS=$'\n'
+  #        for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+  #            delete_subvolume_recursively "/btrfs_tmp/$i"
+  #        done
+  #        btrfs subvolume delete "$1"
+  #    }
+#
+  #    for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+  #        delete_subvolume_recursively "$i"
+  #    done
+#
+  #    btrfs subvolume create /btrfs_tmp/root
+  #    umount /btrfs_tmp
+  #  '';
+  #};
 
-      delete_subvolume_recursively() {
-          IFS=$'\n'
-          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-              delete_subvolume_recursively "/btrfs_tmp/$i"
-          done
-          btrfs subvolume delete "$1"
-      }
+  #fileSystems."/persistent".neededForBoot = true;
 
-      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-          delete_subvolume_recursively "$i"
-      done
-
-      btrfs subvolume create /btrfs_tmp/root
-      umount /btrfs_tmp
-    '';
-  };
-
-  fileSystems."/persistent".neededForBoot = true;
-
-environment.persistence."/persistent" = {
-    enable = true;
-    hideMounts = true;
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-      "/etc/nixos"
-    ];
-    files = [
-      "/etc/machine-id"
-    ];
-    users.lapinou = {
-      directories = [
-      "Downloads"
-      "Music"
-      "Pictures"
-      "Documents"
-      "Videos"
-      "Desktop"
-      ".ssh"
-      ".exegol"
-      ".mozilla"
-      ".config"
-      ".vscode"
-      ".vmware"
-      "programming"
-    ];
-    files = [
-      ".zsh_history"
-      ".zshenv"
-      ".zshrc"
-    ];
-    };
-  };
+#environment.persistence."/persistent" = {
+#    enable = true;
+#    hideMounts = true;
+#    directories = [
+#      "/var/log"
+#      "/var/lib/bluetooth"
+#      "/var/lib/nixos"
+#      "/var/lib/systemd/coredump"
+#      "/etc/NetworkManager/system-connections"
+#      "/etc/nixos"
+#    ];
+#    files = [
+#      "/etc/machine-id"
+#    ];
+#    users.lapinou = {
+#      directories = [
+#      "Downloads"
+#      "Music"
+#      "Pictures"
+#      "Documents"
+#      "Videos"
+#      "Desktop"
+#      ".ssh"
+#      ".exegol"
+#      ".mozilla"
+#      ".config"
+#      ".vscode"
+#      ".vmware"
+#      "programming"
+#    ];
+#    files = [
+#      ".zsh_history"
+#      ".zshenv"
+#      ".zshrc"
+#    ];
+#    };
+#  };
 
   system.stateVersion = "24.11";
 }
