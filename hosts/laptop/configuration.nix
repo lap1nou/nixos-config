@@ -93,6 +93,7 @@
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
+      videoDrivers = [ "displaylink" "modesetting" ];
     };
   };
 
