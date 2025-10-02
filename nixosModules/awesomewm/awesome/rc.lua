@@ -279,6 +279,7 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 local control_panel = require("widget.control_panel")
 local screenshot_button = require("widget.screenshot")
+local battery = require("widget.battery")
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
@@ -332,6 +333,7 @@ awful.screen.connect_for_each_screen(function(s)
 			screenshot_button,
 			control_panel,
 			mytextclock,
+			battery,
 			s.mylayoutbox,
 		},
 	})
