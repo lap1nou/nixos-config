@@ -26,6 +26,7 @@
       xclip
       yq-go
       zip
+      obs-studio
     ];
   };
 }
