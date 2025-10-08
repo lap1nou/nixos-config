@@ -80,3 +80,6 @@ pipx install secator
 
 # Install new gau
 go install github.com/lc/gau/v2/cmd/gau@latest
+
+# Install unfurl
+go install github.com/tomnomnom/unfurl@latest
