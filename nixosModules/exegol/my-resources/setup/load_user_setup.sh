@@ -74,3 +74,9 @@ rm /root/.mozilla/firefox/*.Exegol/places.sqlite
 
 # Apply Firefox policy
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
+
+# Install secator
+pipx install secator
+
+# Install new gau
+go install github.com/lc/gau/v2/cmd/gau@latest
