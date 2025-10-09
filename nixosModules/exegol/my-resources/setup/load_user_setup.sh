@@ -90,4 +90,10 @@ go install -v github.com/s0md3v/smap/cmd/smap@latest
 # Install vulnx (cvemap)
 go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
 
+# Install tlsx
+go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+
+# Install urlfinder
+go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+
 asdf reshim
