@@ -87,4 +87,7 @@ go install github.com/tomnomnom/unfurl@latest
 # Install smap
 go install -v github.com/s0md3v/smap/cmd/smap@latest
 
+# Install vulnx (cvemap)
+go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+
 asdf reshim
