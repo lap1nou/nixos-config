@@ -97,3 +97,6 @@ go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
 go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
 
 asdf reshim
+
+# Download Trickest resolvers.txt
+wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O /opt/lists/resolvers.txt
