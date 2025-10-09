@@ -84,4 +84,7 @@ go install github.com/lc/gau/v2/cmd/gau@latest
 # Install unfurl
 go install github.com/tomnomnom/unfurl@latest
 
+# Install smap
+go install -v github.com/s0md3v/smap/cmd/smap@latest
+
 asdf reshim
