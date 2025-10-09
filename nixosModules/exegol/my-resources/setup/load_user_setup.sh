@@ -91,7 +91,11 @@ go install -v github.com/s0md3v/smap/cmd/smap@latest
 go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
 
 # Install tlsx
-go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+# go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+# Newer golang is requiered, temp fix:
+wget https://github.com/projectdiscovery/tlsx/releases/download/v1.2.1/tlsx_1.2.1_linux_amd64.zip -O /tmp/tlsx_1.2.1_linux_amd64.zip
+unzip -d /tmp/ /tmp/tlsx_1.2.1_linux_amd64.zip
+mv /tmp/tlsx /opt/tools/bin/
 
 # Install urlfinder
 go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
