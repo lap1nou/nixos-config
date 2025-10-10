@@ -60,6 +60,8 @@
     loader.efi.canTouchEfiVariables = false;
   };
 
+  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
