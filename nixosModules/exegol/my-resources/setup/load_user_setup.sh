@@ -7,12 +7,6 @@ set -e
 
 # Exegol also features a set of supported customization a user can make.
 # The /opt/supported_setups.md file lists the supported configurations that can be made easily.
-#JAVA_HOME=/usr/lib/jvm/java-11-openjdk neo4j start
-#local_ip=$(ifconfig eth0 | grep 'inet ' | awk '{print $2}' | tr -d '\n')
-#sed -i "s#\"bind_addr\": \"127.0.0.1:1030\",#\"bind_addr\": \"$local_ip:1030\",##" /opt/tools/BloodHound-CE/bloodhound.config.json
-
-# Install DBAssets
-#pipx install git+https://github.com/lap1nou/db-assets
 
 # Adding a host entry for the domain if we are in a HTB container
 #if [[ ! -z "${HTB}" ]]; then
