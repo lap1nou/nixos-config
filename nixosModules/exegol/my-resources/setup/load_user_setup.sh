@@ -82,6 +82,7 @@ go install github.com/tomnomnom/unfurl@latest
 go install -v github.com/s0md3v/smap/cmd/smap@latest
 
 # Install vulnx (cvemap)
+asdf set golang 1.23.0
 go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
 
 # Install tlsx
