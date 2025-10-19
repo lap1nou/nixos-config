@@ -89,7 +89,7 @@ function install_vulnx() {
   cd /opt/tools/vulnx || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
-  GOBIN=/opt/tools/vulnx/.go/bin go install -v go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+  GOBIN=/opt/tools/vulnx/.go/bin go install -v github.com/projectdiscovery/cvemap/cmd/vulnx@latest
   ln -s /opt/tools/vulnx/.go/bin/vulnx /opt/tools/bin/vulnx
 }
 
