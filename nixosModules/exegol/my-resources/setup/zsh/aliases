@@ -36,9 +36,6 @@ alias l="eza --icons=always -algh"
 alias ll="eza --icons=always -algh"
 alias ls="eza --icons=always -algh"
 alias obsidian="obsidian --no-sandbox &> /dev/null &"
-alias firefox="firefox &> /dev/null &"
-alias ff="firefox"
-alias burpsuite="/usr/lib/jvm/java-21-openjdk/bin/java -jar -Xmx4g /opt/tools/BurpSuiteCommunity/BurpSuiteCommunity.jar &> /dev/null &"
 alias msf_handlers="() {
     cat > /root/.msf4/msf_handlers.rc << EOF
     use payload/windows/x64/meterpreter/reverse_tcp
