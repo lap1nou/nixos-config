@@ -59,13 +59,6 @@ git clone https://github.com/PortSwigger/autorize.git $BURPSUITE_EXTENSIONS_PATH
 mkdir $BURPSUITE_EXTENSIONS_PATH/SAML
 git clone https://github.com/PortSwigger/saml-editor.git $BURPSUITE_EXTENSIONS_PATH/SAML
 
-# Copy Foxyproxy configuration
-cp /opt/my-resources/setup/foxyproxy/FoxyProxy.json /workspace/
-
-# Remove Firefox extensions and bookmark installed by Exegol
-rm /root/.mozilla/firefox/*.Exegol/extensions/*
-rm /root/.mozilla/firefox/*.Exegol/places.sqlite
-
 # Apply Firefox policy
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
@@ -73,34 +66,60 @@ cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distributi
 pipx install secator
 
 # Install new gau
-go install github.com/lc/gau/v2/cmd/gau@latest
+# go install github.com/lc/gau/v2/cmd/gau@latest
 
 # Install unfurl
 go install github.com/tomnomnom/unfurl@latest
 
 # Install smap
-go install -v github.com/s0md3v/smap/cmd/smap@latest
+function install_smap() {
+  mkdir -p /opt/tools/smap || exiT
+  cd /opt/tools/smap || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
+}
 
-# Install vulnx (cvemap)
-asdf set golang 1.23.0
-go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+function install_vulnx() {
+  mkdir -p /opt/tools/vulnx || exiT
+  cd /opt/tools/vulnx || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/vulnx/.go/bin go install -v go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+}
 
-# Install tlsx
-go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+function install_tlsx() {
+  mkdir -p /opt/tools/tlsx || exiT
+  cd /opt/tools/tlsx || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/tlsx/.go/bin go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+}
 
-# Install urlfinder
-go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+function install_urlfinder() {
+  mkdir -p /opt/tools/urlfinder || exiT
+  cd /opt/tools/urlfinder || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/urlfinder/.go/bin go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+}
 
-# Install yq (Go version)
-VERSION=v4.2.0
-PLATFORM=linux_amd64
-wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
-chmod +x /opt/tools/bin/yq-go
+function install_yq_go() {
+  VERSION=v4.2.0
+  PLATFORM=linux_amd64
+  wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
+  chmod +x /opt/tools/bin/yq-go
+}
 
-# Install gum
-go install github.com/charmbracelet/gum@latest
+function install_gum() {
+  mkdir -p /opt/tools/gum || exiT
+  cd /opt/tools/gum || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
+}
 
-asdf reshim
+#asdf reshim
 
 # Download Trickest resolvers.txt
 wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O /opt/lists/resolvers.txt
