@@ -151,6 +151,14 @@ function install_anew() {
   go install -v github.com/tomnomnom/anew@latest
 }
 
+function install_massdns() {
+    echo "[*] Installing Massdns" >> ${LOG_FILE}
+    git -C /opt/tools clone --depth 1 https://github.com/blechschmidt/massdns.git
+    cd /opt/tools/massdns || exit
+    make
+    ln -s /opt/tools/massdns/bin/massdns /opt/tools/bin/massdns
+}
+
 install_starship
 install_obsidian
 install_secator
@@ -162,6 +170,7 @@ install_urlfinder
 install_yq_go
 install_gum
 install_anew
+install_massdns
 
 asdf reshim golang
 
