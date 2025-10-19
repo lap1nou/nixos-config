@@ -26,7 +26,7 @@ function install_starship() {
 }
 
 # Create directories (/workspace/loot /workspace/notes)
-mkdir /workspace/loot /workspace/web
+mkdir -p /workspace/loot /workspace/web
 
 # Copy Obsidian template
 cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
