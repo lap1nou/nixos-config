@@ -81,6 +81,7 @@ function install_smap() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
+  ln -s /opt/tools/smap/.go/bin/smap /opt/tools/bin/smap
 }
 
 function install_vulnx() {
@@ -89,6 +90,7 @@ function install_vulnx() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/vulnx/.go/bin go install -v go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+  ln -s /opt/tools/vulnx/.go/bin/vulnx /opt/tools/bin/vulnx
 }
 
 function install_tlsx() {
@@ -97,6 +99,7 @@ function install_tlsx() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/tlsx/.go/bin go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+  ln -s /opt/tools/tlsx/.go/bin/tlsx /opt/tools/bin/tlsx
 }
 
 function install_urlfinder() {
@@ -105,6 +108,7 @@ function install_urlfinder() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/urlfinder/.go/bin go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+  ln -s /opt/tools/gum/.go/bin/gum /opt/tools/bin/urlfinder
 }
 
 function install_yq_go() {
@@ -120,6 +124,7 @@ function install_gum() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
+  ln -s /opt/tools/gum/.go/bin/gum /opt/tools/bin/gum
 }
 
 function install_anew() {
