@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # urlfinder
 yq-go -i ".urlscan = [\"${URLSCAN_API_KEY}\"]" /root/.config/urlfinder/provider-config.yaml
 yq-go -i ".virustotal = [\"${VIRUSTOTAL_API_KEY}\"]" /root/.config/urlfinder/provider-config.yaml
