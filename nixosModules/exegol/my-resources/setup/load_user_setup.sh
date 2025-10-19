@@ -76,7 +76,7 @@ function install_unfurl() {
 
 # Install smap
 function install_smap() {
-  mkdir -p /opt/tools/smap || exiT
+  mkdir -p /opt/tools/smap || exit
   cd /opt/tools/smap || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
@@ -84,7 +84,7 @@ function install_smap() {
 }
 
 function install_vulnx() {
-  mkdir -p /opt/tools/vulnx || exiT
+  mkdir -p /opt/tools/vulnx || exit
   cd /opt/tools/vulnx || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
@@ -92,7 +92,7 @@ function install_vulnx() {
 }
 
 function install_tlsx() {
-  mkdir -p /opt/tools/tlsx || exiT
+  mkdir -p /opt/tools/tlsx || exit
   cd /opt/tools/tlsx || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
@@ -100,7 +100,7 @@ function install_tlsx() {
 }
 
 function install_urlfinder() {
-  mkdir -p /opt/tools/urlfinder || exiT
+  mkdir -p /opt/tools/urlfinder || exit
   cd /opt/tools/urlfinder || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
@@ -115,7 +115,7 @@ function install_yq_go() {
 }
 
 function install_gum() {
-  mkdir -p /opt/tools/gum || exiT
+  mkdir -p /opt/tools/gum || exit
   cd /opt/tools/gum || exit
   asdf set golang 1.23.0
   mkdir -p .go/bin
