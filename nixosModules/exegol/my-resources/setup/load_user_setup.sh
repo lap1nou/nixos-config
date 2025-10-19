@@ -130,7 +130,7 @@ function install_urlfinder() {
 
 function install_yq_go() {
   echo "[*] Installing Yq-go" >> ${LOG_FILE}
-  VERSION=v4.2.0
+  VERSION=v4.48.1
   PLATFORM=linux_amd64
   wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
   chmod +x /opt/tools/bin/yq-go
