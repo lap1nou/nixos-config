@@ -18,11 +18,12 @@ set -e
 #    echo "export HTB_NAME=\"$HTB_NAME_TMP\"" >> ~/.zshrc
 #fi
 
-# Starship install
-curl -s https://starship.rs/install.sh -o install.sh
-sh ./install.sh -f
-rm -f ./install.sh
-cp /opt/my-resources/setup/zsh/starship.toml ~/.config/starship.toml
+function install_starship() {
+  curl -s https://starship.rs/install.sh -o install.sh
+  sh ./install.sh -f
+  rm -f ./install.sh
+  cp /opt/my-resources/setup/zsh/starship.toml ~/.config/starship.toml
+}
 
 # Create directories (/workspace/loot /workspace/notes)
 mkdir /workspace/loot /workspace/web
@@ -30,46 +31,48 @@ mkdir /workspace/loot /workspace/web
 # Copy Obsidian template
 cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
 
-# Install Obsidian
-OBSIDIAN_VERSION="1.7.7"
-wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
-dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
-rm obsidian_${OBSIDIAN_VERSION}_amd64.deb
+function install_obsidian() {
+  OBSIDIAN_VERSION="1.9.14"
+  wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
+  dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
+  rm obsidian_${OBSIDIAN_VERSION}_amd64.deb
+}
 
-# Install Jython
-JYTHON_VERSION="2.7.4"
-mkdir /opt/tools/jython
-wget "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/jython/jython-standalone.jar"
+function config_burpsuite() {
+  # Install Jython
+  JYTHON_VERSION="2.7.4"
+  mkdir /opt/tools/jython
+  wget "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/jython/jython-standalone.jar"
 
-# Copy custom Burpsuite config
-cp /opt/my-resources/setup/burpsuite/UserConfigCommunity.json ~/.BurpSuite/
+  # Copy custom Burpsuite config
+  cp /opt/my-resources/setup/burpsuite/UserConfigCommunity.json ~/.BurpSuite/
 
-# Download / install Burpsuite extensions
-BURPSUITE_EXTENSIONS_PATH='/opt/tools/BurpSuiteCommunity/extensions'
-mkdir $BURPSUITE_EXTENSIONS_PATH
-wget 'https://github.com/PortSwigger/hackvertor/releases/download/latest_hackvertor_release/hackvertor-all.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/hackvertor-all.jar"
-wget 'https://github.com/PortSwigger/logger-plus-plus/releases/download/latest/LoggerPlusPlus.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/LoggerPlusPlus.jar"
-wget 'https://github.com/lap1nou/sharpener/releases/download/latest2/sharpener.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/sharpener.jar"
-wget 'https://github.com/lap1nou/piper/releases/download/latest/piper.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/piper.jar"
-wget 'https://github.com/lap1nou/jwt-editor/releases/download/latest/jwt-editor-2.5.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/jwt-editor-2.5.jar"
+  # Download / install Burpsuite extensions
+  BURPSUITE_EXTENSIONS_PATH='/opt/tools/BurpSuiteCommunity/extensions'
+  mkdir $BURPSUITE_EXTENSIONS_PATH
+  wget 'https://github.com/PortSwigger/hackvertor/releases/download/latest_hackvertor_release/hackvertor-all.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/hackvertor-all.jar"
+  wget 'https://github.com/PortSwigger/logger-plus-plus/releases/download/latest/LoggerPlusPlus.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/LoggerPlusPlus.jar"
+  wget 'https://github.com/lap1nou/sharpener/releases/download/latest2/sharpener.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/sharpener.jar"
+  wget 'https://github.com/lap1nou/piper/releases/download/latest/piper.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/piper.jar"
+  wget 'https://github.com/lap1nou/jwt-editor/releases/download/latest/jwt-editor-2.5.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/jwt-editor-2.5.jar"
 
-mkdir $BURPSUITE_EXTENSIONS_PATH/autorize
-git clone https://github.com/PortSwigger/autorize.git $BURPSUITE_EXTENSIONS_PATH/autorize
+  mkdir $BURPSUITE_EXTENSIONS_PATH/autorize
+  git clone https://github.com/PortSwigger/autorize.git $BURPSUITE_EXTENSIONS_PATH/autorize
 
-mkdir $BURPSUITE_EXTENSIONS_PATH/SAML
-git clone https://github.com/PortSwigger/saml-editor.git $BURPSUITE_EXTENSIONS_PATH/SAML
+  mkdir $BURPSUITE_EXTENSIONS_PATH/SAML
+  git clone https://github.com/PortSwigger/saml-editor.git $BURPSUITE_EXTENSIONS_PATH/SAML
+}
 
 # Apply Firefox policy
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
-# Install secator
-pipx install secator
+function install_secator() {
+  pipx install secator
+}
 
-# Install new gau
-# go install github.com/lc/gau/v2/cmd/gau@latest
-
-# Install unfurl
-go install github.com/tomnomnom/unfurl@latest
+function install_unfurl() {
+  go install github.com/tomnomnom/unfurl@latest
+}
 
 # Install smap
 function install_smap() {
@@ -119,12 +122,18 @@ function install_gum() {
   GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
 }
 
+install_starship
+install_obsidian
+install_secator
+install_unfurl
 install_smap
 install_vulnx
 install_tlsx
 install_urlfinder
 install_yq_go
 install_gum
+
+config_burpsuite
 
 #asdf reshim
 
