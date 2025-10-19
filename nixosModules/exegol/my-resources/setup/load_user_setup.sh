@@ -119,6 +119,13 @@ function install_gum() {
   GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
 }
 
+install_smap
+install_vulnx
+install_tlsx
+install_urlfinder
+install_yq_go
+install_gum
+
 #asdf reshim
 
 # Download Trickest resolvers.txt
