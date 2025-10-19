@@ -122,6 +122,10 @@ function install_gum() {
   GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
 }
 
+function install_anew() {
+  go install -v github.com/tomnomnom/anew@latest
+}
+
 install_starship
 install_obsidian
 install_secator
@@ -132,6 +136,7 @@ install_tlsx
 install_urlfinder
 install_yq_go
 install_gum
+install_anew
 
 config_burpsuite
 
