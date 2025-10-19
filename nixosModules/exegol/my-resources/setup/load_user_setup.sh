@@ -106,7 +106,7 @@ function install_tlsx() {
   echo "[*] Installing Tlsx" >> ${LOG_FILE}
   mkdir -p /opt/tools/tlsx || exit
   cd /opt/tools/tlsx || exit
-  asdf set golang 1.23.0
+  asdf set golang 1.24.1
   mkdir -p .go/bin
   GOBIN=/opt/tools/tlsx/.go/bin go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
   ln -s /opt/tools/tlsx/.go/bin/tlsx /opt/tools/bin/tlsx
