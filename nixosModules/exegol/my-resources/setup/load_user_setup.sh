@@ -86,11 +86,7 @@ asdf set golang 1.23.0
 go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
 
 # Install tlsx
-# go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
-# Newer golang is requiered, temp fix:
-wget https://github.com/projectdiscovery/tlsx/releases/download/v1.2.1/tlsx_1.2.1_linux_amd64.zip -O /tmp/tlsx_1.2.1_linux_amd64.zip
-unzip -d /tmp/ /tmp/tlsx_1.2.1_linux_amd64.zip
-mv /tmp/tlsx /opt/tools/bin/
+go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
 
 # Install urlfinder
 go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
@@ -100,6 +96,9 @@ VERSION=v4.2.0
 PLATFORM=linux_amd64
 wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
 chmod +x /opt/tools/bin/yq-go
+
+# Install gum
+go install github.com/charmbracelet/gum@latest
 
 asdf reshim
 
