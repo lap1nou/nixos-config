@@ -18,7 +18,10 @@ set -e
 #    echo "export HTB_NAME=\"$HTB_NAME_TMP\"" >> ~/.zshrc
 #fi
 
+LOG_FILE="/tmp/setup_log.txt"
+
 function install_starship() {
+  echo "[*] Installing Starship" > ${LOG_FILE}
   curl -s https://starship.rs/install.sh -o install.sh
   sh ./install.sh -f
   rm -f ./install.sh
@@ -32,6 +35,7 @@ mkdir -p /workspace/loot /workspace/web
 cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
 
 function install_obsidian() {
+  echo "[*] Installing Obsidian" > ${LOG_FILE}
   OBSIDIAN_VERSION="1.9.14"
   wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
   dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
@@ -39,6 +43,7 @@ function install_obsidian() {
 }
 
 function config_burpsuite() {
+  echo "[*] Configure Burpsuite" > ${LOG_FILE}
   # Install Jython
   JYTHON_VERSION="2.7.4"
   mkdir /opt/tools/jython
@@ -67,15 +72,18 @@ function config_burpsuite() {
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
 function install_secator() {
+  echo "[*] Installing Secator" > ${LOG_FILE}
   pipx install secator
 }
 
 function install_unfurl() {
+  echo "[*] Installing Unfurl" > ${LOG_FILE}
   go install github.com/tomnomnom/unfurl@latest
 }
 
 # Install smap
 function install_smap() {
+  echo "[*] Installing Smap" > ${LOG_FILE}
   mkdir -p /opt/tools/smap || exit
   cd /opt/tools/smap || exit
   asdf set golang 1.23.0
@@ -85,6 +93,7 @@ function install_smap() {
 }
 
 function install_vulnx() {
+  echo "[*] Installing Vulnx" > ${LOG_FILE}
   mkdir -p /opt/tools/vulnx || exit
   cd /opt/tools/vulnx || exit
   asdf set golang 1.23.0
@@ -94,6 +103,7 @@ function install_vulnx() {
 }
 
 function install_tlsx() {
+  echo "[*] Installing Tlsx" > ${LOG_FILE}
   mkdir -p /opt/tools/tlsx || exit
   cd /opt/tools/tlsx || exit
   asdf set golang 1.23.0
@@ -103,6 +113,7 @@ function install_tlsx() {
 }
 
 function install_urlfinder() {
+  echo "[*] Installing Urlfinder" > ${LOG_FILE}
   mkdir -p /opt/tools/urlfinder || exit
   cd /opt/tools/urlfinder || exit
   asdf set golang 1.23.0
@@ -112,6 +123,7 @@ function install_urlfinder() {
 }
 
 function install_yq_go() {
+  echo "[*] Installing Yq-go" > ${LOG_FILE}
   VERSION=v4.2.0
   PLATFORM=linux_amd64
   wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
@@ -119,6 +131,7 @@ function install_yq_go() {
 }
 
 function install_gum() {
+  echo "[*] Installing Gum" > ${LOG_FILE}
   mkdir -p /opt/tools/gum || exit
   cd /opt/tools/gum || exit
   asdf set golang 1.23.0
@@ -128,6 +141,7 @@ function install_gum() {
 }
 
 function install_anew() {
+  echo "[*] Installing Anew" > ${LOG_FILE}
   go install -v github.com/tomnomnom/anew@latest
 }
 
