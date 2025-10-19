@@ -95,6 +95,12 @@ mv /tmp/tlsx /opt/tools/bin/
 # Install urlfinder
 go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
 
+# Install yq (Go version)
+VERSION=v4.2.0
+PLATFORM=linux_amd64
+wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
+chmod +x /opt/tools/bin/yq-go
+
 asdf reshim
 
 # Download Trickest resolvers.txt
