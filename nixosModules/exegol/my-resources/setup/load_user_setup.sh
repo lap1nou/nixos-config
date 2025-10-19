@@ -18,6 +18,9 @@ set -e
 #    echo "export HTB_NAME=\"$HTB_NAME_TMP\"" >> ~/.zshrc
 #fi
 
+cp /opt/my-resources/setup/zsh/api_key.sh /root/api_key.sh
+cp /opt/my-resources/setup/zsh/setup_api_key.sh /root/setup_api_key.sh
+
 LOG_FILE="/tmp/setup_log.txt"
 
 function install_starship() {
