@@ -125,7 +125,7 @@ function install_urlfinder() {
   asdf set golang 1.23.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/urlfinder/.go/bin go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
-  ln -s /opt/tools/gum/.go/bin/gum /opt/tools/bin/urlfinder
+  ln -s /opt/tools/urlfinder/.go/bin/urlfinder /opt/tools/bin/urlfinder
 }
 
 function install_yq_go() {
