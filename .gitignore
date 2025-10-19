@@ -1,1 +1,2 @@
 flake.lock
+nixosModules/exegol/my-resources/setup/zsh/api_key.sh
