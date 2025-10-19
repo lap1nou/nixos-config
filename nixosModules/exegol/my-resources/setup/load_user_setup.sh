@@ -140,7 +140,8 @@ install_anew
 
 config_burpsuite
 
-#asdf reshim
-
 # Download Trickest resolvers.txt
 wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O /opt/lists/resolvers.txt
+
+asdf set golang 1.22.2
+asdf reshim golang
