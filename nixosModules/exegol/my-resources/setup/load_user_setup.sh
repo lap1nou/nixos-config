@@ -21,6 +21,9 @@ set -e
 cp /opt/my-resources/setup/zsh/api_key.sh /root/api_key.sh
 cp /opt/my-resources/setup/zsh/setup_api_key.sh /root/setup_api_key.sh
 
+# Removing the Exh hook since Starship is taking care of everything
+sed -i -e 's/add-zsh-hook precmd update_prompt/#add-zsh-hook precmd update_prompt/g' ~/.zshrc
+
 LOG_FILE="/tmp/setup_log.txt"
 
 function install_starship() {
