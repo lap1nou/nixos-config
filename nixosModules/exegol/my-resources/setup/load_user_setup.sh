@@ -132,7 +132,7 @@ function install_mapcidr() {
   echo "[*] Installing Mapcidr" >> ${LOG_FILE}
   mkdir -p /opt/tools/mapcidr || exit
   cd /opt/tools/mapcidr || exit
-  asdf set golang 1.23.0
+  asdf set golang 1.24.1
   mkdir -p .go/bin
   GOBIN=/opt/tools/mapcidr/.go/bin go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
   ln -s /opt/tools/mapcidr/.go/bin/mapcidr /opt/tools/bin/mapcidr
