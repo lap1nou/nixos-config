@@ -128,6 +128,16 @@ function install_urlfinder() {
   ln -s /opt/tools/urlfinder/.go/bin/urlfinder /opt/tools/bin/urlfinder
 }
 
+function install_mapcidr() {
+  echo "[*] Installing Mapcidr" >> ${LOG_FILE}
+  mkdir -p /opt/tools/mapcidr || exit
+  cd /opt/tools/mapcidr || exit
+  asdf set golang 1.23.0
+  mkdir -p .go/bin
+  GOBIN=/opt/tools/mapcidr/.go/bin go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
+  ln -s /opt/tools/mapcidr/.go/bin/mapcidr /opt/tools/bin/mapcidr
+}
+
 function install_yq_go() {
   echo "[*] Installing Yq-go" >> ${LOG_FILE}
   VERSION=v4.48.1
@@ -167,6 +177,7 @@ install_smap
 install_vulnx
 install_tlsx
 install_urlfinder
+install_mapcidr
 install_yq_go
 install_gum
 install_anew
