@@ -156,11 +156,6 @@ function install_gum() {
   ln -s /opt/tools/gum/.go/bin/gum /opt/tools/bin/gum
 }
 
-function install_anew() {
-  echo "[*] Installing Anew" >> ${LOG_FILE}
-  go install -v github.com/tomnomnom/anew@latest
-}
-
 function install_massdns() {
     echo "[*] Installing Massdns" >> ${LOG_FILE}
     git -C /opt/tools clone --depth 1 https://github.com/blechschmidt/massdns.git
@@ -180,7 +175,6 @@ install_urlfinder
 install_mapcidr
 install_yq_go
 install_gum
-install_anew
 install_massdns
 
 asdf reshim golang
