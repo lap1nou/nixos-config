@@ -12,13 +12,13 @@
 
   config = lib.mkIf config.desktop.enable {
     environment.systemPackages = with pkgs; [
-      #(catppuccin-sddm.override {
-      #  flavor = "mocha";
-      #  font = "Noto Sans";
-      #  fontSize = "9";
-      #  background = self.outPath + "/nixosModules/awesomewm/awesome/themes/1/wallpaper.jpg";
-      #  loginBackground = true;
-      #})
+      (catppuccin-sddm.override {
+        flavor = "mocha";
+        font = "Noto Sans";
+        fontSize = "9";
+        background = self.outPath + "/nixosModules/awesomewm/awesome/themes/1/wallpaper.jpg";
+        loginBackground = true;
+      })
       spotify
       vlc
     ];
