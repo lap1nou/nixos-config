@@ -34,5 +34,8 @@
     # Clean folders older than 30D in the ".cache" folder of users
     systemd.user.tmpfiles.rules = [ "e %C - - - ABCM:30d -" ]; # Type Path Mode User Group Age Argument…
     services.upower.enable = true;
+
+    # Remove default packages (perl, rsync, strace)
+    environment.defaultPackages = [];
   };
 }
