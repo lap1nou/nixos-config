@@ -18,6 +18,7 @@
         #allow_remote_control = "yes";
         tab_bar_edge = "top";
         enable_audio_bell = false;
+        scrollbar_interactive = "yes";
       };
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
