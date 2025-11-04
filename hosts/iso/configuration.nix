@@ -36,6 +36,7 @@
   programming.enable = true;
   social.enable = true;
   pentesting.enable = false;
+  nano.enable = true;
   nemo.enable = true;
   wireshark.enable = true;
   keepassxc.enable = false;

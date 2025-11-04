@@ -33,6 +33,7 @@
     ./sshd/sshd.nix
     ./fontsPkgs/fontsPkgs.nix
     ./alias/alias.nix
+    ./nano/nano.nix
     ./nemo/nemo.nix
     ./phone_wifi/phone_wifi.nix
     ./wireshark/wireshark.nix
