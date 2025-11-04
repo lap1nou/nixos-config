@@ -51,6 +51,7 @@
       "org/nemo/preferences" = {
         show-hidden-files = true;
         default-folder-viewer = "list-view";
+        swap-trash-delete = true;
       };
 
       "org/nemo/list-view" = {
