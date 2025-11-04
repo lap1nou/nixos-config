@@ -29,7 +29,7 @@
           [Desktop Entry]
           Name=Files
           Comment=Access and organize files
-          Exec=${pkgs.nemo}/bin/nemo %U
+          Exec=nemo
           Icon=${pkgs.nemo}/share/icons/hicolor/scalable/apps/nemo.svg
           # Translators: these are keywords of the file manager
           Keywords=folders;filesystem;explorer;
