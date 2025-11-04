@@ -82,6 +82,47 @@
       };
     };
 
+    xdg.mime.defaultApplications = {
+      "application/pdf" = "firefox.desktop";
+
+      # Video
+      "video/mp2t" = "vlc.desktop";
+      "video/mp4" = "vlc.desktop";
+      "video/mpeg" = "vlc.desktop";
+      "video/webm" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";
+      "video/ogg" = "vlc.desktop";
+      "video/x-flv" = "vlc.desktop";
+      "video/x-msvideo" = "vlc.desktop";
+
+      # Image
+      "image/svg+xml" = "feh.desktop";
+      "image/png" = "feh.desktop";
+      "image/webp" = "feh.desktop";
+      "image/jpg" = "feh.desktop";
+      "image/jpeg" = "feh.desktop";
+      "image/bmp" = "feh.desktop";
+      "image/gif" = "feh.desktop";
+
+      # Archive
+      "application/zip" = "peazip.desktop";
+
+      # Text
+      "text/csv" = "nano.desktop";
+      "text/plain" = "nano.desktop";
+      "text/css" = "nano.desktop";
+      "text/html" = "nano.desktop";
+      "text/markdown" = "nano.desktop";
+      "text/javascript" = "nano.desktop";
+      "text/tab-separated-values" = "nano.desktop";
+      "text/x-java-source" = "nano.desktop";
+      "text/x-python" = "nano.desktop";
+      "text/x-c" = "nano.desktop";
+      "application/xml" = "nano.desktop";
+      "application/yaml" = "nano.desktop";
+      "application/json" = "nano.desktop";
+    };
+
     environment.systemPackages = with pkgs; [
       nemo-with-extensions
     ];
