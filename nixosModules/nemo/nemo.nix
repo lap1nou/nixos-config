@@ -63,7 +63,7 @@
       };
 
       "org/nemo/preferences/menu-config" = {
-        background-menu-open-in-terminal = false;
+        background-menu-open-in-terminal = true;
         background-menu-open-as-root = false;
         background-menu-show-hidden-files = false;
       };
