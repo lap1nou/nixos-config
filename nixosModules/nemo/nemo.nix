@@ -44,10 +44,6 @@
     };
 
     home-manager.users.lapinou.dconf.settings = {
-      "org/gtk/gtk4/settings/file-chooser" = {
-        show-hidden = true;
-      };
-
       "org/nemo/preferences" = {
         show-hidden-files = true;
         default-folder-viewer = "list-view";
@@ -66,14 +62,23 @@
         ];
       };
 
-      "org/gnome/desktop/default-applications/terminal" = {
-        exec = "kitty";
-      };
-
       "org/nemo/preferences/menu-config" = {
         background-menu-open-in-terminal = false;
         background-menu-open-as-root = false;
         background-menu-show-hidden-files = false;
+      };
+
+      "org/gtk/gtk4/settings/file-chooser" = {
+        show-hidden = true;
+      };
+
+      # Both seems necessary for some reason
+      # Set default applications
+      "org/cinnamon/desktop/default-applications/terminal" = {
+        exec = "kitty";
+      };
+      "org/cinnamon/desktop/applications/terminal" = {
+        exec = "kitty";
       };
     };
 
