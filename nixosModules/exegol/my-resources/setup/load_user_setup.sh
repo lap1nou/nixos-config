@@ -29,6 +29,9 @@ LOG_FILE="/tmp/setup_log.txt"
 # Create directories (/workspace/loot /workspace/notes)
 mkdir -p /workspace/loot /workspace/web
 
+# Copy Obsidian template
+cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
+
 function install_starship() {
   echo "[*] Installing Starship" >> ${LOG_FILE}
   curl -s https://starship.rs/install.sh -o install.sh
@@ -41,9 +44,6 @@ function install_atuin() {
   echo "[*] Installing Atuin" >> ${LOG_FILE}
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
 }
-
-# Copy Obsidian template
-cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
 
 function install_obsidian() {
   echo "[*] Installing Obsidian" >> ${LOG_FILE}
