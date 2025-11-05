@@ -24,6 +24,9 @@
           set mouse
           set constantshow
           set indicator
+          set autoindent
+          set tabsize 2
+          set tabstospaces
 
           include ${pkgs.nanorc}/share/*.nanorc
         '';

@@ -7,6 +7,7 @@
 {
   imports = [
     ./homeManager.nix
+    ./atuin/atuin.nix
     ./starship/starship.nix
     ./zsh/zsh.nix
     ./vscode/vscode.nix

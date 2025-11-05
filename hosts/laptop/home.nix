@@ -10,6 +10,7 @@
   imports = [ ../../homeManagerModules/default.nix ];
 
   homeManagerModules.homeManager.enable = true;
+  homeManagerModules.atuin.enable = true;
   homeManagerModules.starship.enable = true;
   homeManagerModules.zsh.enable = true;
   homeManagerModules.rofi.enable = true;
