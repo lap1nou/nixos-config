@@ -44,6 +44,7 @@ function install_atuin() {
   echo "[*] Installing Atuin" >> ${LOG_FILE}
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
   cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
+  atuin import zsh
 }
 
 function install_obsidian() {
