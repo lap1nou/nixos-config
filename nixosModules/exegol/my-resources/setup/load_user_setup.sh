@@ -195,9 +195,9 @@ install_exegol-history
 
 asdf reshim golang
 
+atuin import zsh
+
 # Download Trickest resolvers.txt
 wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O /opt/lists/resolvers.txt
 
 config_burpsuite
-
-atuin import zsh
