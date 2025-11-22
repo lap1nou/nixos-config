@@ -176,6 +176,7 @@ function install_exegol-history() {
   git -C /opt/tools/ clone -b dev https://github.com/ThePorgs/Exegol-history
   cd /opt/tools/Exegol-history || exit
   pipx install --force --system-site-packages /opt/tools/Exegol-history
+  register-python-argcomplete exegol-history >> ~/.zshrc
 }
 
 install_starship
