@@ -44,6 +44,7 @@ function install_atuin() {
   echo "[*] Installing Atuin" >> ${LOG_FILE}
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
   cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
+  /root/.atuin/bin/atuin import zsh
 }
 
 function install_obsidian() {
@@ -195,8 +196,6 @@ install_massdns
 install_exegol-history
 
 asdf reshim golang
-
-atuin import zsh
 
 # Download Trickest resolvers.txt
 wget https://raw.githubusercontent.com/trickest/resolvers/refs/heads/main/resolvers.txt -O /opt/lists/resolvers.txt
