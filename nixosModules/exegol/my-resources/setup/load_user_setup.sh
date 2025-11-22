@@ -171,6 +171,12 @@ function install_massdns() {
     ln -s /opt/tools/massdns/bin/massdns /opt/tools/bin/massdns
 }
 
+function install_exegol-history() {
+  git -C /opt/tools/ clone -b dev https://github.com/ThePorgs/Exegol-history
+  cd /opt/tools/Exegol-history || exit
+  pipx install --force --system-site-packages /opt/tools/Exegol-history
+}
+
 install_starship
 install_atuin
 install_obsidian
@@ -184,6 +190,7 @@ install_mapcidr
 install_yq_go
 install_gum
 install_massdns
+install_exegol-history
 
 asdf reshim golang
 
