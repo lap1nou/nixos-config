@@ -172,6 +172,8 @@ function install_massdns() {
 }
 
 function install_exegol-history() {
+  echo "[*] Installing Exegol-History" >> ${LOG_FILE}
+  rm -rf /opt/tools/Exegol-history/
   git -C /opt/tools/ clone -b dev https://github.com/ThePorgs/Exegol-history
   cd /opt/tools/Exegol-history || exit
   pipx install --force --system-site-packages /opt/tools/Exegol-history
