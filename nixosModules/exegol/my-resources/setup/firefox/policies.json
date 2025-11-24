@@ -131,6 +131,32 @@
   
       "Certificates": {
         "Install": ["/opt/tools/firefox/cacert.der"]
+      },
+      "3rdparty": {
+        "Extensions": {
+          "foxyproxy@eric.h.jung": {
+            "mode": "pattern",
+            "data": [
+              {
+               "active": true,
+               "title": "Burp",
+               "type": "http",
+               "hostname": "127.0.0.1",
+               "port": "8080",
+               "username": "",
+               "password": "",
+               "cc": "",
+               "city": "",
+               "color": "#ff4500",
+               "pac": "",
+               "pacString": "",
+               "proxyDNS": true,
+               "include": [],
+               "exclude": []
+              }
+            ]
+          }
+        }
       }
     }
   }  
