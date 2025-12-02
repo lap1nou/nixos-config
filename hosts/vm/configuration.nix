@@ -89,7 +89,7 @@
   services = {
     displayManager.sddm = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "catppuccin-mocha-lavender";
       package = pkgs.kdePackages.sddm;
     };
 
