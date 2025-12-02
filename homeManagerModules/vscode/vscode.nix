@@ -12,7 +12,7 @@
   config = lib.mkIf config.homeManagerModules.vscode.enable {
     programs.vscode = {
       enable = true;
-      default.extensions =
+      profiles.default.extensions =
         with pkgs.vscode-extensions;
         [
           ms-azuretools.vscode-docker
