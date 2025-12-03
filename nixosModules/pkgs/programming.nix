@@ -13,6 +13,8 @@
     environment.systemPackages = with pkgs; [
       devbox
       gum
+      python3
+      pipx
     ];
   };
 }

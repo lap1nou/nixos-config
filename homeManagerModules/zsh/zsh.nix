@@ -26,10 +26,10 @@
 
       shellAliases = {
         cat = "bat -p -P";
-        pcat = "bat";
         l = "eza --icons=always -algh";
         ll = "eza --icons=always -algh";
         ls = "eza --icons=always -algh";
+        exegol = "/home/lapinou/.local/bin/exegol";
         xclip = "xclip -i -sel p -f | xclip -i -sel c";
         update = "sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'";
         edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";

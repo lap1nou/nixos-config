@@ -446,11 +446,13 @@ globalkeys = gears.table.join(
 		menubar.show()
 	end, { description = "show the menubar", group = "launcher" }),
 	awful.key({ modkey }, "r", function()
-		awful.spawn.with_shell("rofi -show drun -c ~/.config/rofi/config.rasi")
-	end, { description = "run rofi apps", group = "launcher" }),
+		-- awful.spawn.with_shell("rofi -show drun -c ~/.config/rofi/config.rasi")
+		awful.spawn.with_shell("vicinae toggle")
+	end, { description = "run Vicinae", group = "launcher" }),
 	awful.key({ modkey }, "e", function()
-		awful.spawn.with_shell("rofi-exegol-start")
-	end, { description = "run rofi exegol", group = "launcher" })
+		-- awful.spawn.with_shell("rofi-exegol-start")
+		awful.spawn.with_shell("vicinae vicinae://extensions/lap1nou/exegol/exegol")
+	end, { description = "run Vicinae Exegol extension", group = "launcher" })
 )
 
 clientkeys = gears.table.join(

@@ -40,7 +40,7 @@ in
 
     services.xserver.windowManager.awesome = {
       enable = true;
-      package = awesome;
+      #package = awesome;
 
       luaModules = with pkgs.luaPackages; [
         luarocks

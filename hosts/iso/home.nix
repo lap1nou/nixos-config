@@ -14,6 +14,7 @@
   homeManagerModules.starship.enable = true;
   homeManagerModules.zsh.enable = true;
   homeManagerModules.rofi.enable = true;
+  homeManagerModules.vicinae.enable = true;
   homeManagerModules.git.enable = true;
   homeManagerModules.vscode.enable = true;
   homeManagerModules.bat.enable = true;

@@ -35,6 +35,8 @@
               allowedIPs = [
                 "10.2.0.0/16"
                 "198.51.100.1/32"
+                "10.3.0.0/16"
+                "10.4.0.0/16"
               ];
 
               # Set this to the server IP and port.

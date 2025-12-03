@@ -16,5 +16,6 @@
     ./stylix/stylix.nix
     ./git/git.nix
     ./rofi/rofi.nix
+    ./vicinae/vicinae.nix
   ];
 }
