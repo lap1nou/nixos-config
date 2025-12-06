@@ -12,6 +12,7 @@
     ./zsh/zsh.nix
     ./vscode/vscode.nix
     ./kitty/kitty.nix
+    ./mise/mise.nix
     ./bat/bat.nix
     ./stylix/stylix.nix
     ./git/git.nix

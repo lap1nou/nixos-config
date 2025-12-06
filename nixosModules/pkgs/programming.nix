@@ -16,5 +16,8 @@
       python3
       pipx
     ];
+
+    # Used for mise
+    programs.nix-ld.enable = true;
   };
 }

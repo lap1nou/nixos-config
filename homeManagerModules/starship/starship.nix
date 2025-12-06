@@ -23,6 +23,7 @@
         $directory\
         [](fg:#${config.stylix.generated.palette.base01} bg:#${config.stylix.generated.palette.base03})\
         $nix_shell\
+        $mise\
         [](fg:#${config.stylix.generated.palette.base03} bg:#${config.stylix.generated.palette.base09})\
         $git_branch\
         $git_status\
@@ -64,6 +65,13 @@
         added_style = "fg:#${config.stylix.generated.palette.base00} bg:#${config.stylix.generated.palette.base09}"
         deleted_style = "fg:bright-red bg:235"
         disabled = false
+
+        [mise]
+        disabled = false
+        symbol = 'mise'
+        healthy_symbol = '✓'
+        unhealthy_symbol = '✗'
+        format = '[[ $health $symbol ](bg:#${config.stylix.generated.palette.base03} fg:#${config.stylix.generated.palette.base00})]($style)'
 
         [character]
         style = "bg:#${config.stylix.generated.palette.base05}"

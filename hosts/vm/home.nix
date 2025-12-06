@@ -20,6 +20,7 @@
   homeManagerModules.bat.enable = true;
   homeManagerModules.stylix.enable = true;
   homeManagerModules.kitty.enable = true;
+  homeManagerModules.mise.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
