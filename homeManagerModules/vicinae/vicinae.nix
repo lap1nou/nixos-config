@@ -56,7 +56,8 @@
 
     # https://github.com/nix-community/home-manager/issues/8151
     systemd.user.services.vicinae.Service.Environment = [
-      "PATH=/run/current-system/sw/bin:/home/lapinou/.local/bin/:/home/lapinou/.nix-profile/bin/"
+      # "/run/wrappers/bin/" must be first for Wireshark to work correctly
+      "PATH=/run/wrappers/bin/:/run/current-system/sw/bin:/home/lapinou/.local/bin/:/home/lapinou/.nix-profile/bin/"
     ];
   };
 }
