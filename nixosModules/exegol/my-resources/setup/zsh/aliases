@@ -89,3 +89,5 @@ alias msf_handlers="() {
 
     msfconsole -r /root/.msf4/msf_handlers.rc
 }"
+alias app="rofi -show drun"
+alias rofi="rofi -show drun"
