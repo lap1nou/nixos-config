@@ -40,6 +40,7 @@
   nemo.enable = true;
   wireshark.enable = true;
   keepassxc.enable = true;
+  bluetooth.enable = false;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;

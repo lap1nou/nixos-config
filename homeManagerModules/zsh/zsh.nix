@@ -31,10 +31,10 @@
         ls = "eza --icons=always -algh";
         exegol = "/home/lapinou/.local/bin/exegol";
         xclip = "xclip -i -sel p -f | xclip -i -sel c";
-        update = "sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'";
-        edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
+        nix-update = "sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'";
+        nix-edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
         nix-shell = "nix-shell --extra-experimental-features flakes --run zsh";
-        change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
+        nix-change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
       };
     };
   };

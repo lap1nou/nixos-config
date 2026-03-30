@@ -17,7 +17,7 @@
         accent = "lavender";
         font = "Noto Sans";
         fontSize = "9";
-        background = self.outPath + "/nixosModules/awesomewm/awesome/themes/1/wallpaper.jpg";
+        background = self.outPath + "/nixosModules/awesomewm/awesome/themes/wallpaper.jpg";
         loginBackground = true;
       })
       spotify

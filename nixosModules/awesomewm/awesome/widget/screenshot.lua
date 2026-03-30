@@ -7,7 +7,7 @@ local screenshot_button = wibox.widget({
 	{
 		id = "icon",
 		widget = wibox.widget.imagebox,
-		image = beautiful.dir .. "/icons/wibar/screenshot.svg",
+		image = beautiful.icon_screenshot,
 		align = "center",
 		valign = "center",
 	},

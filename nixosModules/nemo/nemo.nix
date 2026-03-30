@@ -121,6 +121,9 @@
       "application/xml" = "nano.desktop";
       "application/yaml" = "nano.desktop";
       "application/json" = "nano.desktop";
+
+      # Folder
+      "inode/directory" = "nemo.desktop";
     };
 
     environment.systemPackages = with pkgs; [

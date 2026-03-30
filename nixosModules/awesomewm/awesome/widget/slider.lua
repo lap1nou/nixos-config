@@ -10,7 +10,7 @@ function create_slider()
 			gears.shape.rounded_rect(cr, width, height, 25)
 		end,
 		bar_height = dpi(20),
-		bar_color = "#a9b1d6",
+		bar_color = beautiful.base0D,
 		bar_active_color = beautiful.base0C,
 		handle_color = beautiful.base09,
 		handle_border_color = beautiful.base0A,

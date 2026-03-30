@@ -6,11 +6,30 @@ local dpi = beautiful.xresources.apply_dpi
 local slider = require("widget.slider")
 local button = require("widget.button")
 
-function create_slider_container(button_icon_name, button_cmd, slider, slider_title)
-	local button = create_button(button_icon_name, button_cmd)
-	local slider_line = {
+function create_slider_container(container_title, ...)
+	local slider_textbox = wibox.widget({
 		{
-			button,
+			markup = '<span color="'
+				.. beautiful.base02
+				.. '" font="' .. beautiful.font_2 .. '">'
+				.. container_title
+				.. "</span>",
+			widget = wibox.widget.textbox,
+		},
+		widget = wibox.container.margin,
+		top = dpi(10),
+		bottom = dpi(12),
+		right = dpi(8),
+		left = dpi(8),
+	})
+	local slider_array = {slider_textbox, layout = wibox.layout.fixed.vertical}
+
+	-- Add all sliders
+	local extras = {...}
+	for _,v in ipairs(extras) do
+		local slider_line = {
+		{
+			create_button(v.button_icon_name, v.button_cmd),
 			widget = wibox.container.margin,
 			top = 0,
 			bottom = dpi(10),
@@ -18,7 +37,7 @@ function create_slider_container(button_icon_name, button_cmd, slider, slider_ti
 			left = dpi(5),
 		},
 		{
-			slider,
+			v.slider,
 			widget = wibox.container.margin,
 			top = dpi(1),
 			bottom = dpi(10),
@@ -29,34 +48,16 @@ function create_slider_container(button_icon_name, button_cmd, slider, slider_ti
 		},
 		layout = wibox.layout.fixed.horizontal,
 		forced_width = dpi(410),
-		forced_height = dpi(50),
-	}
-
-	local slider_textbox = wibox.widget({
-		{
-			markup = '<span color="'
-				.. beautiful.base02
-				.. '" font="Ubuntu Nerd Font bold 11">'
-				.. slider_title
-				.. "</span>",
-			widget = wibox.widget.textbox,
-		},
-		widget = wibox.container.margin,
-		top = dpi(10),
-		bottom = dpi(12),
-		right = dpi(8),
-		left = dpi(8),
-	})
+		forced_height = dpi(50)
+		}
+		table.insert(slider_array, slider_line)
+	end
 
 	local slider_container = wibox.widget({
 		{
 			{
 				{
-					{
-						slider_textbox,
-						slider_line,
-						layout = wibox.layout.fixed.vertical,
-					},
+					slider_array,
 					widget = wibox.container.margin,
 					top = dpi(3),
 					bottom = dpi(6),
@@ -73,7 +74,6 @@ function create_slider_container(button_icon_name, button_cmd, slider, slider_ti
 		},
 		widget = wibox.container.background,
 		bg = beautiful.base01,
-		forced_height = dpi(100),
 		forced_width = dpi(305),
 		shape = function(cr, width, height)
 			gears.shape.rounded_rect(cr, width, height, 10)

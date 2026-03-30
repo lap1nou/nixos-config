@@ -8,7 +8,7 @@ function create_button(icon_name, cmd)
 	local button = wibox.widget({
 		{
 			{
-				image = beautiful.dir .. "/icons/wibar/control_panel/" .. icon_name,
+				image = icon_name,
 				widget = wibox.widget.imagebox,
 				resize = true,
 				shape = function(cr, width, height)
@@ -53,7 +53,7 @@ function create_button_with_color(icon_name, cmd, normal_color, mouse_entered_co
 	local button = wibox.widget({
 		{
 			{
-				image = beautiful.dir .. "/icons/wibar/control_panel/" .. icon_name,
+				image = icon_name,
 				widget = wibox.widget.imagebox,
 				resize = true,
 				shape = function(cr, width, height)

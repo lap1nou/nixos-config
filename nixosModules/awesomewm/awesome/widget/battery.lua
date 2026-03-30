@@ -24,7 +24,7 @@ local battery_widget = wibox.widget({
 	{
 		id = "icon",
 		widget = wibox.widget.imagebox,
-		image = beautiful.dir .. "/icons/wibar/battery.svg",
+		image = beautiful.icon_battery_100,
 		align = "center",
 		valign = "center",
 	},
@@ -58,35 +58,35 @@ local test = gears.timer({
 		battery_capacity = get_capacity_value()
 		if is_charging() then
 			if battery_capacity <= 20 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_20.svg"
+				battery_widget.icon.image = beautiful.icon_battery_charging_20
 			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_30.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_50.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_60.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_80.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_90.svg"
+				battery_widget.icon.image = beautiful.icon_battery_charging_30
+			elseif battery_capacity <= 50 then
+				battery_widget.icon.image = beautiful.icon_battery_charging_50
+			elseif battery_capacity <= 60 then
+				battery_widget.icon.image = beautiful.icon_battery_charging_60
+			elseif battery_capacity <= 80 then
+				battery_widget.icon.image = beautiful.icon_battery_charging_80
+			elseif battery_capacity <= 90 then
+				battery_widget.icon.image = beautiful.icon_battery_charging_90
 			else
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/charging/battery_charging_100.svg"
+				battery_widget.icon.image = beautiful.icon_battery_charging_100
 			end
 		else
 			if battery_capacity <= 20 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_20.svg"
+				battery_widget.icon.image = beautiful.icon_battery_20
 			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_30.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_50.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_60.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_80.svg"
-			elseif battery_capacity <= 30 then
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_90.svg"
+				battery_widget.icon.image = beautiful.icon_battery_30
+			elseif battery_capacity <= 50 then
+				battery_widget.icon.image = beautiful.icon_battery_50
+			elseif battery_capacity <= 60 then
+				battery_widget.icon.image = beautiful.icon_battery_60
+			elseif battery_capacity <= 80 then
+				battery_widget.icon.image = beautiful.icon_battery_80
+			elseif battery_capacity <= 90 then
+				battery_widget.icon.image = beautiful.icon_battery_90
 			else
-				battery_widget.icon.image = beautiful.dir .. "/icons/wibar/battery/battery_100.svg"
+				battery_widget.icon.image = beautiful.icon_battery_100
 			end
 		end
 	end,

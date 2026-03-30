@@ -38,5 +38,6 @@
     ./phone_wifi/phone_wifi.nix
     ./wireshark/wireshark.nix
     ./keepassxc/keepassxc.nix
+    ./bluetooth/bluetooth.nix
   ];
 }

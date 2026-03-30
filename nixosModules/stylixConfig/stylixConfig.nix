@@ -14,7 +14,7 @@
   config = lib.mkIf config.stylixConfig.enable {
     stylix = {
       enable = true;
-      image = self.outPath + "/nixosModules/awesomewm/awesome/themes/1/wallpaper.jpg";
+      image = self.outPath + "/nixosModules/awesomewm/awesome/themes/wallpaper.jpg";
       polarity = "dark";
       targets.grub.useWallpaper = true;
     };

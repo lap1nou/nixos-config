@@ -11,8 +11,8 @@ function create_upper_button_container(button1, button2, button3, button4)
 		forced_width = dpi(1.5),
 		span_ratio = 0.55,
 		widget = wibox.widget.separator,
-		color = "#a9b1d6",
-		border_color = "#a9b1d6",
+		color = beautiful.base00,
+		border_color = beautiful.base00,
 		opacity = 0.55,
 	})
 
