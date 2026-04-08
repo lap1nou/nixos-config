@@ -25,31 +25,9 @@
                 settings.allowDiscards = true;
                 passwordFile = "/tmp/secret.key";
                 content = {
-                  type = "btrfs";
-                  extraArgs = [ "-f" ];
-                  subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
-                    };
-
-                    #"/persistent" = {
-                      #mountpoint = "/persistent";
-                      #mountOptions = [
-                        #"subvol=persistent"
-                        #"compress=zstd"
-                        #"noatime"
-                      #];
-                    #};
-
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "subvol=nix"
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                  };
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/";
                 };
               };
             };
