@@ -32,14 +32,14 @@
                       mountpoint = "/";
                     };
 
-                    "/persistent" = {
-                      mountpoint = "/persistent";
-                      mountOptions = [
-                        "subvol=persistent"
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
+                    #"/persistent" = {
+                      #mountpoint = "/persistent";
+                      #mountOptions = [
+                        #"subvol=persistent"
+                        #"compress=zstd"
+                        #"noatime"
+                      #];
+                    #};
 
                     "/nix" = {
                       mountpoint = "/nix";
