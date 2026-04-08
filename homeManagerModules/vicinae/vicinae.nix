@@ -17,7 +17,7 @@
 
       settings = {
         closeOnFocusLoss = true;
-        theme.name = "stylixManual";
+        #theme.name = "stylixManual";
       };
 
       # Reference: https://github.com/scottmckendry/nix
