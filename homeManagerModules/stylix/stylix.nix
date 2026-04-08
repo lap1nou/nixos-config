@@ -12,6 +12,5 @@
   config = lib.mkIf config.homeManagerModules.stylix.enable {
     stylix.enable = true;
     stylix.polarity = "dark";
-    stylix.inputs.gnome-shell.follows = "";
   };
 }
