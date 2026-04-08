@@ -6,6 +6,7 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix/release-25.11";
+    stylix.inputs.gnome-shell.follows = "";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
