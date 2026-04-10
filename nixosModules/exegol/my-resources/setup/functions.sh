@@ -164,6 +164,16 @@ function install_rofi() {
     cp /opt/my-resources/setup/rofi/config.rasi ~/.config/rofi/
 }
 
+function install_vscode() {
+    echo "[*] Installing VSCode" >> ${LOG_FILE}
+    wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code.deb
+    dpkg -i code.deb
+    rm -f code.deb
+
+    echo "[*] Installing VSCode extensions" >> ${LOG_FILE}
+    code --no-sandbox --user-data-dir "/root" --install-extension MS-SarifVSCode.sarif-viewer
+}
+
 function htb_add_dns() {
 	cat <<EOF >> /etc/dnsmasq.conf
 	    no-dhcp-interface=

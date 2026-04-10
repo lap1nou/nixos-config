@@ -17,7 +17,13 @@
 
       settings = {
         closeOnFocusLoss = true;
-        #theme.name = "stylixManual";
+        theme.name = "stylix";
+
+        #providers = {
+        #  "@lap1nou/vicinae-extension-exegol-0".preferences = {
+        #    custom = "test";
+        #  };
+        #};
       };
 
       # Reference: https://github.com/scottmckendry/nix
@@ -32,26 +38,6 @@
           } + "/extensions/exegol";
         })
       ];
-
-      # Reference: https://github.com/justDeeevin/nix-config
-      themes.stylixManual = {
-        meta = {
-          version = 1;
-          name = "Manual Stylix";
-          description = "Workaround since Stylix for Vicinae is not working at the moment.";
-          variant = "dark";
-        };
-
-        colors = let colors = (config.stylix.base16.mkSchemeAttrs config.stylix.base16Scheme).withHashtag; in {
-          core = {
-            background = colors.base00;
-            foreground = colors.base06;
-            border = colors.base03;
-            accent = colors.base02;
-            accent_foreground = colors.base06;
-          };
-        };
-      };
     };
 
     # https://github.com/nix-community/home-manager/issues/8151

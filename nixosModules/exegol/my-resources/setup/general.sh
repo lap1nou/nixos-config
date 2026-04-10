@@ -10,11 +10,10 @@ mkdir -p /workspace/loot /workspace/web
 install_starship || true
 install_atuin || true
 install_obsidian || true
-install_gum || true
 install_exegol-history || true
 install_vulnx || true
 install_yq_go || true
-install_rofi || true
+install_vscode || true
 config_burpsuite || true
 
 asdf reshim golang
