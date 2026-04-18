@@ -56,6 +56,10 @@ function config_burpsuite() {
 
   mkdir $BURPSUITE_EXTENSIONS_PATH/SAML
   git clone https://github.com/PortSwigger/saml-editor.git $BURPSUITE_EXTENSIONS_PATH/SAML
+
+  if [ -f /opt/my-resources/setup/burpsuite/prefs.xml ]; then # Burp pro license is present
+    cp /opt/my-resources/setup/burpsuite/prefs.xml /root/.java/.userPrefs/burp/prefs.xml # Source: https://blog.gregscharf.com/2025/07/23/burp-suite-pro-install-in-exegol/
+  fi
 }
 
 function install_secator() {

@@ -62,6 +62,11 @@
     loader.efi.canTouchEfiVariables = false;
   };
 
+  console = { # https://discourse.nixos.org/t/can-nixos-set-keyboard-for-grub-luks-password/29623/9
+    earlySetup = true;
+    useXkbConfig = true;
+  };
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;

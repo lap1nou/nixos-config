@@ -18,7 +18,7 @@
     "ahci"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "vmwgfx" ];
   boot.kernelModules = [ "iwlwifi" ];
   boot.extraModulePackages = [ ];
 

@@ -91,3 +91,5 @@ alias msf_handlers="() {
 }"
 alias app="rofi -show drun"
 alias rofi="rofi -show drun"
+alias BurpSuitePro='/usr/lib/jvm/java-21-openjdk/bin/java -jar -Xmx4g /opt/my-resources/bin/BurpSuitePro/burpsuite_pro.jar'
+alias burpsuite-pro=BurpSuitePro
