@@ -59,7 +59,8 @@ function config_burpsuite() {
 
   if [ -f /opt/my-resources/setup/burpsuite/prefs.xml ]; then # Burp pro license is present
     cp /opt/my-resources/setup/burpsuite/prefs.xml /root/.java/.userPrefs/burp/prefs.xml # Source: https://blog.gregscharf.com/2025/07/23/burp-suite-pro-install-in-exegol/
-    cp /opt/tools/BurpSuiteCommunity/UserConfigCommunity.json cp /opt/tools/BurpSuitePro/UserConfigPro.json
+    cp /opt/tools/BurpSuiteCommunity/UserConfigCommunity.json ~/.BurpSuite/UserConfigPro.json
+    cp -R /opt/my-resources/setup/burpsuite/BurpSuitePro/ /opt/tools/
   fi
 }
 
