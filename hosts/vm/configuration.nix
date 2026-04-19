@@ -41,6 +41,7 @@
   wireshark.enable = true;
   keepassxc.enable = true;
   bluetooth.enable = false;
+  safe-chain.enable = true;
 
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;

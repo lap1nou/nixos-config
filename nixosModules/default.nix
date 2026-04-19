@@ -13,6 +13,7 @@
     ./htop/htop.nix
     ./firefox/firefox.nix
     ./rdm/rdm.nix
+    ./safe-chain/safe-chain.nix
     ./pkgs/utils.nix
     ./pkgs/nixosConfig.nix
     ./pkgs/system.nix

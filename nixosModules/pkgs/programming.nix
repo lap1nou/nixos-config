@@ -15,6 +15,7 @@
       gum
       python3
       pipx
+      zizmor
     ];
 
     # Used for mise

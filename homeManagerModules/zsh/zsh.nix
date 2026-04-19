@@ -36,6 +36,12 @@
         nix-shell = "nix-shell --extra-experimental-features flakes --run zsh";
         nix-change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
       };
+
+      initContent = ''
+        if [[ -f ~/.safe-chain/scripts/init-posix.sh ]]; then
+          source ~/.safe-chain/scripts/init-posix.sh
+        fi
+      '';
     };
   };
 }
