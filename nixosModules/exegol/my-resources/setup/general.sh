@@ -7,6 +7,9 @@ cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distributi
 # Create directories
 mkdir -p /workspace/loot /workspace/web
 
+asdf install golang 1.25.0
+
+install_safe-chain || exit
 install_starship || true
 install_atuin || true
 install_obsidian || true

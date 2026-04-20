@@ -78,7 +78,7 @@ function install_smap() {
   echo "[*] Installing Smap" >> ${LOG_FILE}
   mkdir -p /opt/tools/smap || exit
   cd /opt/tools/smap || exit
-  asdf set golang 1.23.0
+  asdf set golang 1.25.0
   mkdir -p .go/bin
   GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
   ln -s /opt/tools/smap/.go/bin/smap /opt/tools/bin/smap
@@ -178,6 +178,23 @@ function install_vscode() {
 
     echo "[*] Installing VSCode extensions" >> ${LOG_FILE}
     code --no-sandbox --user-data-dir "/root" --install-extension MS-SarifVSCode.sarif-viewer
+}
+
+function install_wscat() {
+  echo "[*] Installing Wscat" >> ${LOG_FILE}
+
+  git clone https://github.com/websockets/wscat.git
+  cd ./wscat
+  git checkout 2509d02c3ef9093b00356c9cf688d1aa089914e1
+  rm -f .npmrc
+  npm install . -g
+  rm -rf /workspace/wscat
+}
+
+function install_safe-chain() {
+  echo "[*] Installing safe-chain" >> ${LOG_FILE}
+
+  curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh
 }
 
 function htb_add_dns() {
