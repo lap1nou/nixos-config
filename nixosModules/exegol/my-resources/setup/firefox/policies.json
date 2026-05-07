@@ -35,7 +35,7 @@
               "name": "RedTeam Notes"
             },
             {
-              "url": "https://orange-cyberdefense.github.io/ocd-mindmaps/img/pentest_ad_dark_2023_02.svg",
+              "url": "https://orange-cyberdefense.github.io/ocd-mindmaps/img/mindmap_ad_dark_classic_2025.03.excalidraw.svg",
               "name": "OCD AD Mindmap"
             },
             {
@@ -77,7 +77,7 @@
               "name": "Trillium"
             },
             {
-              "url": "http://127.0.0.1:1030/login",
+              "url": "http://127.0.0.1:1030/ui/login",
               "name": "BloodHound-CE"
             }
           ]

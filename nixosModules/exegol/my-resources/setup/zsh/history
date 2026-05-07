@@ -4,3 +4,5 @@ mssqlclient.py $DOMAIN/$USER:$PASSWORD@$IP -windows-auth
 gowitness scan file -f /workspace/loot/urls.txt --write-screenshots --screenshot-path /workspace/loot/gowitness-screens/
 ysoserialnet -f Json.Net -g ObjectDataProvider -o raw -c "calc" -t
 burpsuite-pro &> /dev/null &
+WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1 evolution &> /dev/null &
+semgrep scan --sarif -o out.sarif .

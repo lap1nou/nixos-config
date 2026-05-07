@@ -26,10 +26,6 @@ alias tun0='grep_tun0 | tr -d "\n" | xclip'
 alias add-host="echo $1 $2 >> /etc/hosts"
 alias cat="bat -p -P"
 alias pcat="bat"
-alias nmap-classic='(){
-    mkdir -p /workspace/loot/$1/nmap/
-    nmap -v -sV -p- -oA /workspace/loot/$1/nmap/tcp_default_$1 $1;
-}'
 alias install_ysoserialnet="/opt/my-resources/setup/ysoserialnet/install.sh"
 alias ysoserialnet='wine /opt/tools/ysoserialnet/ysoserial.exe'
 alias l="eza --icons=always -algh"
@@ -89,7 +85,11 @@ alias msf_handlers="() {
 
     msfconsole -r /root/.msf4/msf_handlers.rc
 }"
-alias app="rofi -show drun"
-alias rofi="rofi -show drun"
 alias BurpSuitePro='/usr/lib/jvm/java-21-openjdk/bin/java -jar -Xmx4g /opt/my-resources/bin/BurpSuitePro/burpsuite_pro.jar'
 alias burpsuite-pro=BurpSuitePro
+alias nmap-top-1000='(){
+    nmap -Pn -n -v -sS --top-ports 1000 -oA /workspace/loot/nmap_tcp_top_1000_$1 $1
+}'
+alias nmap-full='(){
+    nmap -Pn -n -v -sS -p- -oA /workspace/loot/nmap_tcp_full_$1 $1
+}'
