@@ -74,15 +74,15 @@ function install_unfurl() {
   go install github.com/tomnomnom/unfurl@latest
 }
 
-function install_smap() {
-  echo "[*] Installing Smap" >> ${LOG_FILE}
-  mkdir -p /opt/tools/smap || exit
-  cd /opt/tools/smap || exit
-  asdf set golang 1.25.0
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
-  ln -s /opt/tools/smap/.go/bin/smap /opt/tools/bin/smap
-}
+#function install_smap() {
+#  echo "[*] Installing Smap" >> ${LOG_FILE}
+#  mkdir -p /opt/tools/smap || exit
+#  cd /opt/tools/smap || exit
+#  asdf set golang 1.25.0
+#  mkdir -p .go/bin
+#  GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
+#  ln -s /opt/tools/smap/.go/bin/smap /opt/tools/bin/smap
+#}
 
 function install_vulnx() {
   echo "[*] Installing Vulnx" >> ${LOG_FILE}

@@ -17,7 +17,7 @@
   optimization.enable = true;
   exegol.enable = true;
   fontsPkgs.enable = true;
-  hardening.enable = true;
+  hardening.enable = false;
   localization.enable = true;
   nessus.enable = true;
   nixSettings.enable = true;
