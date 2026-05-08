@@ -1,7 +1,7 @@
 LOG_FILE="/tmp/setup_log.txt"
 
 function install_starship() {
-  echo "[*] Installing Starship" >> ${LOG_FILE}
+  echo "[*] Installing Starship"
   curl -s https://starship.rs/install.sh -o install.sh
   sh ./install.sh -f
   rm -f ./install.sh
@@ -12,14 +12,14 @@ function install_starship() {
 }
 
 function install_atuin() {
-  echo "[*] Installing Atuin" >> ${LOG_FILE}
+  echo "[*] Installing Atuin"
   curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
   cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
   /root/.atuin/bin/atuin import zsh
 }
 
 function install_obsidian() {
-  echo "[*] Installing Obsidian" >> ${LOG_FILE}
+  echo "[*] Installing Obsidian"
   OBSIDIAN_VERSION="1.9.14"
   wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
   dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
@@ -33,7 +33,7 @@ function install_obsidian() {
 }
 
 function config_burpsuite() {
-  echo "[*] Configure Burpsuite" >> ${LOG_FILE}
+  echo "[*] Configure Burpsuite"
   # Install Jython
   JYTHON_VERSION="2.7.4"
   mkdir /opt/tools/jython
@@ -65,17 +65,17 @@ function config_burpsuite() {
 }
 
 function install_secator() {
-  echo "[*] Installing Secator" >> ${LOG_FILE}
+  echo "[*] Installing Secator"
   pipx install secator
 }
 
 function install_unfurl() {
-  echo "[*] Installing Unfurl" >> ${LOG_FILE}
+  echo "[*] Installing Unfurl"
   go install github.com/tomnomnom/unfurl@latest
 }
 
 #function install_smap() {
-#  echo "[*] Installing Smap" >> ${LOG_FILE}
+#  echo "[*] Installing Smap"
 #  mkdir -p /opt/tools/smap || exit
 #  cd /opt/tools/smap || exit
 #  asdf set golang 1.25.0
@@ -85,7 +85,7 @@ function install_unfurl() {
 #}
 
 function install_vulnx() {
-  echo "[*] Installing Vulnx" >> ${LOG_FILE}
+  echo "[*] Installing Vulnx"
   mkdir -p /opt/tools/vulnx || exit
   cd /opt/tools/vulnx || exit
   asdf set golang 1.23.0
@@ -95,7 +95,7 @@ function install_vulnx() {
 }
 
 function install_tlsx() {
-  echo "[*] Installing Tlsx" >> ${LOG_FILE}
+  echo "[*] Installing Tlsx"
   mkdir -p /opt/tools/tlsx || exit
   cd /opt/tools/tlsx || exit
   asdf set golang 1.24.1
@@ -105,7 +105,7 @@ function install_tlsx() {
 }
 
 function install_urlfinder() {
-  echo "[*] Installing Urlfinder" >> ${LOG_FILE}
+  echo "[*] Installing Urlfinder"
   mkdir -p /opt/tools/urlfinder || exit
   cd /opt/tools/urlfinder || exit
   asdf set golang 1.23.0
@@ -115,7 +115,7 @@ function install_urlfinder() {
 }
 
 function install_mapcidr() {
-  echo "[*] Installing Mapcidr" >> ${LOG_FILE}
+  echo "[*] Installing Mapcidr"
   mkdir -p /opt/tools/mapcidr || exit
   cd /opt/tools/mapcidr || exit
   asdf set golang 1.24.1
@@ -125,7 +125,7 @@ function install_mapcidr() {
 }
 
 function install_yq_go() {
-  echo "[*] Installing Yq-go" >> ${LOG_FILE}
+  echo "[*] Installing Yq-go"
   VERSION=v4.48.1
   PLATFORM=linux_amd64
   wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
@@ -133,7 +133,7 @@ function install_yq_go() {
 }
 
 function install_gum() {
-  echo "[*] Installing Gum" >> ${LOG_FILE}
+  echo "[*] Installing Gum"
   mkdir -p /opt/tools/gum || exit
   cd /opt/tools/gum || exit
   asdf set golang 1.23.0
@@ -143,12 +143,12 @@ function install_gum() {
 }
 
 function install_anew() {
-  echo "[*] Installing Anew" >> ${LOG_FILE}
+  echo "[*] Installing Anew"
   go install -v github.com/tomnomnom/anew@latest
 }
 
 function install_massdns() {
-    echo "[*] Installing Massdns" >> ${LOG_FILE}
+    echo "[*] Installing Massdns"
     git -C /opt/tools clone --depth 1 https://github.com/blechschmidt/massdns.git
     cd /opt/tools/massdns || exit
     make
@@ -156,32 +156,40 @@ function install_massdns() {
 }
 
 function install_exegol-history() {
-  echo "[*] Installing Exegol-History" >> ${LOG_FILE}
+  echo "[*] Installing Exegol-History"
   rm -rf /opt/tools/Exegol-history/
-  git -C /opt/tools/ clone -b dev https://github.com/ThePorgs/Exegol-history
-  cd /opt/tools/Exegol-history || exit
-  pipx install --force --system-site-packages /opt/tools/Exegol-history
+  uv tool install git+https://github.com/ThePorgs/Exegol-history@dev --force
   register-python-argcomplete exegol-history >> ~/.zshrc
 }
 
+function install_web-server() {
+  echo "[*] Installing Web-server"
+  uv tool install git+https://github.com/lap1nou/web-server --force
+}
+
 function install_rofi() {
-    echo "[*] Installing Rofi" >> ${LOG_FILE}
+    echo "[*] Installing Rofi"
     mkdir ~/.config/rofi/
     cp /opt/my-resources/setup/rofi/config.rasi ~/.config/rofi/
 }
 
+function install_uv() {
+    echo "[*] Installing uv"
+    pipx install uv
+}
+
 function install_vscode() {
-    echo "[*] Installing VSCode" >> ${LOG_FILE}
+    echo "[*] Installing VSCode"
     wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code.deb
     dpkg -i code.deb
     rm -f code.deb
 
-    echo "[*] Installing VSCode extensions" >> ${LOG_FILE}
+    echo "[*] Installing VSCode extensions"
     code --no-sandbox --user-data-dir "/root" --install-extension MS-SarifVSCode.sarif-viewer
 }
 
 function install_wscat() {
-  echo "[*] Installing Wscat" >> ${LOG_FILE}
+  echo "[*] Installing Wscat"
 
   git clone https://github.com/websockets/wscat.git
   cd ./wscat
@@ -192,7 +200,7 @@ function install_wscat() {
 }
 
 function install_safe-chain() {
-  echo "[*] Installing safe-chain" >> ${LOG_FILE}
+  echo "[*] Installing safe-chain"
 
   curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh
 }
