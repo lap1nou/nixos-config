@@ -1,5 +1,11 @@
 LOG_FILE="/tmp/setup_log.txt"
 
+# Root my-resources PATH
+MY_ROOT_PATH="/opt/my-resources"
+
+# Setup directory for user customization
+MY_SETUP_PATH="$MY_ROOT_PATH/setup"
+
 function install_starship() {
   echo "[*] Installing Starship"
   curl -s https://starship.rs/install.sh -o install.sh
@@ -34,33 +40,85 @@ function install_obsidian() {
 
 function config_burpsuite() {
   echo "[*] Configure Burpsuite"
-  # Install Jython
+
+  echo "[*] Install Jython"
   JYTHON_VERSION="2.7.4"
-  mkdir /opt/tools/jython
-  wget "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/jython/jython-standalone.jar"
+  mkdir /opt/tools/BurpSuiteCommunity/jython
+  wget "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar"
+
+  echo "[*] Install Jruby"
+  JRUBY_VERSION="9.4.12.0"
+  mkdir /opt/tools/BurpSuiteCommunity/jruby
+  wget https://repo1.maven.org/maven2/org/jruby/jruby-complete/${JRUBY_VERSION}/jruby-complete-${JRUBY_VERSION}.jar -O "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar"
 
   # Copy custom Burpsuite config
-  cp /opt/my-resources/setup/burpsuite/UserConfigCommunity.json ~/.BurpSuite/
+  [[ -f "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" ]] && cp "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" "/root/.BurpSuite/UserConfigCommunity.json"
 
-  # Download / install Burpsuite extensions
-  BURPSUITE_EXTENSIONS_PATH='/opt/tools/BurpSuiteCommunity/extensions'
-  mkdir $BURPSUITE_EXTENSIONS_PATH
-  wget 'https://github.com/PortSwigger/hackvertor/releases/download/latest_hackvertor_release/hackvertor-all.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/hackvertor-all.jar"
-  wget 'https://github.com/PortSwigger/logger-plus-plus/releases/download/latest/LoggerPlusPlus.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/LoggerPlusPlus.jar"
-  wget 'https://github.com/lap1nou/sharpener/releases/download/latest2/sharpener.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/sharpener.jar"
-  wget 'https://github.com/lap1nou/piper/releases/download/latest/piper.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/piper.jar"
-  wget 'https://github.com/lap1nou/jwt-editor/releases/download/latest/jwt-editor-2.5.jar' -O "${BURPSUITE_EXTENSIONS_PATH}/jwt-editor-2.5.jar"
-
-  mkdir $BURPSUITE_EXTENSIONS_PATH/autorize
-  git clone https://github.com/PortSwigger/autorize.git $BURPSUITE_EXTENSIONS_PATH/autorize
-
-  mkdir $BURPSUITE_EXTENSIONS_PATH/SAML
-  git clone https://github.com/PortSwigger/saml-editor.git $BURPSUITE_EXTENSIONS_PATH/SAML
+  pip3 install -r "$MY_SETUP_PATH/burpsuite/requirements.txt"
+  python3 "$MY_SETUP_PATH/burpsuite/generate_config.py"
 
   if [ -f /opt/my-resources/setup/burpsuite/prefs.xml ]; then # Burp pro license is present
     cp /opt/my-resources/setup/burpsuite/prefs.xml /root/.java/.userPrefs/burp/prefs.xml # Source: https://blog.gregscharf.com/2025/07/23/burp-suite-pro-install-in-exegol/
-    cp /opt/tools/BurpSuiteCommunity/UserConfigCommunity.json ~/.BurpSuite/UserConfigPro.json
+    cp /root/.BurpSuite/UserConfigCommunity.json ~/.BurpSuite/UserConfigPro.json
     cp -R /opt/my-resources/setup/burpsuite/BurpSuitePro/ /opt/tools/
+    trust_ca_burp_pro_in_firefox
+  fi
+}
+
+function trust_ca_burp_pro_in_firefox() {
+  logger_verbose "Generating Burp CA and trusting in Firefox"
+  if [[ -d "/opt/tools/BurpSuiteCommunity/" ]]; then
+    logger_debug 'Looking for available port'
+    # Find an available port for Burp to listen
+    local burp_port=8080
+    # TODO : add the dynamic port finder
+    # TODO : when dynamic port finder used, remove the code below that iterates on 8080++ until it finds one
+    local listening_ports
+    listening_ports=$(netstat -lnt|grep -Eo '(127.0.0.1|0.0.0.0):[0-9]{1,5}'|cut -d ':' -f 2)
+    while [[ $listening_ports =~ .*$burp_port.* ]]
+    do
+      burp_port=$((burp_port+1))
+    done
+    # Edit configuration file to listen on the available port found
+    logger_debug 'Preparing burp configuration file'
+    sed -i "s/\"listener_port\":[0-9]\+/\"listener_port\":$burp_port/g" /opt/tools/BurpSuiteCommunity/conf.json
+    # Start Burp with "y" to accept policy and generate CA, keep its PID to kill it when done
+    logger_debug 'Starting Burp and waiting for proxy to listen'
+
+    local $burp_pro_path="/opt/my-resources/setup/burpsuite/BurpSuitePro"
+    echo y|/usr/lib/jvm/java-21-openjdk/bin/java -Djava.awt.headless=true -jar "$burp_pro_path/BurpSuitePro.jar" --config-file=/opt/tools/BurpSuiteCommunity/conf.json 2>&1 > /dev/null &
+
+    # pull the latest process's ID
+    local burp_pid=$!
+    # Define Timeout counter
+    # TODO: Upgrade timeout with better process
+    local timeout_counter
+    timeout_counter=0
+    # Let time to Burp to init CA
+    while [[ -z $(netstat -lnt|grep -Eo "(127.0.0.1|0.0.0.0):$burp_port") ]]
+    do
+      if (( $timeout_counter < 120 )); then
+        sleep 0.5
+        timeout_counter=$((timeout_counter+1))
+      else
+        kill "$burp_pid"
+        rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
+        logger_error 'Process timed out, please trust the CA manually.'
+        exit 1
+      fi
+    done
+    # Download the CA to /tmp and update the CA path
+    logger_debug 'Retrieving CA'
+    local burp_ca_path="/opt/tools/firefox/cacert.der"
+    local burp_ca_name="PortSwigger CA"
+    if ! wget -q "http://127.0.0.1:$burp_port/cert" -O "$burp_ca_path"; then
+      kill "$burp_pid"
+      rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
+      logger_error 'The CA cert could not be retrieved, please trust it manually'
+    fi
+    kill "$burp_pid"
+    rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
+    logger_success 'CA trusted successfully'
   fi
 }
 
