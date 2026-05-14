@@ -7,3 +7,5 @@ burpsuite-pro &> /dev/null &
 WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS=1 evolution &> /dev/null &
 semgrep scan --sarif -o out.sarif .
 code --no-sandbox --user-data-dir "/root"
+agg $ASCIINEMA_FILE $GIF_FILE
+ffmpeg -i $GIF_FILE -pix_fmt yuv420p $VIDEO_FILE

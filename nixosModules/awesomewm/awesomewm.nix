@@ -38,6 +38,19 @@ in
       };
     };
 
+    home-manager.users.lapinou.home.file = {
+      ".config/flameshot/flameshot.ini" = {
+        text = ''
+          [General]
+          contrastOpacity=188
+          drawColor=#42ff00
+          savePath=/home/lapinou/Pictures
+          showDesktopNotification=true
+          useX11LegacyScreenshot=true
+        ''; # https://github.com/nix-community/home-manager/issues/9201
+      };
+    };
+
     services.xserver.windowManager.awesome = {
       enable = true;
       #package = awesome;

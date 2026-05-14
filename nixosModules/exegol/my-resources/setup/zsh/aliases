@@ -85,8 +85,7 @@ alias msf_handlers="() {
 
     msfconsole -r /root/.msf4/msf_handlers.rc
 }"
-alias BurpSuitePro='/usr/lib/jvm/java-21-openjdk/bin/java -jar -Xmx4g /opt/my-resources/bin/BurpSuitePro/burpsuite_pro.jar'
-alias burpsuite-pro=BurpSuitePro
+alias burpsuite-pro="/opt/tools/BurpSuitePro/BurpSuite" 
 alias nmap-top-1000='(){
     nmap -Pn -n -v -sS --top-ports 1000 -oA /workspace/loot/nmap_tcp_top_1000_$1 $1
 }'

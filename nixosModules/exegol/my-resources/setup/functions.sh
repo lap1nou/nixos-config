@@ -124,62 +124,56 @@ function trust_ca_burp_pro_in_firefox() {
 
 function install_secator() {
   echo "[*] Installing Secator"
+
   pipx install secator
 }
 
 function install_unfurl() {
   echo "[*] Installing Unfurl"
-  go install github.com/tomnomnom/unfurl@latest
-}
 
-#function install_smap() {
-#  echo "[*] Installing Smap"
-#  mkdir -p /opt/tools/smap || exit
-#  cd /opt/tools/smap || exit
-#  asdf set golang 1.25.0
-#  mkdir -p .go/bin
-#  GOBIN=/opt/tools/smap/.go/bin go install -v github.com/s0md3v/smap/cmd/smap@latest
-#  ln -s /opt/tools/smap/.go/bin/smap /opt/tools/bin/smap
-#}
+  go install github.com/tomnomnom/unfurl@latest
+
+  asdf reshim golang
+}
 
 function install_vulnx() {
   echo "[*] Installing Vulnx"
-  mkdir -p /opt/tools/vulnx || exit
-  cd /opt/tools/vulnx || exit
+
   asdf set golang 1.23.0
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/vulnx/.go/bin go install -v github.com/projectdiscovery/cvemap/cmd/vulnx@latest
-  ln -s /opt/tools/vulnx/.go/bin/vulnx /opt/tools/bin/vulnx
+
+  go install -v github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+
+  asdf reshim golang
 }
 
 function install_tlsx() {
   echo "[*] Installing Tlsx"
-  mkdir -p /opt/tools/tlsx || exit
-  cd /opt/tools/tlsx || exit
-  asdf set golang 1.24.1
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/tlsx/.go/bin go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
-  ln -s /opt/tools/tlsx/.go/bin/tlsx /opt/tools/bin/tlsx
+
+  asdf set golang 1.26.1
+
+  go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+
+  asdf reshim golang
 }
 
 function install_urlfinder() {
   echo "[*] Installing Urlfinder"
-  mkdir -p /opt/tools/urlfinder || exit
-  cd /opt/tools/urlfinder || exit
+
   asdf set golang 1.23.0
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/urlfinder/.go/bin go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
-  ln -s /opt/tools/urlfinder/.go/bin/urlfinder /opt/tools/bin/urlfinder
+
+  go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+
+  asdf reshim golang
 }
 
 function install_mapcidr() {
   echo "[*] Installing Mapcidr"
-  mkdir -p /opt/tools/mapcidr || exit
-  cd /opt/tools/mapcidr || exit
-  asdf set golang 1.24.1
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/mapcidr/.go/bin go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
-  ln -s /opt/tools/mapcidr/.go/bin/mapcidr /opt/tools/bin/mapcidr
+
+  asdf set golang 1.26.1
+
+  go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
+
+  asdf reshim golang
 }
 
 function install_yq_go() {
@@ -192,17 +186,20 @@ function install_yq_go() {
 
 function install_gum() {
   echo "[*] Installing Gum"
-  mkdir -p /opt/tools/gum || exit
-  cd /opt/tools/gum || exit
+
   asdf set golang 1.23.0
-  mkdir -p .go/bin
-  GOBIN=/opt/tools/gum/.go/bin go install -v github.com/charmbracelet/gum@latest
-  ln -s /opt/tools/gum/.go/bin/gum /opt/tools/bin/gum
+
+  go install -v github.com/charmbracelet/gum@latest
+
+  asdf reshim golang
 }
 
 function install_anew() {
   echo "[*] Installing Anew"
+
   go install -v github.com/tomnomnom/anew@latest
+
+  asdf reshim golang
 }
 
 function install_massdns() {
@@ -271,4 +268,10 @@ function htb_add_dns() {
 EOF
 
 	service dnsmasq start
+}
+
+function install_agg() {
+  echo "[*] Installing Agg"
+
+  cargo install --git https://github.com/asciinema/agg
 }
