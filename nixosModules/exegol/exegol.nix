@@ -10,35 +10,28 @@
   };
 
   config = lib.mkIf config.exegol.enable {
-    #home-manager.users.lapinou.home.file = {
-    #    ".exegol/config.yml" = {
-    #        source = ./config.yml;
-    #    };
-    #};
-
+    # Exegol wrapper need the "my-resources" folder to have wider permissions
     home-manager.users.lapinou.home.file = {
-      "/.exegol/HomeManagerInit_my-resources" = {
-        source = ./my-resources;
+      "/.exegol/HomeManagerInit_my-resources_setup" = {
+        source = ./my-resources/setup;
         onChange = ''
-          rm -rf ~/.exegol/my-resources
-          cp -L -r ~/.exegol/HomeManagerInit_my-resources ~/.exegol/my-resources
-          chmod -R 777 ~/.exegol/my-resources
+          rm -rf ~/.exegol/my-resources/setup
+          cp -L -r ~/.exegol/HomeManagerInit_my-resources_setup ~/.exegol/my-resources/setup
+          chmod -R 777 ~/.exegol/my-resources/setup
         '';
       };
     };
 
-    #Exegol
-    #"${home-manager.users.lapinou.home.homeDirectory}/.exegol/config.yml".source = ./pkgs/exegol/config.yml;
-    # Exegol wrapper need the "my-resources" folder to have wider permissions
-    # Dirty workaround: https://github.com/nix-community/home-manager/issues/3090#issuecomment-2010891733
-    #"${home-manager.users.lapinou.home.homeDirectory}/.exegol/HomeManagerInit_my-resources" = {
-    #  source = ./my-resources;
-    #  onChange = ''
-    #    rm -rf ${home-manager.users.lapinou.home.homeDirectory}/.exegol/my-resources
-    #    cp -L -r ${home-manager.users.lapinou.home.homeDirectory}/.exegol/HomeManagerInit_my-resources ${config.home.homeDirectory}/.exegol/my-resources
-    #    chmod -R 777 ${home-manager.users.lapinou.home.homeDirectory}/.exegol/my-resources
-    #  '';
-    #};
+    home-manager.users.lapinou.home.file = {
+      "/.exegol/HomeManagerInit_my-resources_bin" = {
+        source = ./my-resources/bin;
+        onChange = ''
+          rm -rf ~/.exegol/my-resources/bin
+          cp -L -r ~/.exegol/HomeManagerInit_my-resources_bin ~/.exegol/my-resources/bin
+          chmod -R 777 ~/.exegol/my-resources/bin
+        '';
+      };
+    };
 
     environment.systemPackages = with pkgs; [
       xorg.xhost

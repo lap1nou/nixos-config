@@ -12,7 +12,7 @@ $git_branch\
 $git_status\
 $git_metrics\
 [](fg:#FCF392 bg:blue)\
-${custom.local_ip}\
+${localip}\
 [](fg:blue bg:red)\
 ${env_var.TARGET}\
 [](fg:red bg:none)
@@ -27,6 +27,12 @@ error_symbol = '[✗](#E84D44)'
 [cmd_duration]
 format = "[  $duration ]($style)"
 style = "fg:bright-white bg:18"
+
+[localip]
+style = "fg:white bold bg:blue"
+format = '[󰣙 $localipv4 ]($style)'
+ssh_only = false
+enabled = true
 
 [custom.local_ip]
 style = "fg:white bold bg:blue"
