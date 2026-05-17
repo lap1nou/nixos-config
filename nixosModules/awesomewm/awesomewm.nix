@@ -38,6 +38,7 @@ in
       };
     };
 
+    # Add useX11LegacyScreenshot=true in the future
     home-manager.users.lapinou.home.file = {
       ".config/flameshot/flameshot.ini" = {
         text = ''
@@ -46,10 +47,55 @@ in
           drawColor=#42ff00
           savePath=/home/lapinou/Pictures
           showDesktopNotification=true
-          useX11LegacyScreenshot=true
         ''; # https://github.com/nix-community/home-manager/issues/9201
       };
     };
+
+    home-manager.users.lapinou.programs.autorandr = {
+      enable = true;
+      profiles = {
+      "vmware" = {
+        fingerprint = {
+          "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
+        };
+
+        config = {
+          "Virtual-1" = {
+            enable = true;
+            crtc = 0;
+            mode = "1918x920";
+            position = "0x0";
+            rate = "60.00";
+          };
+        };
+      };
+
+      "vmware-fullscreen-2" = {
+        fingerprint = {
+          "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
+          "Virtual-2" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-2";
+        };
+
+        config = {
+          "Virtual-1" = {
+            enable = true;
+            crtc = 0;
+            mode = "1920x1080";
+            position = "0x0";
+            rate = "60.00";
+          };
+
+          "Virtual-2" = {
+            enable = true;
+            crtc = 1;
+            mode = "1920x1080";
+            position = "1920x0";
+            rate = "60.00";
+          };
+        };
+      };
+    };
+  };
 
     services.xserver.windowManager.awesome = {
       enable = true;
@@ -67,6 +113,10 @@ in
         allowAnyUser = true;
       };
     };
+
+    services.udev.extraRules = ''
+      ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr --batch -c"
+    '';
 
     environment.systemPackages = with pkgs; [
       picom
