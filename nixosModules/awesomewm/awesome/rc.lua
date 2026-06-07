@@ -332,8 +332,7 @@ globalkeys = gears.table.join(
 		awful.spawn.with_shell("vicinae toggle")
 	end, { description = "run Vicinae", group = "launcher" }),
 	awful.key({ modkey }, "e", function()
-		--awful.spawn.with_shell("vicinae vicinae://launch/@lap1nou/exegol/exegol")
-		awful.spawn.with_shell("vicinae vicinae://extensions/lap1nou/exegol/exegol")
+		awful.spawn.with_shell("vicinae vicinae://launch/@lap1nou/exegol/exegol")
 	end, { description = "run Vicinae Exegol extension", group = "launcher" })
 )
 
