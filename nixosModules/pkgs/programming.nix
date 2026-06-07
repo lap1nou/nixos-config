@@ -14,7 +14,7 @@
       devbox
       gum
       python3
-      pipx
+      (pipx.overridePythonAttrs (old: {doCheck = false;})) # https://github.com/NixOS/nixpkgs/issues/525124
       zizmor
     ];
 

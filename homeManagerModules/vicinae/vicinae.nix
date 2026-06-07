@@ -19,11 +19,11 @@
         closeOnFocusLoss = true;
         theme.name = "stylix";
 
-        #providers = {
-        #  "@lap1nou/vicinae-extension-exegol-0".preferences = {
-        #    custom = "test";
-        #  };
-        #};
+        providers = {
+          "@lap1nou/exegol".preferences = {
+            terminal = "kitty";
+          };
+        };
       };
 
       # Reference: https://github.com/scottmckendry/nix

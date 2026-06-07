@@ -85,8 +85,8 @@ function trust_ca_burp_pro_in_firefox() {
     # Start Burp with "y" to accept policy and generate CA, keep its PID to kill it when done
     logger_debug 'Starting Burp and waiting for proxy to listen'
 
-    local $burp_pro_path="/opt/my-resources/setup/burpsuite/BurpSuitePro"
-    echo y|/usr/lib/jvm/java-21-openjdk/bin/java -Djava.awt.headless=true -jar "$burp_pro_path/BurpSuitePro.jar" --config-file=/opt/tools/BurpSuiteCommunity/conf.json 2>&1 > /dev/null &
+    local $burp_pro_path="/opt/tools/BurpSuitePro"
+    echo y|/usr/lib/jvm/java-21-openjdk/bin/java -Djava.awt.headless=true -jar "$burp_pro_path/BurpSuite" --config-file=/opt/tools/BurpSuiteCommunity/conf.json 2>&1 > /dev/null &
 
     # pull the latest process's ID
     local burp_pid=$!
