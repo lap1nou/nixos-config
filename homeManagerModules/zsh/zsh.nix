@@ -41,6 +41,8 @@
         if [[ -f ~/.safe-chain/scripts/init-posix.sh ]]; then
           source ~/.safe-chain/scripts/init-posix.sh
         fi
+
+        [[ -s "${pkgs.grc}/etc/grc.zsh" ]] && source ${pkgs.grc}/etc/grc.zsh
       '';
     };
   };

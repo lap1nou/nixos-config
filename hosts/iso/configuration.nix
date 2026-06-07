@@ -11,6 +11,7 @@
   awesomewm.enable = true;
   htb-cli.enable = false;
   htop.enable = true;
+  grc.enable = true;
   firefox.enable = true;
   wireguard.enable = false;
   optimization.enable = true;

@@ -12,6 +12,7 @@
     ./exegol/exegol.nix
     ./htop/htop.nix
     ./firefox/firefox.nix
+    ./grc/grc.nix
     ./rdm/rdm.nix
     ./safe-chain/safe-chain.nix
     ./pkgs/utils.nix
