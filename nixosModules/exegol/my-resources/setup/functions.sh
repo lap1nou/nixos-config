@@ -26,8 +26,8 @@ function install_atuin() {
 
 function install_obsidian() {
   echo "[*] Installing Obsidian"
-  OBSIDIAN_VERSION="1.9.14"
-  wget https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
+  local OBSIDIAN_VERSION="1.12.7"
+  wget -q https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
   dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
   rm obsidian_${OBSIDIAN_VERSION}_amd64.deb
 
@@ -42,14 +42,14 @@ function config_burpsuite() {
   echo "[*] Configure Burpsuite"
 
   echo "[*] Install Jython"
-  JYTHON_VERSION="2.7.4"
+  local JYTHON_VERSION="2.7.4"
   mkdir /opt/tools/BurpSuiteCommunity/jython
-  wget "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar"
+  wget -q "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar"
 
   echo "[*] Install Jruby"
-  JRUBY_VERSION="9.4.12.0"
+  local JRUBY_VERSION="9.4.12.0"
   mkdir /opt/tools/BurpSuiteCommunity/jruby
-  wget https://repo1.maven.org/maven2/org/jruby/jruby-complete/${JRUBY_VERSION}/jruby-complete-${JRUBY_VERSION}.jar -O "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar"
+  wget -q https://repo1.maven.org/maven2/org/jruby/jruby-complete/${JRUBY_VERSION}/jruby-complete-${JRUBY_VERSION}.jar -O "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar"
 
   # Copy custom Burpsuite config
   [[ -f "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" ]] && cp "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" "/root/.BurpSuite/UserConfigCommunity.json"
@@ -66,32 +66,21 @@ function config_burpsuite() {
 }
 
 function trust_ca_burp_pro_in_firefox() {
-  logger_verbose "Generating Burp CA and trusting in Firefox"
+  echo "Generating Burp CA and trusting in Firefox"
   if [[ -d "/opt/tools/BurpSuiteCommunity/" ]]; then
-    logger_debug 'Looking for available port'
+    echo 'Looking for available port'
     # Find an available port for Burp to listen
     local burp_port=8080
-    # TODO : add the dynamic port finder
-    # TODO : when dynamic port finder used, remove the code below that iterates on 8080++ until it finds one
-    local listening_ports
-    listening_ports=$(netstat -lnt|grep -Eo '(127.0.0.1|0.0.0.0):[0-9]{1,5}'|cut -d ':' -f 2)
-    while [[ $listening_ports =~ .*$burp_port.* ]]
-    do
-      burp_port=$((burp_port+1))
-    done
-    # Edit configuration file to listen on the available port found
-    logger_debug 'Preparing burp configuration file'
-    sed -i "s/\"listener_port\":[0-9]\+/\"listener_port\":$burp_port/g" /opt/tools/BurpSuiteCommunity/conf.json
-    # Start Burp with "y" to accept policy and generate CA, keep its PID to kill it when done
-    logger_debug 'Starting Burp and waiting for proxy to listen'
 
-    local $burp_pro_path="/opt/tools/BurpSuitePro"
-    echo y|/usr/lib/jvm/java-21-openjdk/bin/java -Djava.awt.headless=true -jar "$burp_pro_path/BurpSuite" --config-file=/opt/tools/BurpSuiteCommunity/conf.json 2>&1 > /dev/null &
+    echo 'Starting Burp and waiting for proxy to listen'
+
+    local burp_pro_path="/opt/tools/BurpSuitePro"
+    echo y|/usr/lib/jvm/java-21-openjdk/bin/java -Djava.awt.headless=true -jar "$burp_pro_path/burpsuite.jar" --config-file=/opt/tools/BurpSuiteCommunity/conf.json 2>&1 > /dev/null &
 
     # pull the latest process's ID
     local burp_pid=$!
+
     # Define Timeout counter
-    # TODO: Upgrade timeout with better process
     local timeout_counter
     timeout_counter=0
     # Let time to Burp to init CA
@@ -103,22 +92,23 @@ function trust_ca_burp_pro_in_firefox() {
       else
         kill "$burp_pid"
         rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
-        logger_error 'Process timed out, please trust the CA manually.'
+        echo 'Process timed out, please trust the CA manually.'
         exit 1
       fi
     done
+
     # Download the CA to /tmp and update the CA path
-    logger_debug 'Retrieving CA'
+    echo 'Retrieving CA'
     local burp_ca_path="/opt/tools/firefox/cacert.der"
     local burp_ca_name="PortSwigger CA"
     if ! wget -q "http://127.0.0.1:$burp_port/cert" -O "$burp_ca_path"; then
       kill "$burp_pid"
       rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
-      logger_error 'The CA cert could not be retrieved, please trust it manually'
+      echo 'The CA cert could not be retrieved, please trust it manually'
     fi
     kill "$burp_pid"
     rm -r "$(find /tmp/burp*.tmp -type d -printf '%T+ %p\n' | sort | head -n 1 | cut -d ' ' -f2)"  # Remove burp tmp files
-    logger_success 'CA trusted successfully'
+    echo 'CA trusted successfully'
   fi
 }
 
@@ -131,7 +121,8 @@ function install_secator() {
 function install_unfurl() {
   echo "[*] Installing Unfurl"
 
-  go install github.com/tomnomnom/unfurl@latest
+  local UNFURL_VERSION="v0.4.3"
+  go install github.com/tomnomnom/unfurl@$UNFURL_VERSION
 
   asdf reshim golang
 }
@@ -139,9 +130,10 @@ function install_unfurl() {
 function install_vulnx() {
   echo "[*] Installing Vulnx"
 
+  local VULNX_VERSION="v2.0.1"
   asdf set golang 1.23.0
 
-  go install -v github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+  go install github.com/projectdiscovery/vulnx/v2/cmd/vulnx@$VULNX_VERSION
 
   asdf reshim golang
 }
@@ -149,9 +141,10 @@ function install_vulnx() {
 function install_tlsx() {
   echo "[*] Installing Tlsx"
 
+  local TLSX_VERSION="v1.2.2"
   asdf set golang 1.26.1
 
-  go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
+  go install github.com/projectdiscovery/tlsx/cmd/tlsx@$TLSX_VERSION
 
   asdf reshim golang
 }
@@ -159,9 +152,10 @@ function install_tlsx() {
 function install_urlfinder() {
   echo "[*] Installing Urlfinder"
 
+  local URLFINDER_VERSION="v0.0.3"
   asdf set golang 1.23.0
 
-  go install -v github.com/projectdiscovery/urlfinder/cmd/urlfinder@latest
+  go install github.com/projectdiscovery/urlfinder/cmd/urlfinder@$URLFINDER_VERSION
 
   asdf reshim golang
 }
@@ -171,16 +165,16 @@ function install_mapcidr() {
 
   asdf set golang 1.26.1
 
-  go install -v github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
+  go install github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
 
   asdf reshim golang
 }
 
 function install_yq_go() {
   echo "[*] Installing Yq-go"
-  VERSION=v4.48.1
-  PLATFORM=linux_amd64
-  wget "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
+  local VERSION=v4.48.1
+  local PLATFORM=linux_amd64
+  wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
   chmod +x /opt/tools/bin/yq-go
 }
 
@@ -189,7 +183,7 @@ function install_gum() {
 
   asdf set golang 1.23.0
 
-  go install -v github.com/charmbracelet/gum@latest
+  go install github.com/charmbracelet/gum@latest
 
   asdf reshim golang
 }
@@ -197,7 +191,8 @@ function install_gum() {
 function install_anew() {
   echo "[*] Installing Anew"
 
-  go install -v github.com/tomnomnom/anew@latest
+  local ANEW_VERSION="v0.1.1"
+  go install github.com/tomnomnom/anew@$ANEW_VERSION
 
   asdf reshim golang
 }
@@ -222,12 +217,6 @@ function install_web-server() {
   uv tool install git+https://github.com/lap1nou/web-server --force
 }
 
-function install_rofi() {
-    echo "[*] Installing Rofi"
-    mkdir ~/.config/rofi/
-    cp /opt/my-resources/setup/rofi/config.rasi ~/.config/rofi/
-}
-
 function install_uv() {
     echo "[*] Installing uv"
     pipx install uv
@@ -235,23 +224,12 @@ function install_uv() {
 
 function install_vscode() {
     echo "[*] Installing VSCode"
-    wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code.deb
+    wget -q "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" -O code.deb
     dpkg -i code.deb
     rm -f code.deb
 
     echo "[*] Installing VSCode extensions"
     code --no-sandbox --user-data-dir "/root" --install-extension MS-SarifVSCode.sarif-viewer
-}
-
-function install_wscat() {
-  echo "[*] Installing Wscat"
-
-  git clone https://github.com/websockets/wscat.git
-  cd ./wscat
-  git checkout 2509d02c3ef9093b00356c9cf688d1aa089914e1
-  rm -f .npmrc
-  npm install . -g
-  rm -rf /workspace/wscat
 }
 
 function install_safe-chain() {
@@ -274,4 +252,21 @@ function install_agg() {
   echo "[*] Installing Agg"
 
   cargo install --git https://github.com/asciinema/agg
+}
+
+function install_syphoon() {
+  echo "[*] Installing Syphoon"
+
+  if [[ -d "/opt/my-resources/setup/syphoon/" ]]; then
+    echo "[*] Syphoon binary present"
+    cp -r "/opt/my-resources/setup/syphoon/" "/opt/tools/"
+    lv -v -s "/opt/my-resources/setup/syphoon/syphoon" "/opt/tools/bin/syphoon"
+  fi
+}
+
+function config_nxc() {
+  echo "[*] Configure NXC"
+
+  sed -i "s/audit_mode =/audit_mode = */" ~/.nxc/nxc.conf
+  sed -i "s/reveal_chars_of_pwd = 0/reveal_chars_of_pwd = 2/" ~/.nxc/nxc.conf
 }

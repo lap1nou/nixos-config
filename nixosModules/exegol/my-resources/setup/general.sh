@@ -12,15 +12,18 @@ asdf install golang 1.26.1
 asdf set --home golang 1.22.2 1.23.0 1.26.1
 
 install_safe-chain || exit
-install_starship || true
-install_atuin || true
-install_obsidian || true
-install_exegol-history || true
-install_web-server || true
-install_vulnx || true
-install_yq_go || true
-install_vscode || true
-config_burpsuite || true
+install_starship || exit
+install_atuin || exit
+install_obsidian || exit
+install_uv || exit
+install_exegol-history || exit
+install_web-server || exit
+install_vulnx || exit
+install_yq_go || exit
+install_vscode || exit
+install_syphoon || exit
+config_nxc || exit
+config_burpsuite || exit
 
 rm /workspace/.tool-versions
 

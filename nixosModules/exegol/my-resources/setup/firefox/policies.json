@@ -45,6 +45,10 @@
             {
               "url": "https://lolol.farm/",
               "name": "LOLOL Farm"
+            },
+            {
+              "url": "https://github.com/subat0mik/Misconfiguration-Manager",
+              "name": "SCCM Misconfiguration"
             }
           ]
         },

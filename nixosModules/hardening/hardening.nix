@@ -12,8 +12,7 @@
 
   config = lib.mkIf config.hardening.enable {
     networking = {
-      firewall.enable = true;
-      enableIPv6 = false;
+      firewall.enable = false;
     };
 
     security.sudo.execWheelOnly = true;

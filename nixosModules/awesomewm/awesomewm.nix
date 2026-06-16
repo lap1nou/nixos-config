@@ -45,7 +45,6 @@ in
           [General]
           contrastOpacity=188
           drawColor=#42ff00
-          savePath=/home/lapinou/Pictures
           showDesktopNotification=true
         ''; # https://github.com/nix-community/home-manager/issues/9201
       };

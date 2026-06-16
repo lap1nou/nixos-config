@@ -11,7 +11,6 @@
 
   config = lib.mkIf config.office.enable {
     environment.systemPackages = with pkgs; [
-      planify
       drawio
       flameshot
       obsidian
