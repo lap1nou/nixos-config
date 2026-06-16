@@ -32,7 +32,7 @@ style = "fg:bright-white bg:18"
 style = "fg:white bold bg:blue"
 format = '[󰣙 $localipv4 ]($style)'
 ssh_only = false
-enabled = true
+disabled = false
 
 [custom.local_ip]
 style = "fg:white bold bg:blue"
