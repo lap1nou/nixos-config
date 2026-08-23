@@ -13,6 +13,7 @@
   config = lib.mkIf config.hardening.enable {
     networking = {
       firewall.enable = false;
+      networkmanager.enable = true;
     };
 
     security.sudo.execWheelOnly = true;

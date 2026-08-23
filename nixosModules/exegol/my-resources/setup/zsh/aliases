@@ -92,3 +92,15 @@ alias nmap-top-1000='(){
 alias nmap-full='(){
     nmap -Pn -n -v -sS -p- -oA /workspace/loot/nmap_tcp_full_$1 $1
 }'
+alias exh-krb='(){
+    ENV=$(find ~+ -name "*.ccache" -type f | fzf --preview="describeTicket.py {}" --header="Enter: Select, F1: Convert to .kirbi" --bind="f1:execute-silent(ticketConverter.py {} $(basename {} .ccache).kirbi)+abort") 
+    OUT=$(describeTicket.py "$ENV")
+    USER_TMP=$(echo "$OUT" | grep "User Name" | awk -F": " "{print \$2}")
+    DOMAIN_TMP=$(echo "$OUT" | grep "User Realm" | awk -F": " "{print \$2}")
+    export USER="$USER_TMP"
+    export DOMAIN="$DOMAIN_TMP"
+    export KRB5CCNAME="$ENV"
+}'
+function fzf-az-cid {
+    jq -r '.[] | .AppDisplayName + " (" + .AppId + ")"' /opt/lists/MicrosoftApps.json | fzf --header="Choose an Entra client id" --bind='enter:execute(echo {} | sed -n "s/.*(\(.*\))[^)]*$/\1/p")+abort'
+}

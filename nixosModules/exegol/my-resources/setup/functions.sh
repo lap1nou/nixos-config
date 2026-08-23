@@ -210,6 +210,8 @@ function install_exegol-history() {
   rm -rf /opt/tools/Exegol-history/
   uv tool install git+https://github.com/ThePorgs/Exegol-history@dev --force
   register-python-argcomplete exegol-history >> ~/.zshrc
+  # Copy profile.sh
+  wget -q https://raw.githubusercontent.com/ThePorgs/Exegol-history/refs/heads/dev/profile.sh -O /root/.local/share/uv/tool/exegol-history/lib/python3.11/site-packages/profile.sh
 }
 
 function install_web-server() {
@@ -262,6 +264,14 @@ function install_syphoon() {
     cp -r "/opt/my-resources/setup/syphoon/" "/opt/tools/"
     lv -v -s "/opt/my-resources/setup/syphoon/syphoon" "/opt/tools/bin/syphoon"
   fi
+}
+
+function install_dbeaver() {
+    echo "[*] Installing DBeaver"
+    local VERSION="26.1.5"
+    wget -q "https://github.com/dbeaver/dbeaver/releases/download/$VERSION/dbeaver-ce-$VERSION-linux-x86_64.deb" -O /tmp/dbeaver.deb
+    dpkg -i /tmp/dbeaver.deb
+    rm -f /tmp/dbeaver.deb
 }
 
 function config_nxc() {
