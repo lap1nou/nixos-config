@@ -212,6 +212,11 @@ function install_exegol-history() {
   register-python-argcomplete exegol-history >> ~/.zshrc
   # Copy profile.sh
   wget -q https://raw.githubusercontent.com/ThePorgs/Exegol-history/refs/heads/dev/profile.sh -O /root/.local/share/uv/tool/exegol-history/lib/python3.11/site-packages/profile.sh
+
+  # Copy config and enable nxc sync
+  mkdir -p ~/.exegol_history/
+  wget -q https://raw.githubusercontent.com/ThePorgs/Exegol-history/refs/heads/dev/exegol_history/config/config.toml -O ~/.exegol_history/config.toml
+  yq-go -i '.sync.netexec.enabled = true' ~/.exegol_history/config.toml
 }
 
 function install_web-server() {
