@@ -286,3 +286,8 @@ function install_revshell-gen() {
 
   uv tool install git+https://github.com/lap1nou/revshell-gen@master --force
 }
+
+function install_claude_code() {
+  echo "[*] Installing Claude Code"
+  curl -fsSL https://claude.ai/install.sh | bash
+}
