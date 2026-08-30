@@ -16,11 +16,11 @@ install_starship || exit
 install_atuin || exit
 install_obsidian || exit
 install_uv || exit
+install_yq_go || exit
 install_exegol-history || exit
 install_web-server || exit
 install_revshell-gen || exit
 install_vulnx || exit
-install_yq_go || exit
 install_vscode || exit
 install_syphoon || exit
 config_nxc || exit
