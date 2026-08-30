@@ -172,7 +172,7 @@ function install_mapcidr() {
 
 function install_yq_go() {
   echo "[*] Installing Yq-go"
-  local VERSION=v4.48.1
+  local VERSION=v4.53.6
   local PLATFORM=linux_amd64
   wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
   chmod +x /opt/tools/bin/yq-go
