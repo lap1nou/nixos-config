@@ -280,3 +280,9 @@ function config_nxc() {
   sed -i "s/audit_mode =/audit_mode = */" ~/.nxc/nxc.conf
   sed -i "s/reveal_chars_of_pwd = 0/reveal_chars_of_pwd = 2/" ~/.nxc/nxc.conf
 }
+
+function install_revshell-gen() {
+  echo "[*] Installing revshell-gen"
+
+  uv tool install git+https://github.com/lap1nou/revshell-gen@master --force
+}
