@@ -296,3 +296,9 @@ function install_claude_code() {
   echo "[*] Installing Claude Code"
   curl -fsSL https://claude.ai/install.sh | bash
 }
+
+function install_badsecrets() {
+  echo "[*] Installing badsecrets"
+
+  pipx install badsecrets
+}
