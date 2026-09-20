@@ -27,6 +27,7 @@
       yq-go
       zip
       obs-studio
+      python313Packages.pillow
     ];
   };
 }
