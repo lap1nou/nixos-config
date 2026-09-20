@@ -23,6 +23,7 @@ install_revshell-gen || exit
 install_vulnx || exit
 install_vscode || exit
 install_syphoon || exit
+install_badsecrets || exit
 config_nxc || exit
 config_burpsuite || exit
 
