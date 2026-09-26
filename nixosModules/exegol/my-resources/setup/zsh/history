@@ -11,3 +11,5 @@ agg $ASCIINEMA_FILE $GIF_FILE
 ffmpeg -i $GIF_FILE -pix_fmt yuv420p $VIDEO_FILE
 nuclei -tags tech,misc,config,git,exposure -ni -u "$TARGET"
 httpx -sid 5 -delay 3 -title -screenshot -td -server -l targets.txt
+fuse_nfs --export "$EXPORT_NAME" --fake-uid "$MOUNT_POINT" "$TARGET"
+dnsx -silent -d "$DOMAIN" -w `fzf-wordlists`
