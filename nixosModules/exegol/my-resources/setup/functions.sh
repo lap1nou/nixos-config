@@ -302,3 +302,9 @@ function install_badsecrets() {
 
   pipx install badsecrets
 }
+
+function install_nfs_tools {
+	echo "[*] Installing NFS tool (https://github.com/hvs-consulting/nfs-security-tooling)"
+	apt install pkg-config libfuse3-dev python3-dev
+	pipx install git+https://github.com/hvs-consulting/nfs-security-tooling.git
+}
