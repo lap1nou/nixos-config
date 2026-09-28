@@ -308,3 +308,11 @@ function install_nfs_tools {
 	apt install pkg-config libfuse3-dev python3-dev
 	pipx install git+https://github.com/hvs-consulting/nfs-security-tooling.git
 }
+
+function install_nfsshell-ng {
+    echo "[*] Installing nfsshell-ng"
+    git -C /tmp clone --depth 1 https://github.com/lap1nou/nfsshell.git
+    cd /tmp/nfsshell || exit
+    make -j
+    mv nfsshell /opt/tools/bin/nfsshell-ng
+}
