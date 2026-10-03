@@ -316,3 +316,21 @@ function install_nfsshell-ng {
     make -j
     mv nfsshell /opt/tools/bin/nfsshell-ng
 }
+
+function install_ilspy {
+    echo "[*] Installing ILSpy"
+	local VERSION="11.1.0.9782"
+	local VERSION2="11.1"
+    wget -q "https://github.com/icsharpcode/ILSpy/releases/download/v$VERSION2/ilspy_$VERSION-1_amd64.deb" -O ilspy.deb
+	dpkg -i ilspy.deb
+	rm -f ilspy.deb
+}
+
+function install_ilspy_cmd {
+    echo "[*] Installing ILSpycmd"
+	# Installing .NET 10.0 SDK
+    wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+    chmod +x /tmp/dotnet-install.sh
+    /tmp/dotnet-install.sh --channel 10.0
+	dotnet tool install --global ilspycmd
+}
