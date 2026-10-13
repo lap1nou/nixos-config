@@ -334,3 +334,15 @@ function install_ilspy_cmd {
     /tmp/dotnet-install.sh --channel 10.0
 	dotnet tool install --global ilspycmd
 }
+
+function flip-foxyproxy {
+	local actual_value=$(yq-go '.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active' /usr/lib/firefox-esr/distribution/policies.json)
+
+	if [ "$actual_value" = "true" ]; then
+		echo "Disabling BurpSuite proxy."
+	else
+		echo "Enabling BurpSuite proxy."
+	fi
+
+	yq-go '.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active = (.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active | not)' /usr/lib/firefox-esr/distribution/policies.json -i
+}
