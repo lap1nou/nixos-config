@@ -20,7 +20,7 @@
   fontsPkgs.enable = true;
   hardening.enable = false;
   localization.enable = true;
-  nessus.enable = true;
+  nessus.enable = false;
   nixSettings.enable = true;
   ssh.enable = false;
   stylixConfig.enable = true;
