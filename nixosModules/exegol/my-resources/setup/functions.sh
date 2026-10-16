@@ -208,7 +208,7 @@ function install_exegol-history() {
   uv tool install git+https://github.com/ThePorgs/Exegol-history@dev --force
   register-python-argcomplete exegol-history >> ~/.zshrc
   # Copy profile.sh
-  wget -q https://raw.githubusercontent.com/ThePorgs/Exegol-history/refs/heads/dev/profile.sh -O /root/.local/share/uv/tool/exegol-history/lib/python3.11/site-packages/profile.sh
+  wget -q https://raw.githubusercontent.com/ThePorgs/Exegol-history/refs/heads/dev/profile.sh -O /root/.local/share/uv/tools/exegol-history/lib/python3.11/site-packages/profile.sh
 
   # Copy config and enable nxc sync
   mkdir -p ~/.exegol_history/
