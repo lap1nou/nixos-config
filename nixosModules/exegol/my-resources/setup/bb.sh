@@ -10,8 +10,8 @@ cp /opt/my-resources/setup/zsh/setup_api_key.sh /root/setup_api_key.sh
 install_secator || true
 install_unfurl || true
 #install_smap || true
-install_tlsx || true
-install_urlfinder || true
-install_mapcidr || true
+#install_tlsx || true
+#install_urlfinder || true
+#install_mapcidr || true
 #install_anew || true
 #install_massdns || true
