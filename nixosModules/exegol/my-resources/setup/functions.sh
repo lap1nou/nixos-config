@@ -33,9 +33,6 @@ function install_obsidian() {
 
   # Copy Obsidian template
   cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
-
-  # Copy Obsidian .desktop
-  cp /opt/my-resources/setup/obsidian.desktop /usr/share/applications/
 }
 
 function config_burpsuite() {
