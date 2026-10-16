@@ -19,7 +19,7 @@ function install_starship() {
 
 function install_atuin() {
   echo "[*] Installing Atuin"
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh
+  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
   cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
   /root/.atuin/bin/atuin import zsh
 }
