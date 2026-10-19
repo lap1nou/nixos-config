@@ -72,6 +72,7 @@
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
 
   #networking.networkmanager.unmanaged = [ "ens160u1" ];
+  #networking.hostName = "$HOSTNAME";  
   #
   #systemd.network = {
   #  enable = true;
