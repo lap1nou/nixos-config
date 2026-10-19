@@ -5,7 +5,7 @@ source /opt/my-resources/setup/functions.sh
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
 # Create directories
-mkdir -p /workspace/loot /workspace/web
+mkdir -p /workspace/loot /workspace/web mkdir /workspace/output
 
 # Manage Golang versions
 asdf install golang 1.26.1
