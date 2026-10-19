@@ -15,3 +15,7 @@ fuse_nfs --export "$EXPORT_NAME" --fake-uid "$MOUNT_POINT" "$TARGET"
 dnsx -silent -d "$DOMAIN" -w `fzf-wordlists`
 nmap -p 80,443,445 -oA "/workspace/output/nmap/$TARGET" -v --open "$TARGET"
 picocom --baud 19200 /dev/ttyUSB0
+mount -t nfs "$TARGET":"$REMOTE_FOLDER" /workspace/mount/
+mount -t cifs -o username="$USER",password="$PASSWORD" //"$TARGET"/"$SHARE" /workspace/mount/
+scp "$USER"@"$TARGET":"$REMOTE_FILE" /workspace/loot/ # Download a file
+scp "$LOCAL_FILE" "$USER"@"$TARGET":"$REMOTE_FOLDER"  # Upload a file
