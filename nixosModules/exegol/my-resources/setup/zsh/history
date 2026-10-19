@@ -14,3 +14,4 @@ httpx -sid 5 -delay 3 -title -screenshot -td -server -l targets.txt -o "/workspa
 fuse_nfs --export "$EXPORT_NAME" --fake-uid "$MOUNT_POINT" "$TARGET"
 dnsx -silent -d "$DOMAIN" -w `fzf-wordlists`
 nmap -p 80,443,445 -oA "/workspace/output/nmap/$TARGET" -v --open "$TARGET"
+picocom --baud 19200 /dev/ttyUSB0
