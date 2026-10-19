@@ -71,6 +71,22 @@
 
   networking.nameservers = ["1.1.1.1" "8.8.8.8"];
 
+  #networking.networkmanager.unmanaged = [ "ens160u1" ];
+  #
+  #systemd.network = {
+  #  enable = true;
+  #  networks."10-ens160u1" = {
+  #    matchConfig.Name = "ens160u1";
+  #    linkConfig.MACAddress = "$MAC_ADDRESS";
+  #    networkConfig.DHCP = "ipv4";
+  #    dhcpV4Config = {
+  #      ClientIdentifier = "";
+  #      VendorClassIdentifier = ""; # Windows
+  #      RequestOptions = [ $DHCP_OPTIONS ];
+  #    };
+  #  };
+  #};
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.zsh;
