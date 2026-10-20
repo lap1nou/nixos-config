@@ -15,6 +15,7 @@ fuse_nfs --export "$EXPORT_NAME" --fake-uid "$MOUNT_POINT" "$TARGET"
 dnsx -silent -d "$DOMAIN" -w `fzf-wordlists`
 nmap -p 80,443,445 -oA "/workspace/output/nmap/${RANGE_NAME}_light" -v --open "$RANGE"
 nmap --top-ports 1000 -oA "/workspace/output/nmap/${RANGE_NAME}_top1000" -v --open "$RANGE"
+for f in "/workspace/output/nmap/*.xml"; do nmap-parse-output "$f" host-ports; done
 picocom --baud 19200 /dev/ttyUSB0
 mount -t nfs "$TARGET":"$REMOTE_FOLDER" /workspace/mount/
 mount -t cifs -o username="$USER",password="$PASSWORD" //"$TARGET"/"$SHARE" /workspace/mount/
