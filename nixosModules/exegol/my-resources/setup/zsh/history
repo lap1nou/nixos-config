@@ -13,7 +13,8 @@ nuclei -tags tech,misc,config,git,exposure -ni -u "$TARGET"
 httpx -sid 5 -delay 3 -title -screenshot -td -server -l targets.txt -srd "/workspace/output/httpx/"
 fuse_nfs --export "$EXPORT_NAME" --fake-uid "$MOUNT_POINT" "$TARGET"
 dnsx -silent -d "$DOMAIN" -w `fzf-wordlists`
-nmap -p 80,443,445 -oA "/workspace/output/nmap/$TARGET" -v --open "$TARGET"
+nmap -p 80,443,445 -oA "/workspace/output/nmap/${RANGE_NAME}_light" -v --open "$RANGE"
+nmap --top-ports 1000 -oA "/workspace/output/nmap/${RANGE_NAME}_top1000" -v --open "$RANGE"
 picocom --baud 19200 /dev/ttyUSB0
 mount -t nfs "$TARGET":"$REMOTE_FOLDER" /workspace/mount/
 mount -t cifs -o username="$USER",password="$PASSWORD" //"$TARGET"/"$SHARE" /workspace/mount/
