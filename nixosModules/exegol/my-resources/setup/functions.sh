@@ -343,3 +343,8 @@ function flip-foxyproxy {
 
 	yq-go '.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active = (.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active | not)' /usr/lib/firefox-esr/distribution/policies.json -i
 }
+
+function install_WinSCPPasswdExtractor {
+	echo "[*] Installing WinSCPPasswdExtractor"
+	pipx install WinSCPPasswdExtractor
+}
