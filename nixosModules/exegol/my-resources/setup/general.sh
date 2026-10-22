@@ -5,7 +5,7 @@ source /opt/my-resources/setup/functions.sh
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
 # Create directories
-mkdir -p /workspace/loot /workspace/web mkdir /workspace/output
+mkdir -p /workspace/loot /workspace/web /workspace/output
 mkdir -p /workspace/targets
 mkdir -p /workspace/output/nxc /workspace/output/nmap /workspace/output/httpx /workspace/output/certipy /workspace/output/nuclei
 
