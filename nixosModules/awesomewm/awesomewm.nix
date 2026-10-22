@@ -52,48 +52,65 @@ in
 
     home-manager.users.lapinou.programs.autorandr = {
       enable = true;
-      profiles = {
-      "vmware" = {
-        fingerprint = {
-          "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
-        };
-
-        config = {
-          "Virtual-1" = {
-            enable = true;
-            crtc = 0;
-            mode = "1918x920";
-            position = "0x0";
-            rate = "60.00";
-          };
-        };
-      };
-
-      "vmware-fullscreen-2" = {
-        fingerprint = {
-          "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
-          "Virtual-2" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-2";
-        };
-
-        config = {
-          "Virtual-1" = {
-            enable = true;
-            crtc = 0;
-            mode = "1920x1080";
-            position = "0x0";
-            rate = "60.00";
-          };
-
-          "Virtual-2" = {
-            enable = true;
-            crtc = 1;
-            mode = "1920x1080";
-            position = "1920x0";
-            rate = "60.00";
-          };
-        };
-      };
-    };
+      hooks.predetect."vmware-layout" = ''
+        ${pkgs.xrandr}/bin/xrandr --props | ${pkgs.gawk}/bin/awk '
+        /^[^ \t]/ {
+        if (out != "") args = args " --output " out " --auto --pos " x "x" y
+          out = ""
+          if ($1 ~ /^[A-Za-z0-9-]+$/) {
+            if ($2 == "connected") { out = $1; x = 0; y = 0 }
+            else if ($2 == "disconnected") args = args " --output " $1 " --off"
+            }
+          }
+        /^\tsuggested X: [0-9]+ *$/ { x = $3 }
+        /^\tsuggested Y: [0-9]+ *$/ { y = $3 }
+        END {
+        if (out != "") args = args " --output " out " --auto --pos " x "x" y
+          print args
+        }' | ${pkgs.findutils}/bin/xargs ${pkgs.xrandr}/bin/xrandr
+      '';
+      #profiles = {
+      #"vmware" = {
+      #  fingerprint = {
+      #    "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
+      #  };
+      #
+      #  config = {
+      #    "Virtual-1" = {
+      #      enable = true;
+      #      crtc = 0;
+      #      mode = "1918x920";
+      #      position = "0x0";
+      #      rate = "60.00";
+      #    };
+      #  };
+      #};
+      #
+      #"vmware-fullscreen-2" = {
+      #  fingerprint = {
+      #    "Virtual-1" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-1";
+      #    "Virtual-2" =  "--CONNECTED-BUT-EDID-UNAVAILABLE--Virtual-2";
+      #  };
+      #
+      #  config = {
+      #    "Virtual-1" = {
+      #      enable = true;
+      #      crtc = 0;
+      #      mode = "1920x1080";
+      #      position = "0x0";
+      #      rate = "60.00";
+      #    };
+      #
+      #    "Virtual-2" = {
+      #      enable = true;
+      #      crtc = 1;
+      #      mode = "1920x1080";
+      #      position = "1920x0";
+      #      rate = "60.00";
+      #    };
+      #  };
+      #};
+    #};
   };
 
     services.xserver.windowManager.awesome = {
@@ -134,10 +151,12 @@ in
       };
     };
 
+    environment.variables."QT_QPA_PLATFORMTHEME" = lib.mkForce "gtk3";
     environment = {
       sessionVariables = rec {
         ADW_DISABLE_PORTAL = 1;
         GTK_CSD = "0"; # Disable GTK CSD (Client-side decoration) such as the mini close button on Firefox (that d'oesn't go well with Awesomewm for example)
+        QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
       };
     };
   };
