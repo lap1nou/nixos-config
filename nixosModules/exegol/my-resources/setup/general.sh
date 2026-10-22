@@ -6,6 +6,9 @@ cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distributi
 
 # Create directories
 mkdir -p /workspace/loot /workspace/web /workspace/output
+mkdir -p /workspace/notes /workspace/notes/vuln /workspace/notes/screenshot
+touch /workspace/notes/cleanup.md
+touch /workspace/notes/notes.md
 mkdir -p /workspace/targets
 mkdir -p /workspace/output/nxc /workspace/output/nmap /workspace/output/httpx /workspace/output/certipy /workspace/output/nuclei
 
