@@ -39,14 +39,24 @@ in
     };
 
     # Add useX11LegacyScreenshot=true in the future
+    #home-manager.users.lapinou.home.file = {
+    #  ".config/flameshot/flameshot.ini" = {
+    #    text = ''
+    #      [General]
+    #      contrastOpacity=188
+    #      drawColor=#42ff00
+    #      showDesktopNotification=true
+    #    ''; # https://github.com/nix-community/home-manager/issues/9201
+    #  };
+    #};
     home-manager.users.lapinou.home.file = {
-      ".config/flameshot/flameshot.ini" = {
-        text = ''
-          [General]
-          contrastOpacity=188
-          drawColor=#42ff00
-          showDesktopNotification=true
-        ''; # https://github.com/nix-community/home-manager/issues/9201
+      "/.config/flameshot/flameshot.ini_Init_my-resources_setup" = {
+        source = ./flameshot.ini;
+        onChange = ''
+          rm -f ~/.config/flameshot/flameshot.ini
+          cp -L ~/.config/flameshot/flameshot.ini_Init_my-resources_setup ~/.config/flameshot/flameshot.ini
+          chmod u+w  ~/.config/flameshot/flameshot.ini
+        '';
       };
     };
 
