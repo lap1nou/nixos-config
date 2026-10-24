@@ -35,6 +35,7 @@
         nix-edit-config = "sudo code --no-sandbox --user-data-dir /root /etc/nixos/";
         nix-shell = "nix-shell --extra-experimental-features flakes --run zsh";
         nix-change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
+        vmware-fix = "sudo pkill -f 'vmtoolsd'; vmware-user-suid-wrapper &; sudo systemctl restart vmware.service";
       };
 
       initContent = ''
