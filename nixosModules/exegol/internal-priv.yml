@@ -1,0 +1,17 @@
+metadata:
+  comment: "Internal pentest, session logging on, privileged"
+
+image:
+  tag: nightly
+
+shell:
+  default: zsh
+  env:
+    - "EXGL_PROFILE=internal"
+
+system:
+  privileged: true
+
+logging:
+  enabled: true
+  method: asciinema
