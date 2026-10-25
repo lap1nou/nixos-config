@@ -1,0 +1,14 @@
+metadata:
+  comment: "External / web pentest, session logging on"
+
+image:
+  tag: nightly
+
+shell:
+  default: zsh
+  env:
+    - "EXGL_PROFILE=external"
+
+logging:
+  enabled: true
+  method: asciinema
