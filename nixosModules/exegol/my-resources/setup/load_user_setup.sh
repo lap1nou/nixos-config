@@ -7,11 +7,10 @@ set -e
 
 # Exegol also features a set of supported customization a user can make.
 # The /opt/supported_setups.md file lists the supported configurations that can be made easily.
-
-if [[ "${PROFILE}" = "htb" ]]; then
-  /opt/my-resources/setup/htb.sh
-elif [[ "${PROFILE}" = "bb" ]]; then
-  /opt/my-resources/setup/bb.sh
-fi
-
 /opt/my-resources/setup/general.sh
+
+if [[ "${EXGL_PROFILE}" = "internal" ]]; then
+  /opt/my-resources/setup/internal.sh
+elif [[ "${EXGL_PROFILE}" = "external" ]]; then
+  /opt/my-resources/setup/external.sh
+fi
