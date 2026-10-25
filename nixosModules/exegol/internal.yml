@@ -1,0 +1,14 @@
+metadata:
+  comment: "Internal pentest, session logging on"
+
+image:
+  tag: nightly
+
+shell:
+  default: zsh
+  env:
+    - "EXGL_PROFILE=internal"
+
+logging:
+  enabled: true
+  method: asciinema
