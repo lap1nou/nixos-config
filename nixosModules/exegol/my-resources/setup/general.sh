@@ -10,7 +10,7 @@ mkdir -p /workspace/notes /workspace/notes/vuln /workspace/notes/screenshot
 touch /workspace/notes/cleanup.md
 touch /workspace/notes/notes.md
 mkdir -p /workspace/targets
-mkdir -p /workspace/output/nxc /workspace/output/nmap /workspace/output/httpx /workspace/output/certipy /workspace/output/nuclei
+mkdir -p /workspace/output/nxc /workspace/output/nmap /workspace/output/httpx /workspace/output/certipy /workspace/output/nuclei /workspace/output/gobuster
 
 # Manage Golang versions
 asdf install golang 1.26.1
