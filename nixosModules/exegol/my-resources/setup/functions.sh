@@ -307,28 +307,28 @@ function install_nfs_tools {
 }
 
 function install_nfsshell-ng {
-    echo "[*] Installing nfsshell-ng"
-    git -C /tmp clone --depth 1 https://github.com/lap1nou/nfsshell.git
-    cd /tmp/nfsshell || exit
-    make -j
-    mv nfsshell /opt/tools/bin/nfsshell-ng
+  echo "[*] Installing nfsshell-ng"
+  git -C /tmp clone --depth 1 https://github.com/lap1nou/nfsshell.git
+  cd /tmp/nfsshell || exit
+  make -j
+  mv nfsshell /opt/tools/bin/nfsshell-ng
 }
 
 function install_ilspy {
-    echo "[*] Installing ILSpy"
+  echo "[*] Installing ILSpy"
 	local VERSION="11.1.0.9782"
 	local VERSION2="11.1"
-    wget -q "https://github.com/icsharpcode/ILSpy/releases/download/v$VERSION2/ilspy_$VERSION-1_amd64.deb" -O ilspy.deb
+  wget -q "https://github.com/icsharpcode/ILSpy/releases/download/v$VERSION2/ilspy_$VERSION-1_amd64.deb" -O ilspy.deb
 	dpkg -i ilspy.deb
 	rm -f ilspy.deb
 }
 
 function install_ilspy_cmd {
-    echo "[*] Installing ILSpycmd"
+  echo "[*] Installing ILSpycmd"
 	# Installing .NET 10.0 SDK
-    wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh
-    chmod +x /tmp/dotnet-install.sh
-    /tmp/dotnet-install.sh --channel 10.0
+  wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+  chmod +x /tmp/dotnet-install.sh
+  /tmp/dotnet-install.sh --channel 10.0
 	dotnet tool install --global ilspycmd
 }
 
@@ -342,6 +342,38 @@ function flip-foxyproxy {
 	fi
 
 	yq-go '.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active = (.policies.3rdparty.Extensions."foxyproxy@eric.h.jung".data[0].active | not)' /usr/lib/firefox-esr/distribution/policies.json -i
+}
+
+function install_azurehound {
+  echo "[*] Installing AzureHound"
+  local VERSION="v3.1.3"
+  wget -O /tmp/azurehound.zip "https://github.com/SpecterOps/AzureHound/releases/download/${VERSION}/AzureHound_${VERSION}_linux_amd64.zip"
+  unzip /tmp/azurehound.zip -d /opt/tools/bin/
+}
+
+function install_pytune {
+  echo "[*] Installing Pytune"
+  local GIT_COMMIT="214760beab6fae8ae3d6ebfbad7d958196e2e631"
+  git -C /opt/tools/ clone --depth 1 https://github.com/secureworks/pytune.git
+  cd /opt/tools/pytune/ || exit
+  git checkout "${GIT_COMMIT}"
+  sed -i 's/colr//g' requirements.txt # Remove useless package
+  python3 -m venv --system-site-packages ./venv
+  source ./venv/bin/activate
+  pip3 install -r requirements.txt
+  deactivate
+}
+
+function install_findmeaccess {
+  echo "[*] Installing FindMeAccess"
+  local GIT_COMMIT="d14cf1bdd397a251ae3694870530840f1a738162"
+  git -C /opt/tools/ clone --depth 1 https://github.com/absolomb/FindMeAccess.git
+  cd /opt/tools/FindMeAccess/ || exit
+  git checkout "${GIT_COMMIT}"
+  python3 -m venv --system-site-packages ./venv
+  source ./venv/bin/activate
+  pip3 install -r requirements.txt
+  deactivate
 }
 
 function install_WinSCPPasswdExtractor {
