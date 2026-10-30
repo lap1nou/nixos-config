@@ -36,6 +36,9 @@
         nix-shell = "nix-shell --extra-experimental-features flakes --run zsh";
         nix-change-theme = "change-wallpaper; sudo nixos-rebuild switch --flake '/etc/nixos#${osConfig.variables.host}'; echo 'awesome.restart()' | awesome-client";
         vmware-fix = "sudo pkill -f 'vmtoolsd'; vmware-user-suid-wrapper &; sudo systemctl restart vmware.service";
+        fzf-if = ''
+          SELECTION=$(ip --json a | jq -r ".[] | [.ifname, [(.addr_info[] | select(.family==\"inet\") | .local)]] | .[0] + \"|\" + (if (.[1] | length) > 0 then .[1][0] else \"\" end) + \"|\" + (if (.[1] | length) > 0 then .[0] + \" \\u001b[33m(\" + (.[1] | join(\", \")) + \")\\u001b[0m\" else \"\\u001b[2m\" + .[0] + \"\\u001b[0m\" end)" | fzf --ansi -d "|" --with-nth=3 | cut -d "|" -f1,2); [ -n "$SELECTION" ] && INTERFACE=${SELECTION%%|*} ATTACKER_IP=${SELECTION#*|}
+        '';
       };
 
       initContent = ''

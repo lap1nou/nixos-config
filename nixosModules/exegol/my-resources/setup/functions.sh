@@ -349,6 +349,7 @@ function install_azurehound {
   local VERSION="v3.1.3"
   wget -O /tmp/azurehound.zip "https://github.com/SpecterOps/AzureHound/releases/download/${VERSION}/AzureHound_${VERSION}_linux_amd64.zip"
   unzip /tmp/azurehound.zip -d /opt/tools/bin/
+  rm /tmp/azurehound.zip
 }
 
 function install_pytune {
@@ -379,4 +380,91 @@ function install_findmeaccess {
 function install_WinSCPPasswdExtractor {
 	echo "[*] Installing WinSCPPasswdExtractor"
 	pipx install WinSCPPasswdExtractor
+}
+
+function install_gum {
+	echo "[*] Installing Gum"
+  local VERSION="2.0.2"
+	wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
+  dpkg -i /tmp/gum.deb
+  rm /tmp/gum.deb
+}
+
+function company-wordlist() {
+  if ! command -v gum >/dev/null 2>&1; then
+    echo "This script needs gum: https://github.com/charmbracelet/gum"
+    exit 1
+  fi
+
+  RULE_PATH="/opt/my-resources/setup/hashcat/company.rule"
+  ACCENT=212
+  ERROR=196
+
+  # Header
+  gum style \
+    --border double --border-foreground "$ACCENT" \
+    --padding "1 4" --margin "1 0" --align center --bold \
+    "🏢  Company wordlist generator" "Fill in the details below"
+
+  # Company name (required)
+  company=""
+  while [[ -z "${company// /}" ]]; do
+    company=$(gum input \
+      --header "Company name (required)" --header.foreground "$ACCENT" \
+      --placeholder "Acme Inc.") || exit 1
+    if [[ -z "${company// /}" ]]; then
+      gum style --foreground "$ERROR" "  Company name can't be empty."
+    fi
+  done
+
+  # Skip checkbox
+  skip=$(gum choose --no-limit \
+    --header "Options (space to tick, enter to continue)" \
+    --header.foreground "$ACCENT" \
+    "Skip everything except the company name") || true
+
+  street=""
+  country=""
+  notes=""
+
+  if [[ -z "$skip" ]]; then
+    street=$(gum input \
+      --header "Street" --header.foreground "$ACCENT" \
+      --placeholder "Streetname 12") || true
+
+    country=$(gum input \
+      --header "Country" --header.foreground "$ACCENT" \
+      --placeholder "Germany") || true
+
+    notes=$(gum write \
+      --header "Notes (optional, Ctrl+D to finish, Esc to skip)" \
+      --header.foreground "$ACCENT" \
+      --placeholder "Anything else worth noting..." \
+      --width 60 --height 8) || true
+  fi
+
+  # Output file
+  slug=$(printf '%s' "$company" | tr '[:upper:]' '[:lower:]' | tr -cs 'a-z0-9' '-' | sed 's/^-//; s/-$//')
+  outfile="${slug:-company}.txt"
+
+  {
+    echo "$company"
+    if [[ -n "$street" ]];  then echo "$street";  fi
+    if [[ -n "$country" ]]; then echo "$country"; fi
+    if [[ -n "$notes" ]];   then printf '%s\n' "$notes"; fi
+  } > "$outfile"
+
+  gum spin --spinner dot --title "Saving..." -- sleep 0.6
+
+  # Summary
+  gum style \
+    --border rounded --border-foreground "$ACCENT" \
+    --padding "1 2" --margin "1 0" \
+    "$(cat "$outfile")"
+
+  gum style --foreground 42 --bold "✔ Saved to $outfile"
+
+  hashcat --force $outfile -r ${RULE_PATH} --stdout > company_wordlist.txt
+  realpath "company_wordlist.txt" | tr -d '\n' | xclip
+  rm "$outfile"
 }
