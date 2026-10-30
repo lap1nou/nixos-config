@@ -383,9 +383,9 @@ function install_WinSCPPasswdExtractor {
 }
 
 function install_gum {
-	echo "[*] Installing Gum"
+  echo "[*] Installing Gum"
   local VERSION="2.0.2"
-	wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
+  wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
   dpkg -i /tmp/gum.deb
   rm /tmp/gum.deb
 }
