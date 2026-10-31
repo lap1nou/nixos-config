@@ -216,9 +216,19 @@ function install_exegol-history() {
   yq-go -i '.sync.netexec.enabled = true' ~/.exegol_history/config.toml
 }
 
+function genpass(){
+  # Reference: https://unix.stackexchange.com/a/230676
+  tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo
+}
+
 function install_web-server() {
   echo "[*] Installing Web-server"
   uv tool install git+https://github.com/lap1nou/web-server --force
+  # Config
+  mkdir "~/.webserver_tui/"
+  cp "/opt/my-resources/setup/web-server/config.toml" ~/.webserver_tui/
+  yq-go -i ".profiles.updog_workspace.password = \"`genpass`\"" ~/.webserver_tui/config.toml
+  yq-go -i ".profiles.updog_resources.password = \"`genpass`\"" ~/.webserver_tui/config.toml
 }
 
 function install_uv() {

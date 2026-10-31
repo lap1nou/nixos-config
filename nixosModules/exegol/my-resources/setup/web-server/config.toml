@@ -1,0 +1,13 @@
+[profiles.updog_workspace]
+type = "updog"
+interface = "ens33u1"
+port = 80
+directory = "/workspace/web/"
+password = ""
+
+[profiles.updog_resources]
+type = "updog"
+interface = "ens33u1"
+port = 80
+directory = "/opt/resources/"
+password = ""
