@@ -2,7 +2,7 @@
     "policies": {
       "DisableTelemetry": true,
       "DisplayBookmarksToolbar": "always",
-
+      "PromptForDownloadLocation": false,
       "ManagedBookmarks": [
         {
           "toplevel_name": "Exegol Bookmarks"
