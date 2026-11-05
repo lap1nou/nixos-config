@@ -85,7 +85,7 @@
               "name": "BloodHound-CE"
             },
             {
-              "url": "file:///workspace/output/screenshot/screenshot.html",
+              "url": "file:///workspace/output/httpx/",
               "name": "Httpx results"
             }
           ]
