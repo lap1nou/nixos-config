@@ -483,4 +483,6 @@ function install_mise {
 	echo "[*] Installing Mise"
 	local VERSION="v2026.11.1"
 	wget -q "https://github.com/jdx/mise/releases/download/$VERSION/mise-$VERSION-linux-x64" -O /opt/tools/bin/mise
+	echo 'eval "$(/opt/tools/bin/mise activate zsh)"' >> "$HOME/.zshrc"
+	source "$HOME/.zshrc"
 }
