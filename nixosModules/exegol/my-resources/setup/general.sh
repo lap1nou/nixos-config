@@ -5,12 +5,20 @@ source /opt/my-resources/setup/functions.sh
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
 # Create directories
-mkdir -p /workspace/loot /workspace/web /workspace/output
-mkdir -p /workspace/notes /workspace/notes/vuln /workspace/notes/screenshot
-touch /workspace/notes/cleanup.md
-touch /workspace/notes/notes.md
-mkdir -p /workspace/targets
-mkdir -p /workspace/output/nxc /workspace/output/nmap /workspace/output/httpx /workspace/output/certipy /workspace/output/nuclei /workspace/output/gobuster
+FOLDERS=("loot" "web" "output" "notes" "targets")
+for folder in "${FOLDERS[@]}"; do
+  mkdir -p "/workspace/$folder"
+done
+
+NOTE_FOLDERS=("vuln" "screenshot")
+for note_folder in "${NOTE_FOLDERS[@]}"; do
+  mkdir -p "/workspace/notes/$note_folder"
+done
+
+TOOLS=("nxc" "nmap" "httpx" "naabu" "certipy" "nuclei" "gobuster" "bloodhound")
+for tool in "${TOOLS[@]}"; do
+  mkdir -p "/workspace/output/$tool"
+done
 
 # Manage Golang versions
 asdf install golang 1.26.1
