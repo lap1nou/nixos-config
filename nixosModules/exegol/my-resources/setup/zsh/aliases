@@ -103,7 +103,7 @@ alias findmeaccess='/opt/tools/FindMeAccess/venv/bin/python3 /opt/tools/FindMeAc
 function llm {
     local LLM_NAME="Qwen3.5-4B-Q5_K_S"
     if [[ -f "/opt/my-resources/setup/llm/${LLM_NAME}.llamafile" ]]; then
-        /opt/my-resources/setup/llm/${LLM_NAME}.llamafile --server --port 5645 --offline
+        /opt/my-resources/setup/llm/${LLM_NAME}.llamafile --server --host 127.0.0.1 --port 5645 --offline
     else
         echo "[-] Path '/opt/my-resources/setup/llm/${LLM_NAME}.llamafile' doesn't exist"
     fi
