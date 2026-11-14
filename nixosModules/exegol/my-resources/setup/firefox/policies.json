@@ -87,6 +87,10 @@
             {
               "url": "file:///workspace/output/httpx/",
               "name": "Httpx results"
+            },
+            {
+              "url": "http://127.0.0.1:5645/",
+              "name": "Local LLM"
             }
           ]
         },
