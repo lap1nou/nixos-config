@@ -469,7 +469,7 @@ function company-wordlist() {
 
   hashcat --force $outfile -r ${RULE_PATH} --stdout > company_wordlist.txt
   realpath "company_wordlist.txt" | tr -d '\n' | xclip
-  rm "$outfile"
+  rm -f "$outfile"
 }
 
 function install_mise {
