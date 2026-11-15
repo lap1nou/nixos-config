@@ -148,9 +148,9 @@ function install_secator() {
 
 function install_unfurl() {
   echo "[*] Installing Unfurl"
+  local HASH="8f10d050f1b0be12e505053da174f3f39e8eed74"
 
-  local UNFURL_VERSION="v0.4.3"
-  go install github.com/tomnomnom/unfurl@$UNFURL_VERSION
+  go install github.com/tomnomnom/unfurl@$HASH
 
   asdf reshim golang
 }
