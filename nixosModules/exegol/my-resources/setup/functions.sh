@@ -217,7 +217,7 @@ function install_safe-chain() {
   check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
   chmod +x "$ARTIFACT_PATH"
   "$ARTIFACT_PATH"
-  rm "$ARTIFACT_PATH"
+  rm -f "$ARTIFACT_PATH"
 }
 
 function htb_add_dns() {
@@ -282,7 +282,7 @@ function install_claude_code() {
   check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
   chmod +x "$ARTIFACT_PATH"
   "$ARTIFACT_PATH"
-  rm "$ARTIFACT_PATH"
+  rm -f "$ARTIFACT_PATH"
 }
 
 function install_nfs_tools {
@@ -341,7 +341,7 @@ function install_azurehound {
   local VERSION="v3.1.3"
   wget -O /tmp/azurehound.zip "https://github.com/SpecterOps/AzureHound/releases/download/${VERSION}/AzureHound_${VERSION}_linux_amd64.zip"
   unzip /tmp/azurehound.zip -d /opt/tools/bin/
-  rm /tmp/azurehound.zip
+  rm -f /tmp/azurehound.zip
 }
 
 function install_pytune {
@@ -379,7 +379,7 @@ function install_gum {
   local VERSION="2.0.2"
   wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
   dpkg -i /tmp/gum.deb
-  rm /tmp/gum.deb
+  rm -f /tmp/gum.deb
 }
 
 function company-wordlist() {
