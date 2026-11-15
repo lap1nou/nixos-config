@@ -314,11 +314,14 @@ function install_ilspy {
 
 function install_ilspy_cmd {
   echo "[*] Installing ILSpycmd"
-	# Installing .NET 10.0 SDK
+  local VERSION="11.2.0.10050"
+
+  # Installing .NET 10.0 SDK
   wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh
   chmod +x /tmp/dotnet-install.sh
   /tmp/dotnet-install.sh --channel 10.0
-	dotnet tool install --global ilspycmd
+  dotnet tool install --global ilspycmd --version "$VERSION"
+  rm -f /tmp/dotnet-install.sh
 }
 
 function flip-foxyproxy {
