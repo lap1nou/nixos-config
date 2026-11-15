@@ -209,8 +209,15 @@ function install_vscode() {
 
 function install_safe-chain() {
   echo "[*] Installing safe-chain"
+  local VERSION="1.5.29"
+  local HASH="e9bfa05430bca0efcf26e5a0f06d09b9da8cc21de2e0ffab03f512dde649ebbe"
+  local ARTIFACT_PATH="/tmp/install-safe-chain.sh"
 
-  curl -fsSL https://github.com/AikidoSec/safe-chain/releases/latest/download/install-safe-chain.sh | sh
+  wget -q "https://github.com/AikidoSec/safe-chain/releases/download/${VERSION}/install-safe-chain.sh" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  chmod +x "$ARTIFACT_PATH"
+  "$ARTIFACT_PATH"
+  rm "$ARTIFACT_PATH"
 }
 
 function htb_add_dns() {
