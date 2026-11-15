@@ -49,10 +49,14 @@ function install_atuin() {
 
 function install_obsidian() {
   echo "[*] Installing Obsidian"
-  local OBSIDIAN_VERSION="1.12.7"
-  wget -q https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.deb
-  dpkg -i obsidian_${OBSIDIAN_VERSION}_amd64.deb
-  rm obsidian_${OBSIDIAN_VERSION}_amd64.deb
+  local VERSION="1.15.1"
+  local HASH="f77b6dfc8c040214f2febad2b1b9b051b6a838a47b0f4fb90a31cfcb79b8fcec"
+  local ARTIFACT_PATH="/tmp/obsidian.deb"
+
+  wget -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${VERSION}/obsidian_${VERSION}_amd64.deb" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  dpkg -i "$ARTIFACT_PATH"
+  rm "$ARTIFACT_PATH"
 
   # Copy Obsidian template
   cp -R /opt/my-resources/setup/obsidian/notes/ /workspace/notes/
