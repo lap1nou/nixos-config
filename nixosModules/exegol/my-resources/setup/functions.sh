@@ -232,8 +232,9 @@ EOF
 
 function install_agg() {
   echo "[*] Installing Agg"
+  local HASH="b27111e78b17e7c6eb4f7af89fecef25e3fa6841"
 
-  cargo install --git https://github.com/asciinema/agg
+  cargo install --git https://github.com/asciinema/agg --rev "$HASH"
 }
 
 function install_syphoon() {
