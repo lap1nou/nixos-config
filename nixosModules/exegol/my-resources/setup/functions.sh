@@ -473,10 +473,13 @@ function company-wordlist() {
 }
 
 function install_mise {
-	echo "[*] Installing Mise"
-	local VERSION="v2026.11.1"
+  echo "[*] Installing Mise"
+  local VERSION="v2026.11.1"
+  local HASH="7129dbab31d698f9028db9374f7ba7987232b0426f837dcbce437130a61415f9"
+  local ARTIFACT_PATH="/opt/tools/bin/mise"
 
-	wget -q "https://github.com/jdx/mise/releases/download/$VERSION/mise-$VERSION-linux-x64" -O /opt/tools/bin/mise
-	echo 'eval "$(/opt/tools/bin/mise activate zsh)"' >> "$HOME/.zshrc"
-	source "$HOME/.zshrc"
+  wget -q "https://github.com/jdx/mise/releases/download/$VERSION/mise-$VERSION-linux-x64" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  echo 'eval "$($ARTIFACT_PATH activate zsh)"' >> "$HOME/.zshrc"
+  source "$HOME/.zshrc"
 }
