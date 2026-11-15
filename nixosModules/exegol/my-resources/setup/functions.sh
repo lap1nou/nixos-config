@@ -1,5 +1,3 @@
-LOG_FILE="/tmp/setup_log.txt"
-
 # Root my-resources PATH
 MY_ROOT_PATH="/opt/my-resources"
 
