@@ -6,6 +6,14 @@ MY_ROOT_PATH="/opt/my-resources"
 # Setup directory for user customization
 MY_SETUP_PATH="$MY_ROOT_PATH/setup"
 
+# file, hash
+function check_hash() {
+  if [[ "$(sha256sum $1 | cut -d ' ' -f 1)" != "$2" ]]; then
+    echo "[-] Hash verification failed !"
+    return
+  fi
+}
+
 function install_starship() {
   echo "[*] Installing Starship"
   curl -s https://starship.rs/install.sh -o install.sh
