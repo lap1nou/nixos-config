@@ -9,18 +9,24 @@ MY_SETUP_PATH="$MY_ROOT_PATH/setup"
 # file, hash
 function check_hash() {
   if [[ "$(sha256sum $1 | cut -d ' ' -f 1)" != "$2" ]]; then
-    echo "[-] Hash verification failed !"
-    return
+    echo '[-] Hash verification failed !'
+    return 1
   fi
 }
 
 function install_starship() {
   echo "[*] Installing Starship"
-  curl -s https://starship.rs/install.sh -o install.sh
-  sh ./install.sh -f
-  rm -f ./install.sh
-  cp /opt/my-resources/setup/zsh/starship.toml ~/.config/starship.toml
+  local VERSION="1.27.0"
+  local HASH="10c8eb4cb3b761d9bf59ea828444c2dab36c900b7d69a69e08814b286969df89"
 
+  wget -q "https://github.com/starship/starship/releases/download/v${VERSION}/starship-x86_64-unknown-linux-musl.tar.gz" -O "/tmp/starship.tar.gz"
+  check_hash "/tmp/starship.tar.gz" "$HASH" || { rm "/tmp/starship.tar.gz"; return 1; }
+  tar -zxf "/tmp/starship.tar.gz" --directory "/tmp/"
+  mv "/tmp/starship" "/opt/tools/bin/"
+  rm -rf "/tmp/starship.tar.gz"
+
+  echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+  cp /opt/my-resources/setup/zsh/starship.toml ~/.config/starship.toml
   # Removing the Exh hook since Starship is taking care of everything
   sed -i -e 's/add-zsh-hook precmd update_prompt/#add-zsh-hook precmd update_prompt/g' ~/.zshrc
 }
@@ -31,7 +37,7 @@ function install_atuin() {
   local HASH="f8dfc3f9d27cadc2e2c9d489394ef7c568291e2382a4d184865701bf1a4ac30a"
 
   wget -q "https://github.com/atuinsh/atuin/releases/download/v${VERSION}/atuin-x86_64-unknown-linux-musl.tar.gz" -O "/tmp/atuin.tar.gz"
-  check_hash "/tmp/atuin.tar.gz" "$HASH"
+  check_hash "/tmp/atuin.tar.gz" "$HASH" || { rm "/tmp/atuin.tar.gz"; return 1; }
   tar -zxf "/tmp/atuin.tar.gz" --directory "/tmp/"
   mv "/tmp/atuin-x86_64-unknown-linux-musl/atuin" "/opt/tools/bin/"
   rm -rf "/tmp/atuin.tar.gz" "/tmp/atuin-x86_64-unknown-linux-musl/"
