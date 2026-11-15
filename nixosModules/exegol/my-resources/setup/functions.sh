@@ -64,16 +64,20 @@ function install_obsidian() {
 
 function config_burpsuite() {
   echo "[*] Configure Burpsuite"
+  local JYTHON_VERSION="2.7.4"
+  local JRUBY_VERSION="9.4.12.0"
+  local JYTHON_HASH="1fba1769effcc8b19f5e10436bc8274a158ce988559f257927c24c73bb137f3c"
+  local JRUBY_HASH="afb903dc9d38843fed4961cdb63489a78d1b1783f5766acb5bc89f5fc720ed21"
 
   echo "[*] Install Jython"
-  local JYTHON_VERSION="2.7.4"
   mkdir /opt/tools/BurpSuiteCommunity/jython
   wget -q "https://repo1.maven.org/maven2/org/python/jython-standalone/${JYTHON_VERSION}/jython-standalone-${JYTHON_VERSION}.jar" -O "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar"
+  check_hash "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar" "$JYTHON_HASH" || { rm "/opt/tools/BurpSuiteCommunity/jython/jython-standalone.jar"; return 1; }
 
   echo "[*] Install Jruby"
-  local JRUBY_VERSION="9.4.12.0"
   mkdir /opt/tools/BurpSuiteCommunity/jruby
   wget -q https://repo1.maven.org/maven2/org/jruby/jruby-complete/${JRUBY_VERSION}/jruby-complete-${JRUBY_VERSION}.jar -O "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar"
+  check_hash "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar" "$JRUBY_HASH" || { rm "/opt/tools/BurpSuiteCommunity/jruby/jruby-standalone.jar"; return 1; }
 
   # Copy custom Burpsuite config
   [[ -f "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" ]] && cp "$MY_SETUP_PATH/burpsuite/UserConfigCommunity.json" "/root/.BurpSuite/UserConfigCommunity.json"
