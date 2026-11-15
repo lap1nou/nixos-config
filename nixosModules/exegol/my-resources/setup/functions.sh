@@ -274,7 +274,15 @@ function install_revshell-gen() {
 
 function install_claude_code() {
   echo "[*] Installing Claude Code"
-  curl -fsSL https://claude.ai/install.sh | bash
+  local VERSION="2.1.325"
+  local HASH="0dc4f4a9a165fc60746d7ae8489712e5fc352f1e7ad4eb22e7141bd0812eb0cf"
+  local ARTIFACT_PATH="/tmp/claude"
+
+  wget -q "https://downloads.claude.ai/claude-code-releases/$VERSION/linux-x64/claude" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  chmod +x "$ARTIFACT_PATH"
+  "$ARTIFACT_PATH"
+  rm "$ARTIFACT_PATH"
 }
 
 function install_nfs_tools {
