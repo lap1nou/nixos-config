@@ -35,7 +35,6 @@ install_web-server || exit
 install_revshell-gen || exit
 install_vscode || exit
 install_syphoon || exit
-install_badsecrets || exit
 install_gum || exit
 config_nxc || exit
 config_burpsuite || exit
