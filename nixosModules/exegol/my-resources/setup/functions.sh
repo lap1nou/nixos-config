@@ -250,9 +250,13 @@ function install_syphoon() {
 function install_dbeaver() {
     echo "[*] Installing DBeaver"
     local VERSION="26.1.5"
-    wget -q "https://github.com/dbeaver/dbeaver/releases/download/$VERSION/dbeaver-ce-$VERSION-linux-x86_64.deb" -O /tmp/dbeaver.deb
-    dpkg -i /tmp/dbeaver.deb
-    rm -f /tmp/dbeaver.deb
+    local HASH="f6ea1137724fe80d5b27f4b4900df055c6cac4274a9f41e4e4005bd7ddd1dd4c"
+    local ARTIFACT_PATH="/tmp/dbeaver.deb"
+
+    wget -q "https://github.com/dbeaver/dbeaver/releases/download/$VERSION/dbeaver-ce-$VERSION-linux-x86_64.deb" -O "$ARTIFACT_PATH"
+    check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+    dpkg -i "$ARTIFACT_PATH"
+    rm -f "$ARTIFACT_PATH"
 }
 
 function config_nxc() {
