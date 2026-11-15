@@ -24,21 +24,28 @@ done
 asdf install golang 1.26.1
 asdf set --home golang 1.22.2 1.23.0 1.26.1
 
-install_safe-chain || exit
-install_starship || exit
-install_atuin || exit
-install_obsidian || exit
-install_uv || exit
-install_yq_go || exit
-install_exegol-history || exit
-install_web-server || exit
-install_revshell-gen || exit
-install_vscode || exit
-install_syphoon || exit
-install_gum || exit
-config_nxc || exit
-config_burpsuite || exit
+INSTALLS=(
+  install_safe-chain
+  install_starship
+  install_atuin
+  install_obsidian
+  install_uv
+  install_yq_go
+  install_exegol-history
+  install_web-server
+  install_revshell-gen
+  install_vscode
+  install_syphoon
+  install_gum
+  config_nxc
+  config_burpsuite
+)
 
-rm /workspace/.tool-versions
+FAILED=()
+for fn in "${INSTALLS[@]}"; do
+  "$fn" || { echo "[-] $fn failed, skipping"; }
+done
+
+rm -f /workspace/.tool-versions
 
 echo "source /opt/my-resources/setup/functions.sh" >> ~/.zshrc
