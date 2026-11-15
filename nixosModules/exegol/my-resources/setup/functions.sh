@@ -163,16 +163,6 @@ function install_yq_go() {
   chmod +x /opt/tools/bin/yq-go
 }
 
-function install_gum() {
-  echo "[*] Installing Gum"
-
-  asdf set golang 1.23.0
-
-  go install github.com/charmbracelet/gum@latest
-
-  asdf reshim golang
-}
-
 function install_exegol-history() {
   echo "[*] Installing Exegol-History"
   rm -rf /opt/tools/Exegol-history/
