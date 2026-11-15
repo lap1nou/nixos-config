@@ -41,7 +41,6 @@ INSTALLS=(
   config_burpsuite
 )
 
-FAILED=()
 for fn in "${INSTALLS[@]}"; do
   "$fn" || { echo "[-] $fn failed, skipping"; }
 done
