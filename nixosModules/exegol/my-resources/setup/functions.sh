@@ -27,10 +27,18 @@ function install_starship() {
 
 function install_atuin() {
   echo "[*] Installing Atuin"
-  curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
-  mkdir -p /root/.atuin/
-  cp /opt/my-resources/setup/atuin/config.toml /root/.atuin/config.toml
-  /root/.atuin/bin/atuin import zsh
+  local VERSION="18.24.8"
+  local HASH="f8dfc3f9d27cadc2e2c9d489394ef7c568291e2382a4d184865701bf1a4ac30a"
+
+  wget -q "https://github.com/atuinsh/atuin/releases/download/v${VERSION}/atuin-x86_64-unknown-linux-musl.tar.gz" -O "/tmp/atuin.tar.gz"
+  check_hash "/tmp/atuin.tar.gz" "$HASH"
+  tar -zxf "/tmp/atuin.tar.gz" --directory "/tmp/"
+  mv "/tmp/atuin-x86_64-unknown-linux-musl/atuin" "/opt/tools/bin/"
+  rm -rf "/tmp/atuin.tar.gz" "/tmp/atuin-x86_64-unknown-linux-musl/"
+
+  echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+  cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
+  atuin import zsh
 }
 
 function install_obsidian() {
