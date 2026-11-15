@@ -158,10 +158,14 @@ function install_unfurl() {
 
 function install_yq_go() {
   echo "[*] Installing Yq-go"
-  local VERSION=v4.53.6
-  local PLATFORM=linux_amd64
-  wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O /opt/tools/bin/yq-go
-  chmod +x /opt/tools/bin/yq-go
+  local VERSION="v4.53.6"
+  local PLATFORM="linux_amd64"
+  local HASH="c5f056448f973ae7d39b5401949648a78f2dc1947d6a8eb65be60d5c504b9385"
+  local ARTIFACT_PATH="/opt/tools/bin/yq-go"
+
+  wget -q "https://github.com/mikefarah/yq/releases/download/${VERSION}/yq_${PLATFORM}" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  chmod +x "$ARTIFACT_PATH"
 }
 
 function install_exegol-history() {
