@@ -357,7 +357,7 @@ function install_pytune {
   echo "[*] Installing Pytune"
   local HASH="214760beab6fae8ae3d6ebfbad7d958196e2e631"
 
-  git -C /opt/tools/ clone --depth 1 https://github.com/secureworks/pytune.git
+  git -C /opt/tools/ clone https://github.com/secureworks/pytune.git
   cd /opt/tools/pytune/ || exit
   git checkout "${HASH}"
   sed -i 's/colr//g' requirements.txt # Remove useless package
@@ -371,7 +371,7 @@ function install_findmeaccess {
   echo "[*] Installing FindMeAccess"
   local HASH="d14cf1bdd397a251ae3694870530840f1a738162"
 
-  git -C /opt/tools/ clone --depth 1 https://github.com/absolomb/FindMeAccess.git
+  git -C /opt/tools/ clone https://github.com/absolomb/FindMeAccess.git
   cd /opt/tools/FindMeAccess/ || exit
   git checkout "${HASH}"
   python3 -m venv --system-site-packages ./venv
