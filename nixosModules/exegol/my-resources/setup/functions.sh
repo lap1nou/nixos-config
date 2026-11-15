@@ -16,12 +16,13 @@ function install_starship() {
   echo "[*] Installing Starship"
   local VERSION="1.27.0"
   local HASH="10c8eb4cb3b761d9bf59ea828444c2dab36c900b7d69a69e08814b286969df89"
+  local ARTIFACT_PATH="/tmp/starship.tar.gz"
 
-  wget -q "https://github.com/starship/starship/releases/download/v${VERSION}/starship-x86_64-unknown-linux-musl.tar.gz" -O "/tmp/starship.tar.gz"
-  check_hash "/tmp/starship.tar.gz" "$HASH" || { rm "/tmp/starship.tar.gz"; return 1; }
-  tar -zxf "/tmp/starship.tar.gz" --directory "/tmp/"
+  wget -q "https://github.com/starship/starship/releases/download/v${VERSION}/starship-x86_64-unknown-linux-musl.tar.gz" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  tar -zxf "$ARTIFACT_PATH" --directory "/tmp/"
   mv "/tmp/starship" "/opt/tools/bin/"
-  rm -rf "/tmp/starship.tar.gz"
+  rm -rf "$ARTIFACT_PATH"
 
   echo 'eval "$(starship init zsh)"' >> ~/.zshrc
   cp /opt/my-resources/setup/zsh/starship.toml ~/.config/starship.toml
@@ -33,14 +34,16 @@ function install_atuin() {
   echo "[*] Installing Atuin"
   local VERSION="18.24.8"
   local HASH="f8dfc3f9d27cadc2e2c9d489394ef7c568291e2382a4d184865701bf1a4ac30a"
+  local ARTIFACT_PATH="/tmp/atuin.tar.gz"
 
-  wget -q "https://github.com/atuinsh/atuin/releases/download/v${VERSION}/atuin-x86_64-unknown-linux-musl.tar.gz" -O "/tmp/atuin.tar.gz"
-  check_hash "/tmp/atuin.tar.gz" "$HASH" || { rm "/tmp/atuin.tar.gz"; return 1; }
-  tar -zxf "/tmp/atuin.tar.gz" --directory "/tmp/"
+  wget -q "https://github.com/atuinsh/atuin/releases/download/v${VERSION}/atuin-x86_64-unknown-linux-musl.tar.gz" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  tar -zxf "$ARTIFACT_PATH" --directory "/tmp/"
   mv "/tmp/atuin-x86_64-unknown-linux-musl/atuin" "/opt/tools/bin/"
-  rm -rf "/tmp/atuin.tar.gz" "/tmp/atuin-x86_64-unknown-linux-musl/"
+  rm -rf "$ARTIFACT_PATH" "/tmp/atuin-x86_64-unknown-linux-musl/"
 
   echo 'eval "$(atuin init zsh)"' >> ~/.zshrc
+  mkdir -p ~/.config/atuin/
   cp /opt/my-resources/setup/atuin/config.toml ~/.config/atuin/config.toml
   atuin import zsh
 }
