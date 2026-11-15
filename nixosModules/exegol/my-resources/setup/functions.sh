@@ -155,49 +155,6 @@ function install_unfurl() {
   asdf reshim golang
 }
 
-function install_vulnx() {
-  echo "[*] Installing Vulnx"
-
-  local VULNX_VERSION="v2.0.1"
-  asdf set golang 1.23.0
-
-  go install github.com/projectdiscovery/vulnx/v2/cmd/vulnx@$VULNX_VERSION
-
-  asdf reshim golang
-}
-
-function install_tlsx() {
-  echo "[*] Installing Tlsx"
-
-  local TLSX_VERSION="v1.2.2"
-  asdf set golang 1.26.1
-
-  go install github.com/projectdiscovery/tlsx/cmd/tlsx@$TLSX_VERSION
-
-  asdf reshim golang
-}
-
-function install_urlfinder() {
-  echo "[*] Installing Urlfinder"
-
-  local URLFINDER_VERSION="v0.0.3"
-  asdf set golang 1.23.0
-
-  go install github.com/projectdiscovery/urlfinder/cmd/urlfinder@$URLFINDER_VERSION
-
-  asdf reshim golang
-}
-
-function install_mapcidr() {
-  echo "[*] Installing Mapcidr"
-
-  asdf set golang 1.26.1
-
-  go install github.com/projectdiscovery/mapcidr/cmd/mapcidr@latest
-
-  asdf reshim golang
-}
-
 function install_yq_go() {
   echo "[*] Installing Yq-go"
   local VERSION=v4.53.6
@@ -214,23 +171,6 @@ function install_gum() {
   go install github.com/charmbracelet/gum@latest
 
   asdf reshim golang
-}
-
-function install_anew() {
-  echo "[*] Installing Anew"
-
-  local ANEW_VERSION="v0.1.1"
-  go install github.com/tomnomnom/anew@$ANEW_VERSION
-
-  asdf reshim golang
-}
-
-function install_massdns() {
-    echo "[*] Installing Massdns"
-    git -C /opt/tools clone --depth 1 https://github.com/blechschmidt/massdns.git
-    cd /opt/tools/massdns || exit
-    make
-    ln -s /opt/tools/massdns/bin/massdns /opt/tools/bin/massdns
 }
 
 function install_exegol-history() {
@@ -333,12 +273,6 @@ function install_revshell-gen() {
 function install_claude_code() {
   echo "[*] Installing Claude Code"
   curl -fsSL https://claude.ai/install.sh | bash
-}
-
-function install_badsecrets() {
-  echo "[*] Installing badsecrets"
-
-  pipx install badsecrets
 }
 
 function install_nfs_tools {
