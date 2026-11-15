@@ -301,15 +301,15 @@ function install_nfsshell-ng {
 
 function install_ilspy {
   echo "[*] Installing ILSpy"
-	local VERSION="11.1.0.9782"
-	local VERSION2="11.1"
+  local VERSION="11.1.0.9782"
+  local VERSION2="11.1"
   local HASH="726696d5a62146daf627d06d255fa3c18253f633b8615f48b31382ae88ef5141"
   local ARTIFACT_PATH="/tmp/ilspy.deb"
 
   wget -q "https://github.com/icsharpcode/ILSpy/releases/download/v$VERSION2/ilspy_$VERSION-1_amd64.deb" -O "$ARTIFACT_PATH"
-	check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
   dpkg -i "$ARTIFACT_PATH"
-	rm -f "$ARTIFACT_PATH"
+  rm -f "$ARTIFACT_PATH"
 }
 
 function install_ilspy_cmd {
