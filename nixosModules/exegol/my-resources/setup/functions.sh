@@ -384,10 +384,13 @@ function install_WinSCPPasswdExtractor {
 function install_gum {
   echo "[*] Installing Gum"
   local VERSION="2.0.2"
+  local HASH="9aad8600d9d280d91544439f35db4c9583cc0201bb718ac6afcc0f4989ea945b"
+  local ARTIFACT_PATH="/tmp/gum.deb"
 
-  wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
-  dpkg -i /tmp/gum.deb
-  rm -f /tmp/gum.deb
+  wget -q "https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  dpkg -i "$ARTIFACT_PATH"
+  rm -f "$ARTIFACT_PATH"
 }
 
 function company-wordlist() {
