@@ -339,17 +339,22 @@ function flip-foxyproxy {
 function install_azurehound {
   echo "[*] Installing AzureHound"
   local VERSION="v3.1.3"
-  wget -O /tmp/azurehound.zip "https://github.com/SpecterOps/AzureHound/releases/download/${VERSION}/AzureHound_${VERSION}_linux_amd64.zip"
-  unzip /tmp/azurehound.zip -d /opt/tools/bin/
-  rm -f /tmp/azurehound.zip
+  local HASH="b814116a9850658ef36be54c3f8e2d1560a0560ca377052206defac064e5a68d"
+  local ARTIFACT_PATH="/tmp/azurehound.zip"
+
+  wget -q "https://github.com/SpecterOps/AzureHound/releases/download/${VERSION}/AzureHound_${VERSION}_linux_amd64.zip" -O "$ARTIFACT_PATH"
+  check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
+  unzip "$ARTIFACT_PATH" -d /opt/tools/bin/
+  rm -f "$ARTIFACT_PATH"
 }
 
 function install_pytune {
   echo "[*] Installing Pytune"
-  local GIT_COMMIT="214760beab6fae8ae3d6ebfbad7d958196e2e631"
+  local HASH="214760beab6fae8ae3d6ebfbad7d958196e2e631"
+
   git -C /opt/tools/ clone --depth 1 https://github.com/secureworks/pytune.git
   cd /opt/tools/pytune/ || exit
-  git checkout "${GIT_COMMIT}"
+  git checkout "${HASH}"
   sed -i 's/colr//g' requirements.txt # Remove useless package
   python3 -m venv --system-site-packages ./venv
   source ./venv/bin/activate
@@ -359,10 +364,11 @@ function install_pytune {
 
 function install_findmeaccess {
   echo "[*] Installing FindMeAccess"
-  local GIT_COMMIT="d14cf1bdd397a251ae3694870530840f1a738162"
+  local HASH="d14cf1bdd397a251ae3694870530840f1a738162"
+
   git -C /opt/tools/ clone --depth 1 https://github.com/absolomb/FindMeAccess.git
   cd /opt/tools/FindMeAccess/ || exit
-  git checkout "${GIT_COMMIT}"
+  git checkout "${HASH}"
   python3 -m venv --system-site-packages ./venv
   source ./venv/bin/activate
   pip3 install -r requirements.txt
@@ -371,12 +377,14 @@ function install_findmeaccess {
 
 function install_WinSCPPasswdExtractor {
 	echo "[*] Installing WinSCPPasswdExtractor"
+
 	pipx install WinSCPPasswdExtractor
 }
 
 function install_gum {
   echo "[*] Installing Gum"
   local VERSION="2.0.2"
+
   wget -O /tmp/gum.deb https://github.com/charmbracelet/gum/releases/download/v${VERSION}/gum_${VERSION}_amd64.deb
   dpkg -i /tmp/gum.deb
   rm -f /tmp/gum.deb
@@ -464,6 +472,7 @@ function company-wordlist() {
 function install_mise {
 	echo "[*] Installing Mise"
 	local VERSION="v2026.11.1"
+
 	wget -q "https://github.com/jdx/mise/releases/download/$VERSION/mise-$VERSION-linux-x64" -O /opt/tools/bin/mise
 	echo 'eval "$(/opt/tools/bin/mise activate zsh)"' >> "$HOME/.zshrc"
 	source "$HOME/.zshrc"
