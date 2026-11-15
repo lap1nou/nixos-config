@@ -5,7 +5,7 @@ source /opt/my-resources/setup/functions.sh
 cp /opt/my-resources/setup/firefox/policies.json /usr/lib/firefox-esr/distribution/
 
 # Create directories
-FOLDERS=("loot" "web" "output" "notes" "targets")
+FOLDERS=("loot" "web" "output" "notes" "targets" "receipts")
 for folder in "${FOLDERS[@]}"; do
   mkdir -p "/workspace/$folder"
 done
