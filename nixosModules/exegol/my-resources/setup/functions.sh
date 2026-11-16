@@ -488,3 +488,16 @@ function install_mise {
   echo 'eval "$($ARTIFACT_PATH activate zsh)"' >> "$HOME/.zshrc"
   source "$HOME/.zshrc"
 }
+
+function harden_package_manager {
+  echo "[*] Hardening package manager"
+  mkdir -p ~/.config/pnpm/ ~/.config/uv/ ~/.config/pip/ ~/.config/pypoetry/
+
+  cp "$MY_ROOT_PATH/setup/zsh/.npmrc" ~/.npmrc
+  cp "$MY_ROOT_PATH/setup/zsh/config.yaml" ~/.config/pnpm/config.yaml
+  cp "$MY_ROOT_PATH/setup/zsh/.yarnrc.yml" ~/.yarnrc.yml
+  cp "$MY_ROOT_PATH/setup/zsh/.bunfig.toml" ~/.bunfig.toml
+  cp "$MY_ROOT_PATH/setup/zsh/uv.toml" ~/.config/uv/uv.toml
+  cp "$MY_ROOT_PATH/setup/zsh/pip.conf" ~/.config/pip/pip.conf
+  cp "$MY_ROOT_PATH/setup/zsh/config.toml" ~/.config/pypoetry/config.toml
+}
