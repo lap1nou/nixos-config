@@ -108,3 +108,6 @@ function llm {
         echo "[-] Path '/opt/my-resources/setup/llm/${LLM_NAME}.llamafile' doesn't exist"
     fi
 }
+exegol-history () {
+	/root/.local/bin/exegol-history "$@" && [ -f ~/.exegol_history/exh_source.sh ] || return 0 && source ~/.exegol_history/exh_source.sh
+}
