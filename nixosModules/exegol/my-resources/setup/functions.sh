@@ -508,3 +508,12 @@ function config_jadx {
   mkdir -p ~/.config/jadx/
   cp "$MY_ROOT_PATH/setup/jadx-gui/gui.json" ~/.config/jadx/
 }
+
+function config_ghidra {
+  echo "[*] Configuring Ghidra"
+  local version
+
+  version=$(sed -n 's/^application\.version=//p' /opt/tools/ghidra/Ghidra/application.properties)
+  mkdir -p "/root/.config/ghidra/ghidra_${version}_PUBLIC/"
+  cp "$MY_ROOT_PATH/setup/ghidra/preferences" "/root/.config/ghidra/ghidra_${version}_PUBLIC/"
+}

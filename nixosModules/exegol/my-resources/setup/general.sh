@@ -41,6 +41,7 @@ INSTALLS=(
   config_nxc
   config_burpsuite
   config_jadx
+  config_ghidra
 )
 
 for fn in "${INSTALLS[@]}"; do
