@@ -111,3 +111,6 @@ function llm {
 exegol-history () {
 	/root/.local/bin/exegol-history "$@" && [ -f ~/.exegol_history/exh_source.sh ] || return 0 && source ~/.exegol_history/exh_source.sh
 }
+alias thunar='GTK_THEME=Adwaita:dark thunar &> /dev/null &'
+alias firefox='firefox &> /dev/null &'
+alias libreoffice='libreoffice &> /dev/null &'
