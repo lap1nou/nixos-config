@@ -111,6 +111,9 @@ function llm {
 exegol-history () {
 	/root/.local/bin/exegol-history "$@" && [ -f ~/.exegol_history/exh_source.sh ] || return 0 && source ~/.exegol_history/exh_source.sh
 }
+
+# GUI
 alias thunar='GTK_THEME=Adwaita:dark thunar &> /dev/null &'
 alias firefox='firefox &> /dev/null &'
-alias libreoffice='libreoffice &> /dev/null &'
+alias libreoffice='GTK_THEME=Adwaita:dark libreoffice &> /dev/null &'
+alias ghex='GTK_THEME=Adwaita:dark ghex &> /dev/null &'
