@@ -26,6 +26,7 @@ asdf set --home golang 1.22.2 1.23.0 1.26.1
 
 INSTALLS=(
   install_safe-chain
+  harden_package_manager
   install_starship
   install_atuin
   install_obsidian
@@ -39,6 +40,7 @@ INSTALLS=(
   install_gum
   config_nxc
   config_burpsuite
+  config_jadx
 )
 
 for fn in "${INSTALLS[@]}"; do

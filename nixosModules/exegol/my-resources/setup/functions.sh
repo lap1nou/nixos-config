@@ -501,3 +501,10 @@ function harden_package_manager {
   cp "$MY_ROOT_PATH/setup/zsh/pip.conf" ~/.config/pip/pip.conf
   cp "$MY_ROOT_PATH/setup/zsh/config.toml" ~/.config/pypoetry/config.toml
 }
+
+function config_jadx {
+  echo "[*] Configuring JADX"
+
+  mkdir -p ~/.config/jadx/
+  cp "$MY_ROOT_PATH/setup/jadx-gui/gui.json" ~/.config/jadx/
+}
