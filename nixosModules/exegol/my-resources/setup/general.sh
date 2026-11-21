@@ -38,6 +38,7 @@ INSTALLS=(
   install_vscode
   install_syphoon
   install_gum
+  install_yazi
   config_nxc
   config_burpsuite
   config_jadx
