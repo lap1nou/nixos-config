@@ -530,3 +530,23 @@ function config_thunar {
   cp "$MY_ROOT_PATH/setup/thunar/thunar.xml" "/root/.config/xfce4/xfconf/xfce-perchannel-xml/"
   cp "$MY_ROOT_PATH/setup/thunar/bookmarks" "/root/.config/gtk-3.0/"
 }
+
+function install_yazi {
+  echo "[*] Installing Yazi"
+  local VERSION="v26.9.1"
+  local HASH="77d9d41441eaa8f17a555ccd3961ea128321dceac5fc06cf53db131aa60fde8a"
+  local ARTIFACT_PATH="/tmp/yazi-x86_64-unknown-linux-musl.deb"
+
+  wget -q "https://github.com/sxyazi/yazi/releases/download/${VERSION}/yazi-x86_64-unknown-linux-musl.deb" -O "$ARTIFACT_PATH"
+  dpkg -i "$ARTIFACT_PATH"
+  rm -f "$ARTIFACT_PATH"
+
+  # Config + install Yazi office plugin
+  local HASH2="66e114b4638b6552f42e0de3769961677953e5dbcafbbe8503baf41fac81d911"
+  local ARTIFACT_PATH2="/tmp/office.lua"
+
+  wget -q "https://raw.githubusercontent.com/lap1nou/office.yazi/refs/heads/main/main.lua" -O "$ARTIFACT_PATH2"
+  mkdir -p ~/.config/yazi/plugins/office.yazi/
+  mv "$ARTIFACT_PATH2" ~/.config/yazi/plugins/office.yazi/main.lua
+  cp "$MY_ROOT_PATH/setup/yazi/yazi.toml" ~/.config/yazi/
+}
