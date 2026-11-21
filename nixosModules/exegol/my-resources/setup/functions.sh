@@ -491,7 +491,7 @@ function install_mise {
   wget -q "https://github.com/jdx/mise/releases/download/$VERSION/mise-$VERSION-linux-x64" -O "$ARTIFACT_PATH"
   check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
   chmod +x "$ARTIFACT_PATH"
-  echo 'eval "$($ARTIFACT_PATH activate zsh)"' >> "$HOME/.zshrc"
+  echo "eval \"$(${ARTIFACT_PATH} activate zsh)\"" >> "$HOME/.zshrc"
   source "$HOME/.zshrc"
 }
 
