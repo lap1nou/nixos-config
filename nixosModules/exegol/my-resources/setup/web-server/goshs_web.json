@@ -1,0 +1,15 @@
+{
+	"interface": "lo",
+	"directory": "/workspace/web/",
+	"port": 443,
+	"ssl": true,
+	"self_signed": true,
+	"auth_username": "",
+	"auth_password": "",
+	"output": "/var/log/goshs.log",
+	"ftp_port": 21,
+	"smtp_port": 25,
+	"dns_port": 53,
+	"ldap_port": 389,
+	"smb_port": 445
+}

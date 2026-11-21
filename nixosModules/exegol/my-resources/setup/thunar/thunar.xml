@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="thunar" version="1.0">
+  <property name="last-show-hidden" type="bool" value="true"/>
+</channel>

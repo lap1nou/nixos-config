@@ -184,17 +184,22 @@ function install_exegol-history() {
 
 function genpass(){
   # Reference: https://unix.stackexchange.com/a/230676
-  tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo
+  tr -dc 'A-Za-z0-9!#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13; echo
 }
 
 function install_web-server() {
   echo "[*] Installing Web-server"
+  local password=$(genpass)
+
   uv tool install git+https://github.com/lap1nou/web-server --force
+
   # Config
   mkdir ~/.webserver_tui/
   cp "/opt/my-resources/setup/web-server/config.toml" ~/.webserver_tui/
-  yq-go -i ".profiles.updog_workspace.password = \"`genpass`\"" ~/.webserver_tui/config.toml
-  yq-go -i ".profiles.updog_resources.password = \"`genpass`\"" ~/.webserver_tui/config.toml
+  yq-go -i ".profiles.updog_workspace.password = \"$password\"" ~/.webserver_tui/config.toml
+  yq-go -i ".profiles.updog_resources.password = \"$password\"" ~/.webserver_tui/config.toml
+  yq-go -i ".password = \"$password\"" ~/.webserver_tui/goshs_web.json
+  yq-go -i ".password = \"$password\"" ~/.webserver_tui/goshs_resource.json
 }
 
 function install_uv() {
@@ -516,4 +521,12 @@ function config_ghidra {
   version=$(sed -n 's/^application\.version=//p' /opt/tools/ghidra/Ghidra/application.properties)
   mkdir -p "/root/.config/ghidra/ghidra_${version}_PUBLIC/"
   cp "$MY_ROOT_PATH/setup/ghidra/preferences" "/root/.config/ghidra/ghidra_${version}_PUBLIC/"
+}
+
+function config_thunar {
+  echo "[*] Configuring Thunar"
+
+  mkdir -p /root/.config/xfce4/xfconf/xfce-perchannel-xml /root/.config/gtk-3.0/
+  cp "$MY_ROOT_PATH/setup/thunar/thunar.xml" "/root/.config/xfce4/xfconf/xfce-perchannel-xml/"
+  cp "$MY_ROOT_PATH/setup/thunar/bookmarks" "/root/.config/gtk-3.0/"
 }

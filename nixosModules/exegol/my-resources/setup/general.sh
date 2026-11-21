@@ -42,6 +42,7 @@ INSTALLS=(
   config_burpsuite
   config_jadx
   config_ghidra
+  config_thunar
 )
 
 for fn in "${INSTALLS[@]}"; do
