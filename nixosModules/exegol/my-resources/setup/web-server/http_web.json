@@ -7,9 +7,11 @@
 	"auth_username": "",
 	"auth_password": "",
 	"output": "/var/log/goshs.log",
+	"ftp": false,
 	"ftp_port": 21,
 	"smtp_port": 25,
 	"dns_port": 53,
 	"ldap_port": 389,
+	"smb_server": false,
 	"smb_port": 445
 }
