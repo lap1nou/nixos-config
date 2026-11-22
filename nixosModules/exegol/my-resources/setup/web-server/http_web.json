@@ -13,5 +13,6 @@
 	"dns_port": 53,
 	"ldap_port": 389,
 	"smb_server": false,
+	"smb_share": "EXEGOL$",
 	"smb_port": 445
 }
