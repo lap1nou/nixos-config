@@ -10,7 +10,7 @@
 {
   shared_folder.enable = true;
   awesomewm.enable = true;
-  htb-cli.enable = true;
+  htb-cli.enable = false;
   htop.enable = true;
   grc.enable = true;
   firefox.enable = true;
@@ -35,12 +35,12 @@
   desktop.enable = true;
   office.enable = true;
   programming.enable = true;
-  social.enable = true;
+  social.enable = false;
   pentesting.enable = true;
   nano.enable = true;
   nemo.enable = true;
-  wireshark.enable = true;
-  keepassxc.enable = true;
+  wireshark.enable = false;
+  keepassxc.enable = false;
   bluetooth.enable = false;
   safe-chain.enable = true;
 
