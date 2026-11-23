@@ -551,9 +551,9 @@ function install_yazi {
   mkdir -p ~/.config/yazi/plugins/office.yazi/
   mv "$ARTIFACT_PATH2" ~/.config/yazi/plugins/office.yazi/main.lua
 
-  local HASH3="ed730eb0ce6d5d1369ecb217fd7c6f6b2cb2590acd69f1c73a30232e7d74b407"
+  local HASH3="df761409949f6d9ab63c9e20f2d08fd2b267f2c8a7850c461766be8c6936cc44"
   local ARTIFACT_PATH3="/tmp/main.lua"
-  wget -q "https://github.com/yazi-rs/plugins/blob/e0bbd205de9759e7aa81857e1ff616eb5123e305/full-border.yazi/main.lua" -O "$ARTIFACT_PATH3"
+  wget -q "https://raw.githubusercontent.com/yazi-rs/plugins/e0bbd205de9759e7aa81857e1ff616eb5123e305/full-border.yazi/main.lua" -O "$ARTIFACT_PATH3"
   check_hash "$ARTIFACT_PATH3" "$HASH3" || { rm "$ARTIFACT_PATH3"; return 1; }
   mkdir -p ~/.config/yazi/plugins/full-border.yazi/
   mv "$ARTIFACT_PATH3" ~/.config/yazi/plugins/full-border.yazi/main.lua
