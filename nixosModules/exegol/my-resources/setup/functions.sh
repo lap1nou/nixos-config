@@ -553,7 +553,7 @@ function install_yazi {
 
   local HASH3="4b707071834c0e92f2757f2b571c98ff1badefa662a3ab60784d03b47fd27fe7"
   local ARTIFACT_PATH3="/tmp/main.lua"
-  wget "https://github.com/yazi-rs/plugins/blob/e0bbd205de9759e7aa81857e1ff616eb5123e305/full-border.yazi/main.lua" -O "$ARTIFACT_PATH3"
+  wget -q "https://github.com/yazi-rs/plugins/blob/e0bbd205de9759e7aa81857e1ff616eb5123e305/full-border.yazi/main.lua" -O "$ARTIFACT_PATH3"
   check_hash "$ARTIFACT_PATH3" "$HASH3" || { rm "$ARTIFACT_PATH3"; return 1; }
   mkdir -p ~/.config/yazi/plugins/full-border.yazi/
   mv "$ARTIFACT_PATH3" ~/.config/yazi/plugins/full-border.yazi/main.lua
