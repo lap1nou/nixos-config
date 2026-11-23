@@ -11,7 +11,6 @@
 
   config = lib.mkIf config.programming.enable {
     environment.systemPackages = with pkgs; [
-      devbox
       gum
       python3
       (pipx.overridePythonAttrs (old: {doCheck = false;})) # https://github.com/NixOS/nixpkgs/issues/525124
