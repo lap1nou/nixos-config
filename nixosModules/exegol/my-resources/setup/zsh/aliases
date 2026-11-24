@@ -111,7 +111,7 @@ function llm {
 exegol-history () {
 	/root/.local/bin/exegol-history "$@" && [ -f ~/.exegol_history/exh_source.sh ] || return 0 && source ~/.exegol_history/exh_source.sh
 }
-function nmap-host() {
+function nmap-parse-host() {
 	if [ $# -eq 0 ]; then
 		local ip=$(exh export hosts --format JSON | jq '.[] | "\(.ip) (\(.hostname))"' -r | fzf | cut -d ' ' -f 1)
 		for f in /workspace/output/nmap/*.xml; do
@@ -122,6 +122,22 @@ function nmap-host() {
 			nmap-parse-output "$f" include "$1" | nmap-parse-output - host-ports
 		done
 	fi
+}
+function nmap-parse-protocols(){
+	rm /workspace/targets/http.txt /workspace/targets/rdp.txt /workspace/targets/smb.txt /workspace/targets/ldap.txt
+
+	for f in /workspace/output/nmap/*.xml; do
+		nmap-parse-output "$f" http-ports | awk -F'//' '{ print $2 }' >> /workspace/targets/http.txt;
+		nmap-parse-output "$f" service ms-wbt-server >> /workspace/targets/rdp.txt;
+		nmap-parse-output "$f" service microsoft-ds >> /workspace/targets/smb.txt;
+		nmap-parse-output "$f" service ldap >> /workspace/targets/ldap.txt;
+		nmap-parse-output "$f" service ldapssl >> /workspace/targets/ldap.txt;
+	done
+
+	local PROTOCOL=("http" "rdp" "smb" "ldap")
+	for prot in "${PROTOCOL[@]}"; do
+  		sort -u targets/"$prot".txt -o targets/"$prot".txt
+	done
 }
 
 # GUI
