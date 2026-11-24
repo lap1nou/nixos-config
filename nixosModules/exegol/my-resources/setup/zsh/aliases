@@ -111,6 +111,13 @@ function llm {
 exegol-history () {
 	/root/.local/bin/exegol-history "$@" && [ -f ~/.exegol_history/exh_source.sh ] || return 0 && source ~/.exegol_history/exh_source.sh
 }
+function nmap-host() { # Retrieve the open ports for a specific host
+	if [ $# -eq 0 ]; then
+		nmap-parse-output /workspace/output/nmap/*.xml include $(exh export hosts --format JSON | jq '.[] | "\(.ip) (\(.hostname))"' -r | fzf | cut -d ' ' -f 1) | nmap-parse-output - host-ports
+	else
+		nmap-parse-output /workspace/output/nmap/*.xml include "$1" | nmap-parse-output - host-ports
+	fi
+}
 
 # GUI
 alias thunar='GTK_THEME=Adwaita:dark thunar &> /dev/null &'
