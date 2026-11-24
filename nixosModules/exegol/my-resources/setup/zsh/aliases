@@ -136,7 +136,7 @@ function nmap-parse-protocols(){
 
 	local PROTOCOL=("http" "rdp" "smb" "ldap")
 	for prot in "${PROTOCOL[@]}"; do
-  		sort -u targets/"$prot".txt -o targets/"$prot".txt
+  		sort -u /workspace/targets/"$prot".txt -o /workspace/targets/"$prot".txt
 	done
 }
 
