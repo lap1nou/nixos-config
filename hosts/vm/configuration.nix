@@ -39,7 +39,7 @@
   pentesting.enable = true;
   nano.enable = true;
   nemo.enable = true;
-  wireshark.enable = false;
+  wireshark.enable = true;
   keepassxc.enable = false;
   bluetooth.enable = false;
   safe-chain.enable = true;
