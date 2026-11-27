@@ -272,8 +272,7 @@ function install_dbeaver() {
 function config_nxc() {
   echo "[*] Configure NXC"
 
-  sed -i "s/audit_mode =/audit_mode = */" ~/.nxc/nxc.conf
-  sed -i "s/reveal_chars_of_pwd = 0/reveal_chars_of_pwd = 2/" ~/.nxc/nxc.conf
+  cp "${MY_ROOT_PATH}/setup/netexec/nxc.conf" ~/.nxc/nxc.conf
 }
 
 function install_revshell-gen() {
