@@ -291,7 +291,7 @@ function install_claude_code() {
   wget -q "https://downloads.claude.ai/claude-code-releases/$VERSION/linux-x64/claude" -O "$ARTIFACT_PATH"
   check_hash "$ARTIFACT_PATH" "$HASH" || { rm "$ARTIFACT_PATH"; return 1; }
   chmod +x "$ARTIFACT_PATH"
-  "$ARTIFACT_PATH"
+  mv "$ARTIFACT_PATH" /opt/tools/bin/
   rm -f "$ARTIFACT_PATH"
 }
 
