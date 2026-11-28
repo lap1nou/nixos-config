@@ -37,5 +37,7 @@
 
     # Remove default packages (perl, rsync, strace)
     environment.defaultPackages = [];
+
+    systemd.services.NetworkManager-wait-online.enable = false;
   };
 }
